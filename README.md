@@ -29,6 +29,8 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | ふるさと納税の上限額を計算する | `furusato-nozei` | 給与収入や課税所得から寄附上限額の目安を計算(API不要) | 不要 | [furusato-nozei ガイド](docs/features/furusato-nozei.md) |
 | 図書館の蔵書を検索する | `calil-books` | カーリル図書館APIで図書館の蔵書と貸出状況を検索 | APIキー(無料)が必要 | [calil-books ガイド](docs/features/calil-books.md) |
 
+各スキルの**正本は `<スキル名>/SKILL.md`** です。`docs/features/` のガイドは概要版なので、詳細な手順・パラメータ・エラー対応は必ず SKILL.md を参照してください。
+
 スコープについて:
 
 - スクレイピング対策が強いサービス(メルカリ、SUUMO、乗換案内、食べログなど)は対象外です。
@@ -62,6 +64,8 @@ Node.js 18+ and `npx` are required. See the [install guide](docs/install.md) for
 | Look up national holidays and long weekends | `japan-holidays` | Holiday, substitute-holiday and bridge-holiday calculation from the Cabinet Office's official CSV | Not required | [japan-holidays guide](docs/features/japan-holidays.md) |
 | Estimate your furusato nozei donation cap | `furusato-nozei` | Pure-calculation estimate of the hometown-tax donation limit (no API needed) | Not required | [furusato-nozei guide](docs/features/furusato-nozei.md) |
 | Search library holdings | `calil-books` | Library and book-availability search via the Calil API | Free API key required | [calil-books guide](docs/features/calil-books.md) |
+
+The canonical source for each skill is its `<skill>/SKILL.md`. The guides under `docs/features/` are summaries only - always refer to SKILL.md for full procedures, parameters, and error handling.
 
 Scope notes:
 

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kurashi-skill | 日本の暮らしを、AIエージェントに</title>
+<meta name="description" content="日本での暮らしを手伝う、AIエージェント向けオープンソースのスキルコレクション。気象庁・内閣府・カーリルなど公式APIと公開データだけを使う、ログイン不要の照会系スキル5つ。MITライセンス。">
+<meta property="og:title" content="kurashi-skill | 日本の暮らしを、AIエージェントに">
+<meta property="og:description" content="天気・防災・祝日・ふるさと納税・図書館。公式APIだけで動くAIエージェント用スキル集。MITオープンソース。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tahodev.github.io/kurashi-skill/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='10' fill='%23B9402F'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23F8F4E9' font-family='serif'%3E%E5%AE%B6%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --kinari:#F8F4E9;      /* 生成り */
+  --kinari-2:#F1EBDC;
+  --ai:#1B3A4B;          /* 藍 */
+  --ai-deep:#0F2540;     /* 紺青 */
+  --ai-soft:#3D5A6C;
+  --shu:#B9402F;         /* 朱 */
+  --shu-bright:#D05A41;
+  --sumi:#2B2B2B;        /* 墨 */
+  --sumi-soft:#5C5C56;
+  --line:#D8D0BC;
+  --washi:radial-gradient(circle at 20% 10%, rgba(255,255,255,.5), transparent 55%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--kinari);
+  background-image:var(--washi);
+  color:var(--sumi);
+  font-family:'Noto Sans JP',sans-serif;
+  font-weight:400;
+  line-height:1.9;
+  letter-spacing:.02em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px}
+.serif{font-family:'Noto Serif JP',serif}
+
+/* ── nav ── */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(248,244,233,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ai-deep)}
+nav .brand .hanko{width:30px;height:30px}
+nav .brand span{font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em}
+nav .links{display:flex;gap:18px;font-size:13px}
+nav .links a{color:var(--ai-soft);text-decoration:none}
+nav .links a:hover{color:var(--shu)}
+@media(max-width:560px){nav .links a:not(:last-child){display:none}}
+
+/* ── hero ── */
+header.hero{
+  padding:84px 0 72px;
+  text-align:center;
+  position:relative;
+}
+.hero .hanko{width:96px;height:96px;margin:0 auto 26px;display:block;filter:drop-shadow(0 6px 14px rgba(185,64,47,.25))}
+.hero .kanji-bg{
+  position:absolute;top:30px;right:-10px;
+  writing-mode:vertical-rl;
+  font-family:'Noto Serif JP',serif;
+  font-size:15px;letter-spacing:.5em;
+  color:var(--ai);opacity:.28;
+  user-select:none;
+}
+@media(max-width:680px){.hero .kanji-bg{display:none}}
+.hero h1{
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:clamp(30px,6.4vw,44px);
+  font-weight:700;
+  color:var(--ai-deep);
+  letter-spacing:.04em;
+  line-height:1.4;
+}
+.hero h1 .accent{color:var(--shu)}
+.hero .yomi{font-size:13px;letter-spacing:.35em;color:var(--sumi-soft);margin-top:10px}
+.hero p.lead{
+  max-width:560px;margin:22px auto 0;
+  font-size:15.5px;color:var(--sumi-soft);
+}
+.hero .badges{margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.chip{
+  font-size:11.5px;letter-spacing:.08em;
+  border:1px solid var(--line);border-radius:999px;
+  padding:3px 12px;color:var(--ai-soft);background:rgba(255,255,255,.5);
+}
+.chip.red{border-color:rgba(185,64,47,.4);color:var(--shu)}
+
+/* ── install bar ── */
+.install{
+  margin:34px auto 0;max-width:640px;
+  background:var(--ai-deep);border-radius:12px;
+  padding:16px 18px;text-align:left;
+  position:relative;
+  box-shadow:0 10px 30px rgba(15,37,64,.25);
+}
+.install .label{font-size:11px;letter-spacing:.2em;color:#8FA6B5;margin-bottom:6px}
+.install code{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:13.5px;color:#EDE6D3;word-break:break-all;line-height:1.7;
+}
+.install code .c{color:#7E93A5}
+.install .copy{
+  position:absolute;top:12px;right:12px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+  color:#EDE6D3;font-size:11px;border-radius:6px;padding:4px 10px;cursor:pointer;
+}
+.install .copy:hover{background:rgba(255,255,255,.16)}
+
+/* ── sections ── */
+section{padding:64px 0}
+.sec-head{margin-bottom:34px}
+.sec-head .no{
+  font-family:'Noto Serif JP',serif;font-size:13px;color:var(--shu);
+  letter-spacing:.3em;margin-bottom:8px;
+}
+.sec-head h2{
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:clamp(22px,4.6vw,28px);font-weight:700;color:var(--ai-deep);
+  letter-spacing:.05em;
+}
+.sec-head h2::after{
+  content:"";display:block;width:44px;height:2px;background:var(--shu);
+  margin-top:12px;
+}
+.sec-head p{margin-top:14px;font-size:14.5px;color:var(--sumi-soft);max-width:620px}
+
+/* about 3 points */
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:680px){.points{grid-template-columns:1fr}}
+.point{
+  background:rgba(255,255,255,.55);
+  border:1px solid var(--line);border-radius:12px;
+  padding:22px 20px;
+}
+.point .glyph{
+  font-family:'Noto Serif JP',serif;font-size:26px;color:var(--shu);
+  margin-bottom:10px;
+}
+.point h3{font-size:15px;font-weight:700;color:var(--ai-deep);margin-bottom:6px;letter-spacing:.04em}
+.point p{font-size:13px;color:var(--sumi-soft);line-height:1.8}
+
+/* skill cards */
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:680px){.skills{grid-template-columns:1fr}}
+.skill{
+  background:rgba(255,255,255,.6);
+  border:1px solid var(--line);border-radius:14px;
+  padding:24px 22px;position:relative;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.skill:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,37,64,.1)}
+.skill .top{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.skill .stamp{
+  font-family:'Noto Serif JP',serif;
+  width:44px;height:44px;flex:0 0 44px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--ai);color:var(--kinari);
+  border-radius:8px;font-size:22px;
+}
+.skill.red .stamp{background:var(--shu)}
+.skill h3{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;font-weight:600;color:var(--ai-deep)}
+.skill .en{font-size:11px;letter-spacing:.14em;color:var(--sumi-soft);text-transform:uppercase}
+.skill p{font-size:13.5px;color:var(--sumi-soft);margin:10px 0 12px;line-height:1.8}
+.skill .meta{display:flex;gap:8px;flex-wrap:wrap}
+.tag{
+  font-size:10.5px;letter-spacing:.06em;padding:2px 9px;border-radius:999px;
+  background:var(--kinari-2);border:1px solid var(--line);color:var(--ai-soft);
+}
+.tag.ok{color:var(--shu);border-color:rgba(185,64,47,.35);background:rgba(185,64,47,.06)}
+
+/* chat demo */
+.chat{
+  background:var(--ai-deep);border-radius:16px;
+  padding:26px 20px;color:#EDE6D3;
+  box-shadow:0 14px 36px rgba(15,37,64,.28);
+}
+.chat .caption{font-size:11px;letter-spacing:.22em;color:#8FA6B5;margin-bottom:18px;text-align:center}
+.msg{display:flex;margin-bottom:16px}
+.msg .bubble{
+  max-width:82%;padding:11px 15px;border-radius:14px;
+  font-size:13.5px;line-height:1.8;
+}
+.msg.user{justify-content:flex-end}
+.msg.user .bubble{background:#EDE6D3;color:var(--sumi);border-bottom-right-radius:4px}
+.msg.agent .bubble{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-bottom-left-radius:4px}
+.msg.agent .who{
+  font-size:10.5px;letter-spacing:.1em;color:var(--shu-bright);
+  margin-bottom:4px;font-family:ui-monospace,Menlo,monospace;
+}
+.chat .note{font-size:11px;color:#7E93A5;text-align:center;margin-top:8px}
+
+/* challenge */
+.challenge{
+  background:rgba(255,255,255,.55);
+  border:1px solid var(--line);border-radius:16px;
+  padding:30px 26px;
+  display:flex;gap:26px;align-items:flex-start;
+}
+@media(max-width:680px){.challenge{flex-direction:column}}
+.challenge .big{
+  font-family:'Noto Serif JP',serif;
+  font-size:56px;font-weight:700;color:var(--shu);line-height:1.1;
+  writing-mode:horizontal-tb;
+}
+.challenge .big small{display:block;font-size:13px;color:var(--sumi-soft);letter-spacing:.2em;font-weight:400;margin-top:4px}
+.challenge .body{flex:1}
+.challenge h3{font-size:16px;color:var(--ai-deep);font-weight:700;margin-bottom:8px}
+.challenge p{font-size:13.5px;color:var(--sumi-soft);margin-bottom:14px}
+.challenge .day{
+  display:flex;align-items:center;gap:10px;font-size:13px;
+  border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;
+  flex-wrap:wrap;
+}
+.challenge .day .d{
+  font-family:ui-monospace,Menlo,monospace;font-size:12px;
+  background:var(--ai);color:var(--kinari);border-radius:6px;padding:2px 8px;
+}
+
+/* links */
+.links-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:680px){.links-grid{grid-template-columns:1fr}}
+a.card{
+  display:block;text-decoration:none;
+  background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:14px;
+  padding:20px;transition:transform .18s ease, box-shadow .18s ease;
+}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,37,64,.1)}
+a.card .k{font-size:11px;letter-spacing:.2em;color:var(--shu);margin-bottom:6px}
+a.card .t{font-size:15px;font-weight:700;color:var(--ai-deep);margin-bottom:4px}
+a.card .u{font-size:12px;color:var(--sumi-soft);word-break:break-all}
+
+/* footer */
+footer{
+  border-top:1px solid var(--line);
+  padding:34px 0 46px;text-align:center;
+  font-size:12px;color:var(--sumi-soft);
+}
+footer .hanko{width:34px;height:34px;margin:0 auto 12px;display:block;opacity:.9}
+footer a{color:var(--ai-soft)}
+footer .lic{margin-top:6px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="hanko" viewBox="0 0 64 64" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="11" fill="#B9402F"/><text x="32" y="45" font-size="36" text-anchor="middle" fill="#F8F4E9" font-family="'Noto Serif JP',serif">家</text></svg>
+      <span>kurashi-skill</span>
+    </a>
+    <div class="links">
+      <a href="#skills">スキル</a>
+      <a href="#demo">使い方</a>
+      <a href="#challenge">30日チャレンジ</a>
+      <a href="https://github.com/tahodev/kurashi-skill">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="kanji-bg">暮らしを、すこし楽に。</div>
+    <svg class="hanko" viewBox="0 0 64 64" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="11" fill="#B9402F"/><text x="32" y="45" font-size="36" text-anchor="middle" fill="#F8F4E9" font-family="'Noto Serif JP',serif">家</text></svg>
+    <h1>日本の暮らしを、<br class="sp"><span class="accent">AIエージェント</span>に。</h1>
+    <div class="yomi">KURASHI-SKILL ・ 暮らしスキル</div>
+    <p class="lead">
+      天気、防災、祝日、ふるさと納税、図書館。<br>
+      日本での日常に必要な「調べもの」だけを集めた、AIエージェント向けオープンソースのスキルコレクションです。公式APIと公開データだけを使い、ログインは不要。MITライセンス。
+    </p>
+    <div class="badges">
+      <span class="chip red">MIT License</span>
+      <span class="chip">ログイン不要</span>
+      <span class="chip">公式APIのみ</span>
+      <span class="chip">npx skills add 対応</span>
+    </div>
+    <div class="install">
+      <button class="copy" onclick="copyCmd(this)">copy</button>
+      <div class="label">INSTALL</div>
+      <code id="cmd"><span class="c"># 全スキルをインストール</span><br>npx --yes skills add tahodev/kurashi-skill --all -g</code>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">其の一 — ABOUT</div>
+      <h2>kurashi-skill とは</h2>
+      <p>Claude Code、Codex、OpenCode など <code>npx skills add</code> に対応したコーディングエージェントに、日本の暮らしの「調べもの力」を追加するスキル集です。</p>
+    </div>
+    <div class="points">
+      <div class="point">
+        <div class="glyph">公</div>
+        <h3>公式データだけ</h3>
+        <p>気象庁の公開JSON、内閣府の祝日CSV、カーリル図書館API。出所のはっきりした公式APIと公開データだけを使います。</p>
+      </div>
+      <div class="point">
+        <div class="glyph">鍵</div>
+        <h3>ログイン不要</h3>
+        <p>アカウント登録も課金も基本的に不要。スクレイピング対策の強いサービスは最初から対象外にしています。</p>
+      </div>
+      <div class="point">
+        <div class="glyph">読</div>
+        <h3>照会と計算のみ</h3>
+        <p>予約・購入・投稿など状態を変える操作は扱いません。読み取り専用だから、安心してエージェントに任せられます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">其の二 — SKILLS</div>
+      <h2>5つのスキル</h2>
+      <p>各スキルの正本はリポジトリ内の <code>&lt;スキル名&gt;/SKILL.md</code>。ここではひとこと紹介だけ。</p>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <div class="top"><div class="stamp">天</div><div><h3>jma-weather</h3><div class="en">Weather</div></div></div>
+        <p>気象庁の公開JSONから、天気・降水確率・気温・週間予報を取得。「明日の天気は?」にそのまま答えられます。</p>
+        <div class="meta"><span class="tag ok">ログイン不要</span><span class="tag">気象庁</span></div>
+      </div>
+      <div class="skill red">
+        <div class="top"><div class="stamp">災</div><div><h3>bosai-alert</h3><div class="en">Disaster info</div></div></div>
+        <p>地震速報と震度の詳細、地域ごとの気象警報・注意報、津波情報を気象庁の防災情報から取得します。</p>
+        <div class="meta"><span class="tag ok">ログイン不要</span><span class="tag">気象庁</span></div>
+      </div>
+      <div class="skill">
+        <div class="top"><div class="stamp">祝</div><div><h3>japan-holidays</h3><div class="en">Holidays</div></div></div>
+        <p>内閣府の公式CSVから祝日・振替休日・国民の休日を調べ、連休や営業日判定まで計算します。</p>
+        <div class="meta"><span class="tag ok">ログイン不要</span><span class="tag">内閣府</span></div>
+      </div>
+      <div class="skill red">
+        <div class="top"><div class="stamp">税</div><div><h3>furusato-nozei</h3><div class="en">Hometown tax</div></div></div>
+        <p>給与収入や課税所得から、ふるさと納税で自己負担2,000円に収まる寄附上限額の目安を計算。APIすら不要の純粋計算です。</p>
+        <div class="meta"><span class="tag ok">API不要</span><span class="tag">公開計算式</span></div>
+      </div>
+      <div class="skill">
+        <div class="top"><div class="stamp">本</div><div><h3>calil-books</h3><div class="en">Libraries</div></div></div>
+        <p>カーリル図書館APIで、全国の図書館の蔵書と貸出状況を横断検索。「近くの図書館にこの本ある?」に答えます。</p>
+        <div class="meta"><span class="tag">無料APIキー</span><span class="tag">カーリル</span></div>
+      </div>
+      <div class="skill red">
+        <div class="top"><div class="stamp">続</div><div><h3>and more&hellip;</h3><div class="en">Growing daily</div></div></div>
+        <p>30日チャレンジでスキルは増え続けています。次に来るスキルはリポジトリとQiitaで公開中。</p>
+        <div class="meta"><span class="tag ok">毎日更新</span><span class="tag">build in public</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">其の三 — DEMO</div>
+      <h2>エージェントに聞いてみる</h2>
+      <p>インストールしたら、あとは自然に話しかけるだけ。スキルが質問に合わせて自動で選ばれます。</p>
+    </div>
+    <div class="chat">
+      <div class="caption">CONVERSATION EXAMPLE</div>
+      <div class="msg user"><div class="bubble">明日の天気は?</div></div>
+      <div class="msg agent"><div class="bubble"><div class="who">jma-weather</div>東京は晴れのちくもり。降水確率は午前10%・午後20%、最高気温は28°Cの予報です。<br><span style="opacity:.65">(出典: 気象庁 2026-09-09 17時発表)</span></div></div>
+      <div class="msg user"><div class="bubble">今年のふるさと納税の限度額は? 年収600万円・独身だと</div></div>
+      <div class="msg agent"><div class="bubble"><div class="who">furusato-nozei</div>目安は約77,000円です。自己負担2,000円に収まる上限の目安で、住宅ローン控除などがある場合は変わります。</div></div>
+      <div class="note">※ 表示はイメージです。実際の数値は時点と条件によって変わります。</div>
+    </div>
+  </div>
+</section>
+
+<section id="challenge">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">其の四 — BUILD IN PUBLIC</div>
+      <h2>30日間の公開開発チャレンジ</h2>
+    </div>
+    <div class="challenge">
+      <div class="big">30<small>DAYS</small></div>
+      <div class="body">
+        <h3>1日1スキル。コミットが、そのまま記事になる。</h3>
+        <p>このリポジトリは30日間の公開開発チャレンジとして育っています。毎日の作業はQiitaで連載中。制作パートナーのAIエージェントのクオータが30日持つかどうかが、実は最大のリスク要因だったりします。</p>
+        <div class="day">
+          <span class="d">Day 1</span>
+          <span>宣言 &amp; リポジトリ公開(初期スキル5個)</span>
+          <a href="https://qiita.com/Ichiropen/items/eac3bb6220e75a4ade88" style="color:var(--shu)">Qiitaで読む →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="links">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">其の五 — LINKS</div>
+      <h2>リンク</h2>
+    </div>
+    <div class="links-grid">
+      <a class="card" href="https://github.com/tahodev/kurashi-skill">
+        <div class="k">GITHUB</div>
+        <div class="t">tahodev / kurashi-skill</div>
+        <div class="u">ソースコード・issue・インストール手順</div>
+      </a>
+      <a class="card" href="https://qiita.com/Ichiropen">
+        <div class="k">QIITA</div>
+        <div class="t">@Ichiropen</div>
+        <div class="u">30日チャレンジ連載の本編</div>
+      </a>
+      <a class="card" href="https://github.com/tahodev/kurashi-skill/blob/main/docs/install.md">
+        <div class="k">DOCS</div>
+        <div class="t">インストールガイド</div>
+        <div class="u">Node.js 18+ と npx があればOK</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <svg class="hanko" viewBox="0 0 64 64" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="11" fill="#B9402F"/><text x="32" y="45" font-size="36" text-anchor="middle" fill="#F8F4E9" font-family="'Noto Serif JP',serif">家</text></svg>
+    <div>kurashi-skill — 日本の暮らしを、AIエージェントに。</div>
+    <div class="lic"><a href="https://github.com/tahodev/kurashi-skill/blob/main/LICENSE">MIT License</a> © 2026 tahodev</div>
+  </div>
+</footer>
+
+<script>
+function copyCmd(btn){
+  var text = "npx --yes skills add tahodev/kurashi-skill --all -g";
+  var done = function(){ btn.textContent = "copied!"; setTimeout(function(){ btn.textContent = "copy"; }, 1600); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, done);
+  }else{
+    var ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(ta); done();
+  }
+}
+</script>
+</body>
+</html>

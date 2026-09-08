@@ -82,3 +82,7 @@ curl -s https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json
 - **HTTP 404**: エリアコードの間違いがほぼ原因。`https://www.jma.go.jp/bosai/common/const/area.json` を取り直し、`offices` 層のコードを使っているか確認する(`class10s` などの細かいコードでは 404 になる)。
 - **HTTP 5xx / タイムアウト**: 気象庁サイト側の障害か負荷。数秒おいて1〜2回だけ再試行し、直らなければ「気象庁のサイトで障害が起きている可能性がある。公式サイト https://www.jma.go.jp/jma/index.html を直接確認してください」とユーザーに伝える。推測で予報をでっち上げない。
 - **空・壊れたJSON**: JSONとして解釈できないレスポンス(HTMLのエラーページなど)が返ったら、それも失敗として扱う。古いキャッシュを「最新」として渡さない。
+
+## English summary
+
+Fetches weather forecasts (weather, precipitation probability, temperature) for anywhere in Japan from the Japan Meteorological Agency's public JSON feeds. No API key or login required; `curl` is enough. Find the area code in `area.json`, then read the forecast JSON for that office. Always quote the JMA issue time (`reportDatetime`) with the data, and check the official JMA site for any real decision.

@@ -106,3 +106,7 @@ metadata:
 - **前提が不確かなときは明示する**: 社会保険料の約15%概算など、使った仮定を計算結果と一緒に必ず見せる。仮定を隠した数字を出さない。
 - **複雑な所得がある場合は計算を降りる**: 住宅ローン控除、医療費控除、株式・副業の所得などがあると概算は崩れる。その場合は「この概算では正確に出せない」ことを伝え、総務省のシミュレーションや税務署・税理士への確認を案内する( https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/about/ )。
 - **結果は必ず「目安」と伝える**: 正確な上限額のように見せない。
+
+## English summary
+
+Estimates the furusato nozei (hometown tax) donation cap - the amount you can donate with only a 2,000 yen out-of-pocket cost. Pure calculation, no API needed. Ask for gross salary and family composition first, show every assumption and intermediate value, and always present the result as an estimate. Tax tables are the current values as of September 2026 with NTA/Soumu source links; for cases with mortgage or medical deductions, defer to the official Soumu simulator or a tax professional.

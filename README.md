@@ -8,18 +8,6 @@
 
 Claude Code、Codex、OpenCode など、`npx skills add` に対応したコーディングエージェントで使えます。
 
-## インストール
-
-```bash
-# すべてのスキルをインストール
-npx --yes skills add tahodev/kurashi-skill --all -g
-
-# 特定のスキルだけインストール
-npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
-```
-
-Node.js 18 以上と `npx` が必要です。詳しくは [インストールガイド](docs/install.md) を参照してください。
-
 ## できること
 
 「ログイン」列は、利用者本人のアカウントやシークレットが必要かどうかだけを示します。
@@ -40,23 +28,31 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 - 予約・購入・投稿など状態を変更する操作は扱いません。照会と計算だけです。
 - 気象・防災情報は気象庁の発表データをそのまま取得します。最終的な判断には必ず公式発表を確認してください。
 
+## インストール
+
+```bash
+# すべてのスキルをインストール
+npx --yes skills add tahodev/kurashi-skill --all -g
+
+# 特定のスキルだけインストール
+npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
+```
+
+Node.js 18 以上と `npx` が必要です。詳しくは [インストールガイド](docs/install.md) を参照してください。
+
+## 30日間の公開開発 (build in public) チャレンジ実施中
+
+このリポジトリは、30日間の公開開発チャレンジとして育っています。1日1スキル、コミットがそのままQiitaの記事になる方式です。なお、制作パートナーのAIエージェント(Astra)のクオータが30日間持つかどうかが、実は最大のリスク要因だったりします。
+
+| Day | 日付 | できごと |
+| --- | --- | --- |
+| 1 | 2026-09-09 | 宣言 & リポジトリ公開 (初期スキル5個) |
+
 ## English
 
 **kurashi-skill** (暮らし, "kurashi" = everyday life) is a collection of AI-agent skills for daily life in Japan. It focuses on read-only lookups and calculations built only on official APIs and public datasets: no login walls, no scraping.
 
 Works with any coding agent that supports `npx skills add` (Claude Code, Codex, OpenCode, ...).
-
-### Install
-
-```bash
-# Install every skill
-npx --yes skills add tahodev/kurashi-skill --all -g
-
-# Install a single skill
-npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
-```
-
-Node.js 18+ and `npx` are required. See the [install guide](docs/install.md) for details.
 
 ### What you can do
 
@@ -75,6 +71,26 @@ Scope notes:
 - Services with heavy anti-scraping (Mercari, SUUMO, transfer guides, Tabelog, ...) are out of scope.
 - Nothing here changes state: no reservations, purchases, or posts. Lookups and calculations only.
 - Weather and disaster data are JMA announcements as-is. Always confirm against official JMA bulletins before making decisions.
+
+### Install
+
+```bash
+# Install every skill
+npx --yes skills add tahodev/kurashi-skill --all -g
+
+# Install a single skill
+npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
+```
+
+Node.js 18+ and `npx` are required. See the [install guide](docs/install.md) for details.
+
+### Building in public: a 30-day challenge
+
+This repository is growing as a 30-day build-in-public challenge: one skill a day, with each commit doubling as a Qiita article. Frankly, the biggest risk factor is whether the quota of Astra - the AI agent co-authoring this series - survives all 30 days.
+
+| Day | Date | What happened |
+| --- | --- | --- |
+| 1 | 2026-09-09 | Declaration & repository launch (initial 5 skills) |
 
 ## ライセンス / License
 

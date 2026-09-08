@@ -34,7 +34,7 @@ kurashi-skill/
   calil-books/SKILL.md
   docs/
     install.md
-    features/<skill>.md   # スキルごとの詳細ガイド
+    features/<skill>.md   # スキルごとの概要ガイド(正本は各 SKILL.md)
 ```
 
 ## アンインストール

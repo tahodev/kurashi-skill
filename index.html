@@ -9,6 +9,35 @@
 <meta property="og:description" content="天気・防災・祝日・ふるさと納税・図書館。公式APIだけで動くAIエージェント用スキル集。MITオープンソース。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tahodev.github.io/kurashi-skill/">
+<meta property="og:site_name" content="kurashi-skill">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://tahodev.github.io/kurashi-skill/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="kurashi-skill — 日本の暮らしを、AIエージェントに。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="kurashi-skill | 日本の暮らしを、AIエージェントに">
+<meta name="twitter:description" content="天気・防災・祝日・ふるさと納税・図書館。公式APIだけで動くAIエージェント用スキル集。MITオープンソース。">
+<meta name="twitter:image" content="https://tahodev.github.io/kurashi-skill/og.png">
+<meta name="keywords" content="AIエージェント,スキル,暮らし,気象庁,ふるさと納税,祝日,防災,地震速報,図書館,カーリル,オープンソース,MIT,npx skills add,Claude Code,Codex,日本,天気予報">
+<meta name="robots" content="index,follow">
+<meta name="author" content="tahodev">
+<link rel="canonical" href="https://tahodev.github.io/kurashi-skill/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "kurashi-skill",
+  "alternateName": "暮らしスキル",
+  "description": "日本での暮らしを手伝う、AIエージェント向けオープンソースのスキルコレクション。気象庁の公開データ、内閣府の祝日CSV、カーリル図書館APIなど公式APIと公開データだけを使う。",
+  "codeRepository": "https://github.com/tahodev/kurashi-skill",
+  "license": "https://opensource.org/licenses/MIT",
+  "inLanguage": "ja",
+  "keywords": "AIエージェント, スキル, 暮らし, 気象庁, ふるさと納税, 祝日, 防災, 図書館",
+  "author": {"@type": "Person", "name": "tahodev", "url": "https://github.com/tahodev"},
+  "url": "https://tahodev.github.io/kurashi-skill/"
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F8F4E9'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%230F2540' font-family='sans-serif' letter-spacing='2'%3Ek%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -252,6 +281,23 @@ a.card .k{font-size:11px;letter-spacing:.2em;color:var(--shu);margin-bottom:6px}
 a.card .t{font-size:15px;font-weight:700;color:var(--ai-deep);margin-bottom:4px}
 a.card .u{font-size:12px;color:var(--sumi-soft);word-break:break-all}
 
+/* community repos */
+.repos{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+a.repo{
+  display:flex;align-items:baseline;gap:14px;text-decoration:none;
+  padding:16px 6px;border-bottom:1px solid var(--line);
+  transition:background .15s ease;
+}
+a.repo:hover{background:rgba(255,255,255,.5)}
+a.repo .rname{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13.5px;font-weight:600;
+  color:var(--ai-deep);flex:0 0 auto;min-width:200px;
+}
+a.repo .rdesc{flex:1;font-size:13px;color:var(--sumi-soft);line-height:1.7}
+a.repo .stars{flex:0 0 auto;font-size:11.5px;color:var(--shu);letter-spacing:.05em}
+@media(max-width:680px){a.repo{flex-wrap:wrap;gap:2px 12px}a.repo .rname{min-width:0}}
+.repo-note{margin-top:14px;font-size:12px;color:var(--sumi-soft)}
+
 /* footer */
 footer{
   border-top:1px solid var(--line);
@@ -272,6 +318,7 @@ footer .lic{margin-top:6px}
       <a href="#skills">スキル</a>
       <a href="#demo">使い方</a>
       <a href="#challenge">30日チャレンジ</a>
+      <a href="#community">他のレポ</a>
       <a href="https://github.com/tahodev/kurashi-skill">GitHub</a>
     </div>
   </div>
@@ -301,6 +348,7 @@ footer .lic{margin-top:6px}
   </div>
 </header>
 
+<main>
 <section id="about">
   <div class="wrap">
     <div class="sec-head">
@@ -409,10 +457,53 @@ footer .lic{margin-top:6px}
   </div>
 </section>
 
+<section id="community">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="no">其の五 — COMMUNITY</div>
+      <h2>日本の暮らしに役立つ、ほかのレポ</h2>
+      <p>kurashi-skillはこの界隈の先行プロジェクトに助けられています。日本の暮らしや公開データを扱う、おすすめのオープンソース。</p>
+    </div>
+    <div class="repos">
+      <a class="repo" href="https://github.com/codeforkanazawa-org/5374">
+        <span class="rname">codeforkanazawa-org/5374</span>
+        <span class="rdesc">5374(ゴミナシ).jp — 地域のごみ収集日を調べられる定番アプリの金沢版・元祖。</span>
+        <span class="stars">★ 120</span>
+      </a>
+      <a class="repo" href="https://github.com/holiday-jp/holiday_jp">
+        <span class="rname">holiday-jp/holiday_jp</span>
+        <span class="rdesc">日本の祝日データセットのデファクト。多くの言語向けライブラリの母体。</span>
+        <span class="stars">★ 136</span>
+      </a>
+      <a class="repo" href="https://github.com/geolonia/japanese-addresses">
+        <span class="rname">geolonia/japanese-addresses</span>
+        <span class="rdesc">全国27万件超の町丁目レベル住所オープンデータ。位置情報系の必須データ。</span>
+        <span class="stars">★ 770</span>
+      </a>
+      <a class="repo" href="https://github.com/yubinbango/yubinbango-core">
+        <span class="rname">yubinbango/yubinbango-core</span>
+        <span class="rdesc">郵便番号から住所を自動入力するJSライブラリ。フォーム改善の古典。</span>
+        <span class="stars">★ 48</span>
+      </a>
+      <a class="repo" href="https://github.com/sugi/wareki">
+        <span class="rname">sugi/wareki</span>
+        <span class="rdesc">和暦⇔西暦の双方向変換ライブラリ(Ruby)。全元号対応。</span>
+        <span class="stars">★ 104</span>
+      </a>
+      <a class="repo" href="https://github.com/ciscorn/jma-weather-images">
+        <span class="rname">ciscorn/jma-weather-images</span>
+        <span class="rdesc">気象庁のテロップ番号から天気画像を合成するCC0サンプル。jma-weatherの好相棒。</span>
+        <span class="stars">★ 32</span>
+      </a>
+    </div>
+    <p class="repo-note">掲載基準: 公開データ・公式APIベースで、日本在住者の日常に直結するもの。掲載・取り下げの希望はGitHubのissueまで。</p>
+  </div>
+</section>
+
 <section id="links">
   <div class="wrap">
     <div class="sec-head">
-      <div class="no">其の五 — LINKS</div>
+      <div class="no">其の六 — LINKS</div>
       <h2>リンク</h2>
     </div>
     <div class="links-grid">
@@ -434,6 +525,8 @@ footer .lic{margin-top:6px}
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap">

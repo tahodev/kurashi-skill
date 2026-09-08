@@ -9,7 +9,7 @@
 <meta property="og:description" content="天気・防災・祝日・ふるさと納税・図書館。公式APIだけで動くAIエージェント用スキル集。MITオープンソース。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tahodev.github.io/kurashi-skill/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='10' fill='%23B9402F'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23F8F4E9' font-family='serif'%3E%E5%AE%B6%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F8F4E9'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%230F2540' font-family='sans-serif' letter-spacing='2'%3Ek%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
@@ -40,6 +40,20 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+.wordmark{
+  font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;
+  font-weight:500;
+  font-size:clamp(30px,7.2vw,42px);
+  letter-spacing:.3em;
+  text-indent:.3em; /* optically recenter letterspaced text */
+  color:var(--ai-deep);
+  line-height:1.3;
+}
+.wordmark-sub{
+  margin-top:12px;
+  font-size:12px;letter-spacing:.42em;text-indent:.42em;
+  color:var(--sumi-soft);
+}
 .serif{font-family:'Noto Serif JP',serif}
 
 /* ── nav ── */
@@ -50,9 +64,8 @@ nav{
   border-bottom:1px solid var(--line);
 }
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ai-deep)}
-nav .brand .hanko{width:30px;height:30px}
-nav .brand span{font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em}
+nav .brand{display:flex;align-items:center;text-decoration:none;color:var(--ai-deep)}
+nav .brand .navword{font-family:'Zen Kaku Gothic New',sans-serif;font-weight:500;font-size:14px;letter-spacing:.24em;color:var(--ai-deep)}
 nav .links{display:flex;gap:18px;font-size:13px}
 nav .links a{color:var(--ai-soft);text-decoration:none}
 nav .links a:hover{color:var(--shu)}
@@ -64,7 +77,6 @@ header.hero{
   text-align:center;
   position:relative;
 }
-.hero .hanko{width:96px;height:96px;margin:0 auto 26px;display:block;filter:drop-shadow(0 6px 14px rgba(185,64,47,.25))}
 .hero .kanji-bg{
   position:absolute;top:30px;right:-10px;
   writing-mode:vertical-rl;
@@ -255,10 +267,7 @@ footer .lic{margin-top:6px}
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top">
-      <svg class="hanko" viewBox="0 0 64 64" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="11" fill="#B9402F"/><text x="32" y="45" font-size="36" text-anchor="middle" fill="#F8F4E9" font-family="'Noto Serif JP',serif">家</text></svg>
-      <span>kurashi-skill</span>
-    </a>
+    <a class="brand" href="#top"><span class="navword">kurashi skill</span></a>
     <div class="links">
       <a href="#skills">スキル</a>
       <a href="#demo">使い方</a>
@@ -271,9 +280,9 @@ footer .lic{margin-top:6px}
 <header class="hero" id="top">
   <div class="wrap">
     <div class="kanji-bg">暮らしを、すこし楽に。</div>
-    <svg class="hanko" viewBox="0 0 64 64" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="11" fill="#B9402F"/><text x="32" y="45" font-size="36" text-anchor="middle" fill="#F8F4E9" font-family="'Noto Serif JP',serif">家</text></svg>
-    <h1>日本の暮らしを、<br class="sp"><span class="accent">AIエージェント</span>に。</h1>
-    <div class="yomi">KURASHI-SKILL ・ 暮らしスキル</div>
+    <div class="wordmark">kurashi skill</div>
+    <div class="wordmark-sub">暮らしスキル</div>
+    <h1 style="margin-top:34px">日本の暮らしを、<br class="sp"><span class="accent">AIエージェント</span>に。</h1>
     <p class="lead">
       天気、防災、祝日、ふるさと納税、図書館。<br>
       日本での日常に必要な「調べもの」だけを集めた、AIエージェント向けオープンソースのスキルコレクションです。公式APIと公開データだけを使い、ログインは不要。MITライセンス。
@@ -428,8 +437,8 @@ footer .lic{margin-top:6px}
 
 <footer>
   <div class="wrap">
-    <svg class="hanko" viewBox="0 0 64 64" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="11" fill="#B9402F"/><text x="32" y="45" font-size="36" text-anchor="middle" fill="#F8F4E9" font-family="'Noto Serif JP',serif">家</text></svg>
-    <div>kurashi-skill — 日本の暮らしを、AIエージェントに。</div>
+    <div style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:500;font-size:13px;letter-spacing:.28em;text-indent:.28em;color:var(--ai-deep);margin-bottom:10px">kurashi skill</div>
+    <div>日本の暮らしを、AIエージェントに。</div>
     <div class="lic"><a href="https://github.com/tahodev/kurashi-skill/blob/main/LICENSE">MIT License</a> © 2026 tahodev</div>
   </div>
 </footer>

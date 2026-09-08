@@ -51,3 +51,17 @@ curl -s https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv | iconv -f SHIFT
 
 - 元データは内閣府の公開ページ (https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html)。CSVが更新されたら最新を取り直す。
 - 祝日法の改正で変わることがある。古いローカルコピーを使い回さない。
+
+## エラー・失敗時の対応
+
+- **タイムアウトを付ける**: `curl -sm 30` のように必ず制限時間を付ける。
+- **`iconv` がない環境**: 代わりに Python を使う(ほぼどの環境にもある):
+
+  ```bash
+  curl -sm 30 -s https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv \
+    | python3 -c "import sys; sys.stdout.write(sys.stdin.buffer.read().decode('cp932'))"
+  ```
+
+  変換を忘れると祝日名が文字化けする。化けたままユーザーに見せない。
+- **CSVが取れない(HTTP 5xx、タイムアウト、空)**: 1〜2回再試行し、駄目なら「内閣府のサイトから祝日CSVを取得できなかった。https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html で確認してください」と伝える。手元の古いコピーを最新として扱わない。
+- **該当年がCSVに未収録**: 先の年はCSVに入っていないことがある。その場合は「公式CSVに未収録」と明示したうえで、上のルール(振替休日・国民の休日)による推計であることを区別して伝える。

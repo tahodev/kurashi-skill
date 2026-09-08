@@ -1,5 +1,8 @@
 # kurashi-skill
 
+[![health-check](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml/badge.svg)](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 日本での暮らしを手伝う、AIエージェント向けスキルコレクションです。
 気象庁の公開データ、内閣府の祝日CSV、カーリル図書館APIなど、公式APIと公開データだけを使い、ログインなしで安全に使える照会系スキルを中心に集めています。
 

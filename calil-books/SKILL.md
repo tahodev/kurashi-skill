@@ -1,6 +1,6 @@
 ---
 name: calil-books
-description: カーリル図書館APIで全国の図書館の蔵書と貸出状況を検索する。無料APIキーが必要。
+description: カーリル図書館APIで図書館の蔵書と貸出状況を検索する。蔵書検索、図書館、貸出状況、本を借りたいときに対応。無料APIキーが必要。書籍の購入・電子書籍・国会図書館の検索は対象外。
 license: MIT
 metadata:
   category: books

@@ -1,4 +1,16 @@
-# kurashi-skill
+<p align="center">
+  <a href="https://tahodev.github.io/kurashi-skill/">
+    <img src="https://tahodev.github.io/kurashi-skill/emblem.png" alt="kurashi-skill のシンボル — 落款風の家のマーク" width="120">
+  </a>
+</p>
+
+<h1 align="center">kurashi-skill</h1>
+
+<p align="center">
+  日本の暮らしを、AIエージェントに。<br>
+  <a href="https://tahodev.github.io/kurashi-skill/"><strong>紹介サイト — tahodev.github.io/kurashi-skill</strong></a>
+</p>
+
 
 [![health-check](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml/badge.svg)](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

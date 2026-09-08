@@ -295,7 +295,12 @@ a.repo .rname{
 }
 a.repo .rdesc{flex:1;font-size:13px;color:var(--sumi-soft);line-height:1.7}
 a.repo .stars{flex:0 0 auto;font-size:11.5px;color:var(--shu);letter-spacing:.05em}
-@media(max-width:680px){a.repo{flex-wrap:wrap;gap:2px 12px}a.repo .rname{min-width:0}}
+@media(max-width:680px){
+a.repo{flex-wrap:wrap;gap:3px 12px;padding:15px 4px}
+a.repo .rname{min-width:0;flex:1 1 100%}
+a.repo .rdesc{flex:1 1 auto;font-size:12.5px}
+a.repo .stars{flex:0 0 auto}
+}
 .repo-note{margin-top:14px;font-size:12px;color:var(--sumi-soft)}
 
 /* footer */

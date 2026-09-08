@@ -1,0 +1,38 @@
+name: health-check
+
+on:
+  schedule:
+    # 毎日 12:17 UTC (21:17 JST)
+    - cron: '17 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint skill frontmatter
+        run: bash scripts/lint-skills.sh
+
+      - name: Check URLs in SKILL.md files
+        run: bash scripts/check-urls.sh
+
+      - name: Open or update a GitHub issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="health-check failed: lint or dead URL ($(date -u +%Y-%m-%d))"
+          BODY=$'Scheduled health-check failed.\n\n'"Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          EXISTING=$(gh issue list --state open --search 'health-check failed' --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label 'health-check' || \
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi

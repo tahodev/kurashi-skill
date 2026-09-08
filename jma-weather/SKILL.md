@@ -42,9 +42,6 @@ curl -s https://www.jma.go.jp/bosai/common/const/area.json
 # 天気・降水確率・気温(数日分)
 curl -s https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json
 
-# 週間予報のテキスト概況
-curl -s https://www.jma.go.jp/bosai/forecast/data/overview_week/130000.json
-
 # 短期予報のテキスト概況
 curl -s https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json
 ```
@@ -53,7 +50,7 @@ curl -s https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json
 
 ### 3. JSONの読み方
 
-`forecast` レスポンスは配列で、要素ごとに `publishingOffice` (発表気象台) と `reportDatetime` (発表時刻) を持つ。`timeSeries` に時系列データが入る。
+`forecast` レスポンスは配列で、要素ごとに `publishingOffice` (発表気象台) と `reportDatetime` (発表時刻) を持つ。`timeSeries` に時系列データが入る。通常は2要素あり、1つ目が短期(天気・降水確率・気温)、2つ目が週間(7日先までの降水確率と最高/最低気温)を持つ。週間分だけ別エンドポイントはない。
 
 - `timeSeries[].timeDefines`: 各時刻の枠。他の配列とインデックスが対応する。
 - `areas[].weathers`: 「晴れ 時々 くもり」などの天気文字列。

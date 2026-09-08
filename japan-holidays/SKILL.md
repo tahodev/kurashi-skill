@@ -65,3 +65,7 @@ curl -s https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv | iconv -f SHIFT
   変換を忘れると祝日名が文字化けする。化けたままユーザーに見せない。
 - **CSVが取れない(HTTP 5xx、タイムアウト、空)**: 1〜2回再試行し、駄目なら「内閣府のサイトから祝日CSVを取得できなかった。https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html で確認してください」と伝える。手元の古いコピーを最新として扱わない。
 - **該当年がCSVに未収録**: 先の年はCSVに入っていないことがある。その場合は「公式CSVに未収録」と明示したうえで、上のルール(振替休日・国民の休日)による推計であることを区別して伝える。
+
+## English summary
+
+Looks up Japanese national holidays and computes long weekends from the Cabinet Office's official CSV. No API key or login required. The CSV is Shift_JIS encoded, so convert to UTF-8 first (`iconv`, or Python as a fallback). It covers 1955 through roughly next year; for later years, estimate with the holiday-law rules (substitute holidays, citizen's holidays) and label the result as an estimate. Always re-fetch instead of trusting an old local copy.

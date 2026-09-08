@@ -69,3 +69,7 @@ curl -s "https://api.calil.jp/check?appkey=${CALIL_APPKEY}&session=SESSION_ID&fo
 - **HTTP 4xx**: パラメータかキーの問題。再試行で直らないので、原因を確認してから1回だけやり直す。
 - **HTTP 5xx / タイムアウト**: 1〜2回だけ再試行。直らなければカーリル側の障害の可能性として、 https://calil.jp/ を直接確認するよう案内する。
 - **`蔵書なし` や空の結果はエラーではない**: その館に本がない正常な結果として伝える。取得失敗と混同しない。
+
+## English summary
+
+Searches library holdings and loan availability across Japan via the Calil Library API. Requires a free API key from https://calil.jp/api/dashboard/ - keep it in an environment variable, never in chat or commits. Availability checks are asynchronous: poll with the returned `session` at 2+ second intervals, capped at about 10 tries / 2 minutes. The API terms limit long-term caching of results.

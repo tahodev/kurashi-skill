@@ -70,3 +70,7 @@ curl -s https://www.jma.go.jp/bosai/tsunami/data/list.json
 - **HTTP 404**: `offices` コードの間違いが原因になりやすい。`https://www.jma.go.jp/bosai/common/const/area.json` でコードを確認する。
 - **HTTP 5xx / タイムアウト**: 1〜2回だけ再試行。直らなければ取得失敗であることを明示し、「気象庁の防災情報ページ https://www.jma.go.jp/bosai/map.html を直接確認してください」と案内する。失敗を「情報なし」とは絶対に言わない。
 - **詳細JSONのURL**: 一覧の `json` フィールドをそのまま使う。ファイル名を自分で組み立てると404になりやすい。
+
+## English summary
+
+Fetches JMA disaster information: the latest earthquake list and per-quake details, weather warnings/advisories by area, and active tsunami information. No API key or login required. The detail JSON filename comes from the list's `json` field - never build the URL yourself. An empty array means "nothing currently in effect", not an error. In an emergency, always point the user to official JMA and local-government announcements.

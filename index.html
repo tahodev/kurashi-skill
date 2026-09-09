@@ -312,6 +312,31 @@ footer{
 footer .hanko{width:34px;height:34px;margin:0 auto 12px;display:block;opacity:.9}
 footer a{color:var(--ai-soft)}
 footer .lic{margin-top:6px}
+
+/* wa design layer */
+body::before{
+  content:"";position:fixed;inset:0;z-index:1000;pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wagara{
+  height:44px;margin:6px 0 0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cg fill='none' stroke='%231B3A4B' stroke-opacity='.13' stroke-width='1'%3E%3Ccircle cx='0' cy='30' r='28'/%3E%3Ccircle cx='0' cy='30' r='21'/%3E%3Ccircle cx='0' cy='30' r='14'/%3E%3Ccircle cx='0' cy='30' r='7'/%3E%3Ccircle cx='60' cy='30' r='28'/%3E%3Ccircle cx='60' cy='30' r='21'/%3E%3Ccircle cx='60' cy='30' r='14'/%3E%3Ccircle cx='60' cy='30' r='7'/%3E%3Ccircle cx='30' cy='0' r='28'/%3E%3Ccircle cx='30' cy='0' r='21'/%3E%3Ccircle cx='30' cy='0' r='14'/%3E%3Ccircle cx='30' cy='0' r='7'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:repeat-x;background-size:60px 30px;background-position:center bottom;
+}
+.sec-head{position:relative}
+.sec-head .tate{
+  position:absolute;top:2px;right:0;
+  writing-mode:vertical-rl;
+  font-family:'Noto Serif JP',serif;font-size:15px;letter-spacing:.4em;
+  color:var(--ai);opacity:.3;user-select:none;
+}
+@media(max-width:680px){.sec-head .tate{font-size:13px;opacity:.26}}
+.keisen{
+  display:flex;align-items:center;gap:12px;margin:0 0 8px;
+}
+.keisen::before,.keisen::after{content:"";flex:1;height:1px;background:var(--line)}
+.keisen span{width:7px;height:7px;background:var(--shu);transform:rotate(45deg);flex:0 0 auto;opacity:.85}
 </style>
 </head>
 <body>
@@ -353,11 +378,13 @@ footer .lic{margin-top:6px}
     </div>
   </div>
 </header>
+<div class="wagara"></div>
 
 <main>
 <section id="about">
   <div class="wrap">
     <div class="sec-head">
+      <div class="tate">趣</div>
       <div class="no">其の一 — ABOUT</div>
       <h2>kurashi-skill とは</h2>
       <p>Claude Code、Codex、OpenCode など <code>npx skills add</code> に対応したコーディングエージェントに、日本の暮らしの「調べもの力」を追加するスキル集です。</p>
@@ -385,6 +412,7 @@ footer .lic{margin-top:6px}
 <section id="skills">
   <div class="wrap">
     <div class="sec-head">
+      <div class="tate">技</div>
       <div class="no">其の二 — SKILLS</div>
       <h2>5つのスキル</h2>
       <p>各スキルの正本はリポジトリ内の <code>&lt;スキル名&gt;/SKILL.md</code>。ここではひとこと紹介だけ。</p>
@@ -427,6 +455,7 @@ footer .lic{margin-top:6px}
 <section id="demo">
   <div class="wrap">
     <div class="sec-head">
+      <div class="tate">話</div>
       <div class="no">其の三 — DEMO</div>
       <h2>エージェントに聞いてみる</h2>
       <p>インストールしたら、あとは自然に話しかけるだけ。スキルが質問に合わせて自動で選ばれます。</p>
@@ -445,6 +474,7 @@ footer .lic{margin-top:6px}
 <section id="challenge">
   <div class="wrap">
     <div class="sec-head">
+      <div class="tate">歩</div>
       <div class="no">其の四 — BUILD IN PUBLIC</div>
       <h2>30日間の公開開発チャレンジ</h2>
     </div>
@@ -466,6 +496,7 @@ footer .lic{margin-top:6px}
 <section id="community">
   <div class="wrap">
     <div class="sec-head">
+      <div class="tate">縁</div>
       <div class="no">其の五 — COMMUNITY</div>
       <h2>日本の暮らしに役立つ、ほかのレポ</h2>
       <p>kurashi-skillはこの界隈の先行プロジェクトに助けられています。日本の暮らしや公開データを扱う、おすすめのオープンソース。</p>
@@ -509,6 +540,7 @@ footer .lic{margin-top:6px}
 <section id="links">
   <div class="wrap">
     <div class="sec-head">
+      <div class="tate">先</div>
       <div class="no">其の六 — LINKS</div>
       <h2>リンク</h2>
     </div>
@@ -532,6 +564,8 @@ footer .lic{margin-top:6px}
   </div>
 </section>
 
+
+<div class="wrap"><div class="keisen"><span></span></div></div>
 </main>
 
 <footer>

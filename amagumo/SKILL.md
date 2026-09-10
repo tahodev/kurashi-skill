@@ -72,7 +72,8 @@ curl -sm 30 -o tile.png \
 python3 -c "
 from PIL import Image
 im=Image.open('tile.png').convert('P')
-print(im.getpixel((px,py)), im.getpalette()[3*idx:3*idx+3])"   # px,pyはタイル内座標
+idx=im.getpixel((px,py))
+print(idx, im.getpalette()[3*idx:3*idx+3])"   # px,pyはタイル内座標
 ```
 
 「今降ってるか」と「この後どうなるか」は、同じ地点について実況(N1)の最新と予報(N2)の先の時刻を見比べると答えられる。

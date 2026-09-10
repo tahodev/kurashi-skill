@@ -58,7 +58,7 @@ curl -s https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv | iconv -f SHIFT
 - **`iconv` がない環境**: 代わりに Python を使う(ほぼどの環境にもある):
 
   ```bash
-  curl -sm 30 -s https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv \
+  curl -sm 30 https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv \
     | python3 -c "import sys; sys.stdout.write(sys.stdin.buffer.read().decode('cp932'))"
   ```
 

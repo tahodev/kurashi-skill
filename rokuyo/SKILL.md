@@ -1,6 +1,6 @@
 ---
 name: rokuyo
-description: 新暦の日付から六曜(大安・赤口・先勝・友引・先・先負・仏滅)を計算する。六曜、大安、仏滅、縁起のいい日、選日の質問に対応。旧暦変換テーブル内蔵でAPIキー・ログイン不要。祝日はjapan-holidays、和暦変換はwarekiを使う。
+description: 新暦の日付から六曜(大安・赤口・先勝・友引・先負・仏滅)を計算する。六曜、大安、仏滅、縁起のいい日、選日の質問に対応。旧暦変換テーブル内蔵でAPIキー・ログイン不要。祝日はjapan-holidays、和暦変換はwarekiを使う。
 license: MIT
 metadata:
   category: calendar
@@ -28,11 +28,11 @@ metadata:
 
 例: 2026-09-11 → テーブルで「2026-09-11 旧暦8月開始」の行 → 旧暦8月1日 → (8+1)%6=3 → **友引**(外部カレンダーと照合済み)。
 
-## 旧暦月テーブル(新暦の各月の初日)
+## 旧暦月テーブル(朔=旧暦の各月の初日)
 
 国立天文台暦計算室の暦要項「朔弦望」「二十四節気および雑節」(https://eco.mtk.nao.ac.jp/koyomi/yoko/2026/rekiyou263.html ほか各年)から計算。閏月は「中気を含まない月」という公式ルールで判定。2026-09-11に外部カレンダー2件と照合して検証済み(閏月含む)。
 
-| 新暦の月の初日(朔) | 旧暦 | 新暦の月の初日(朔) | 旧暦 |
+| 朔の日(新暦) | 旧暦 | 朔の日(新暦) | 旧暦 |
 | --- | --- | --- | --- |
 | 2024-12-01 | 11月 | 2026-04-17 | 3月 |
 | 2024-12-31 | 12月 | 2026-05-17 | 4月 |
@@ -52,14 +52,14 @@ metadata:
 | 2026-02-17 | 1月 | 2027-07-04 | 6月 |
 | 2026-03-19 | 2月 | 2027-08-02 | 7月 |
 
-表の区切りの注意: 2026-07-14開始の月は2026-08-12まで、2027-08-02開始の月は2027-08-31まで。テーブル収録範囲は2024-12-01から2027-09-29開始の月(2027-10-28まで)まで。2027年9月以降の分は暦要項2028年版が出たら追記する。
+表の区切りの注意: 2026-07-14開始の月は2026-08-12まで、2027-08-02開始の月は2027-08-31まで。テーブル収録範囲は2024-12-01から2027-12-27まで(暦要項2027年版には2027-12-28の朔まで収録されている。2026-09-11に2024〜2027年の全朔日を暦要項と照合済み)。2027-12-28以降の分は暦要項2028年版が出たら追記する。
 
-続き(2027年9月以降): 2027-09-01=8月、2027-09-30=9月、2027-10-29=10月、2027-11-28=11月開始(各々翌朔の前日まで)。
+続き(2027年9月以降): 2027-09-01=8月、2027-09-30=9月、2027-10-29=10月、2027-11-28=11月、2027-12-28=12月開始(各々翌朔の前日まで。2027-12-28開始の月は翌朔が暦要項2028年版待ちのため、計算を保証するのは2027-12-27まで)。
 
 ## エラー・失敗時の対応
 
 - このスキルはネットワークを使わない。
-- **テーブル範囲外の日付**: 推測で計算しない。「内蔵テーブルの範囲外(2024-12-01〜2027-10-28)」と明示する。正確な値は国立天文台暦計算室の暦要項(https://eco.mtk.nao.ac.jp/koyomi/yoko/)で確認できる。
+- **テーブル範囲外の日付**: 推測で計算しない。「内蔵テーブルの範囲外(2024-12-01〜2027-12-27)」と明示する。正確な値は国立天文台暦計算室の暦要項(https://eco.mtk.nao.ac.jp/koyomi/yoko/)で確認できる。
 - **結果の伝え方**: 六曜は旧暦ベースなので、「新暦○年○月○日 = 旧暦○月○日 → 大安」のように根拠を添えると誤解がない。
 
 ## 注意
@@ -70,4 +70,4 @@ metadata:
 
 ## English summary
 
-Computes rokuyo (the six-day fortune cycle: taian, shakkou, senshou, tomobiki, senbu, butsumetsu) from a Gregorian date, using a built-in lunar-calendar table derived from the National Astronomical Observatory of Japan's official almanac (new moons and solar terms). No network access needed. Formula: (lunar month + lunar day) mod 6, where 0=taian. Covers 2024-12-01 through 2027-10-28; for dates outside the table, say so instead of guessing. Leap months reuse the previous month's number. Rokuyo is a folk fortune indicator - tell the user it has no scientific basis.
+Computes rokuyo (the six-day fortune cycle: taian, shakkou, senshou, tomobiki, senbu, butsumetsu) from a Gregorian date, using a built-in lunar-calendar table derived from the National Astronomical Observatory of Japan's official almanac (new moons and solar terms). No network access needed. Formula: (lunar month + lunar day) mod 6, where 0=taian. Covers 2024-12-01 through 2027-12-27; for dates outside the table, say so instead of guessing. Leap months reuse the previous month's number. Rokuyo is a folk fortune indicator - tell the user it has no scientific basis.

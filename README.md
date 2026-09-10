@@ -15,6 +15,11 @@
 [![health-check](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml/badge.svg)](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+<p align="center">
+  <img src="assets/1-demo.gif" alt="kurashi-skill が気象庁・内閣府の公開データを使って天気、地震、祝日、ふるさと納税の質問に答えるデモ" width="900">
+</p>
+<p align="center"><sub>実際の公式データを使ったデモ / Demo using live official data</sub></p>
+
 日本での暮らしを手伝う、AIエージェント向けスキルコレクションです。
 気象庁の公開データ、内閣府の祝日CSV、カーリル図書館APIなど、公式APIと公開データだけを使い、ログインなしで安全に使える照会系スキルを中心に集めています。
 

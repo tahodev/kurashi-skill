@@ -22,6 +22,7 @@
 - ROADMAP.md を追加(30日チャレンジ Day 7-30 のスキル候補一覧)
 
 ### Changed
+- ROADMAP.md に Day 7-30 の採用スケジュールを記録(Day 1 記事の案と検証済み候補一覧をマージして 2026-09-11 に決定)。不採用(`station-finder` / `nenkin`)とバックログ(`reinfolib-prices` / `estat-stats` / `dataportal-search` / `amedas-weather` / `hazard-map`)の判断理由も明記
 - furusato-nozei: 給与所得控除・基礎控除を令和7年分以降の現行値に更新し、各税率表に基準日(2026年9月時点)と国税庁・総務省の公式URLを明記
 - docs/features の各ガイドを要約に整理し、SKILL.md を正(カノニカル)とする方針を明記
 - health-check を push / pull_request でも実行するように変更(失敗時の自動issue起票は schedule / 手動実行時のみ)

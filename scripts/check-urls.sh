@@ -15,6 +15,9 @@ EXCLUDE_URLS=(
   # JMA individual earthquake JSONs are removed after a few days; kept in
   # bosai-alert/SKILL.md as a worked example of the `json` field.
   'https://www.jma.go.jp/bosai/quake/data/20260908234330_20260908234052_VXSE5k_1.json'
+  # Typhoon list.json returns 404 when no typhoon is active - that is the
+  # normal quiet-time state, documented in bosai-typhoon/SKILL.md.
+  'https://www.jma.go.jp/bosai/typhoon/data/list.json'
 )
 
 mapfile -t urls < <(grep -hoE 'https?://[^ )"`<]+' -- */SKILL.md README.md docs/*.md docs/features/*.md \

@@ -36,6 +36,12 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 祝日・連休を調べる | `japan-holidays` | 内閣府の公式CSVから祝日・振替休日・国民の休日と連休を計算 | 不要 | [japan-holidays ガイド](docs/features/japan-holidays.md) |
 | ふるさと納税の上限額を計算する | `furusato-nozei` | 給与収入や課税所得から寄附上限額の目安を計算(API不要) | 不要 | [furusato-nozei ガイド](docs/features/furusato-nozei.md) |
 | 図書館の蔵書を検索する | `calil-books` | カーリル図書館APIで図書館の蔵書と貸出状況を検索 | APIキー(無料)が必要 | [calil-books ガイド](docs/features/calil-books.md) |
+| 和暦と西暦を変換する | `wareki` | 元号の境界表で西暦⇄和暦を相互変換(API不要) | 不要 | [wareki ガイド](docs/features/wareki.md) |
+| 六曜を調べる | `rokuyo` | 国立天文台の暦要項から作った旧暦テーブルで大安・仏滅などを計算 | 不要 | [rokuyo ガイド](docs/features/rokuyo.md) |
+| 郵便番号・住所を検索する | `zipcode-lookup` | 日本郵便の公式データ(KEN_ALL)で郵便番号⇄住所をローカル検索 | 不要 | [zipcode-lookup ガイド](docs/features/zipcode-lookup.md) |
+| 郵便料金を調べる | `yubin-fee` | 定形・定形外・はがき・レターパックなどの料金を重量とサイズから計算 | 不要 | [yubin-fee ガイド](docs/features/yubin-fee.md) |
+| 今の雨雲を調べる | `amagumo` | 気象庁の雨雲レーダータイルから現在の雨の強さと短時間の見通しを取得 | 不要 | [amagumo ガイド](docs/features/amagumo.md) |
+| 台風の発生を確認する | `bosai-typhoon` | 気象庁の台風情報JSONで発生中の台風の有無を確認 | 不要 | [bosai-typhoon ガイド](docs/features/bosai-typhoon.md) |
 
 各スキルの**正本は `<スキル名>/SKILL.md`** です。`docs/features/` のガイドは概要版なので、詳細な手順・パラメータ・エラー対応は必ず SKILL.md を参照してください。
 
@@ -83,6 +89,12 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Look up national holidays and long weekends | `japan-holidays` | Holiday, substitute-holiday and bridge-holiday calculation from the Cabinet Office's official CSV | Not required | [japan-holidays guide](docs/features/japan-holidays.md) |
 | Estimate your furusato nozei donation cap | `furusato-nozei` | Pure-calculation estimate of the hometown-tax donation limit (no API needed) | Not required | [furusato-nozei guide](docs/features/furusato-nozei.md) |
 | Search library holdings | `calil-books` | Library and book-availability search via the Calil API | Free API key required | [calil-books guide](docs/features/calil-books.md) |
+| Convert between Gregorian and Japanese era dates | `wareki` | Day-exact era boundary table for wareki conversion (no API) | Not required | [wareki guide](docs/features/wareki.md) |
+| Check the rokuyo fortune day | `rokuyo` | Taian/butsumetsu and the other four from a lunar table built on the official almanac | Not required | [rokuyo guide](docs/features/rokuyo.md) |
+| Look up postal codes and addresses | `zipcode-lookup` | Two-way search over Japan Post's official KEN_ALL dataset | Not required | [zipcode-lookup guide](docs/features/zipcode-lookup.md) |
+| Check domestic postage fees | `yubin-fee` | Letter, postcard and Letter Pack fees from weight and size (2024-10-01 revision) | Not required | [yubin-fee guide](docs/features/yubin-fee.md) |
+| Check current rain radar | `amagumo` | JMA rain-cloud tiles for current intensity and a 30-60 minute outlook | Not required | [amagumo guide](docs/features/amagumo.md) |
+| Check for active typhoons | `bosai-typhoon` | JMA typhoon JSON feed; a 404 means none active (normal) | Not required | [bosai-typhoon guide](docs/features/bosai-typhoon.md) |
 
 The canonical source for each skill is its `<skill>/SKILL.md`. The guides under `docs/features/` are summaries only - always refer to SKILL.md for full procedures, parameters, and error handling.
 

@@ -59,6 +59,9 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | Day | 日付 | できごと |
 | --- | --- | --- |
 | 1 | 2026-09-09 | 宣言 & リポジトリ公開 (初期スキル5個) |
+| 2 | 2026-09-10 | jma-weather v2 アップグレード |
+
+Day 7〜30 の候補は [ROADMAP.md](ROADMAP.md) を参照。
 
 ## English
 
@@ -103,6 +106,9 @@ This repository is growing as a 30-day build-in-public challenge: one skill a da
 | Day | Date | What happened |
 | --- | --- | --- |
 | 1 | 2026-09-09 | Declaration & repository launch (initial 5 skills) |
+| 2 | 2026-09-10 | jma-weather v2 upgrade |
+
+Candidates for Days 7-30: see [ROADMAP.md](ROADMAP.md).
 
 ## ライセンス / License
 

@@ -33,8 +33,11 @@ curl -s https://www.jma.go.jp/bosai/quake/data/list.json
 一覧の `json` フィールドをそのまま使う。
 
 ```bash
+# 下のURLは実際の発表をもとにした歴史的な例(2026-09-08 23:40発表分)
 curl -s https://www.jma.go.jp/bosai/quake/data/20260908234330_20260908234052_VXSE5k_1.json
 ```
+
+> **このURLは期限切れの歴史的な例**: 気象庁の個別JSONは発表から数日で公開終了となり404になる。実際に使うときは、直前の一覧取得で得た最新の `json` フィールドの値に置き換えること。期限切れが前提のURLなので、CIのURLチェックでは `scripts/check-urls.sh` の `EXCLUDE_URLS` で除外済み。
 
 構造: `Control` (発表情報) と `Body` (震源、震度観測点のリストなど)。`Body.Intensity.Observation` に地域ごとの震度が入る。
 

@@ -1,6 +1,9 @@
 name: health-check
 
 on:
+  push:
+    branches: [main]
+  pull_request:
   schedule:
     # 毎日 12:17 UTC (21:17 JST)
     - cron: '17 12 * * *'
@@ -23,7 +26,7 @@ jobs:
         run: bash scripts/check-urls.sh
 
       - name: Open or update a GitHub issue on failure
-        if: failure()
+        if: failure() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

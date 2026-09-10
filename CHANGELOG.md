@@ -14,9 +14,23 @@
 ### Added
 - 各SKILL.mdに失敗時の対応セクション(HTTPエラー、空配列とエラーの区別、ポーリング上限、文字コード変換の代替手段、タイムアウト、ユーザーへの伝え方)を追加
 - CONTRIBUTING.md、issueテンプレート、AGENTS.md を追加
+- 各SKILL.mdに英語サマリーセクションを追加
+- ヘルスチェックCI(`.github/workflows/health-check.yml`): SKILL.mdのURLチェック(`scripts/check-urls.sh`)・フロントマターリント(`scripts/lint-skills.sh`)・失敗時の自動issue起票
+- 各スキルのdescriptionにルーティングキーワードと対象外スコープの境界を追加
+- README に30日間の公開開発(build in public)チャレンジ節、シールエンブレムのヘッダーと紹介サイトへのリンク、CI・ライセンスバッジを追加。`.gitignore` を追加
+- docs/install.md にクリーン環境でのインストール検証手順を追加
+- ROADMAP.md を追加(30日チャレンジ Day 7-30 のスキル候補一覧)
 
 ### Changed
 - furusato-nozei: 給与所得控除・基礎控除を令和7年分以降の現行値に更新し、各税率表に基準日(2026年9月時点)と国税庁・総務省の公式URLを明記
+- docs/features の各ガイドを要約に整理し、SKILL.md を正(カノニカル)とする方針を明記
+- health-check を push / pull_request でも実行するように変更(失敗時の自動issue起票は schedule / 手動実行時のみ)
+- lint-skills.sh: CONTRIBUTING.md で必須としている `metadata.category` / `metadata.locale` を必須項目として検査するように変更
+- check-urls.sh: チェック対象を README.md と docs/**/*.md に拡大し、期限切れが前提の実例URLを除外する `EXCLUDE_URLS` の仕組みを追加
+
+### Fixed
+- bosai-alert: 日付入りの地震詳細JSONの実例URLが期限切れで404になりCIを壊す問題を、歴史的な例である注記とURLチェック除外で解消
+- japan-holidays: curl フォールバックコマンドの重複した `-s` オプションを修正
 
 ## [0.1.0] - 2026-09-09
 

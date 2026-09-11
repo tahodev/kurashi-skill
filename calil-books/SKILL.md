@@ -19,16 +19,17 @@ metadata:
 ## 図書館を検索する
 
 ```bash
-curl -s "https://api.calil.jp/library?appkey=${CALIL_APPKEY}&pref=東京都&format=json"
+curl -s "https://api.calil.jp/library?appkey=${CALIL_APPKEY}&pref=東京都&format=json&callback=no"
 ```
 
+- **`callback=no` を必ず付ける。** 付けないと `format=json` でも応答がJSONP(`callback(...)` でラップされた形式)で返り、カーリル自身が非推奨と案内している(2026-09-12実測)。JSONPのままでは `jq` などでそのまま解釈できない。
 - `pref`: 都道府県名。`city` で市区町村に絞れる。`geocode=経度,緯度` でも検索できる。
 - レスポンスの `systemid` が蔵書照会で使う図書館システムのID。`libkey` は館の略名、`formal` は正式名称。
 
 ## 蔵書・貸出状況を調べる
 
 ```bash
-curl -s "https://api.calil.jp/check?appkey=${CALIL_APPKEY}&isbn=9784478025819&systemid=Tokyo_Setagaya&format=json"
+curl -s "https://api.calil.jp/check?appkey=${CALIL_APPKEY}&isbn=9784478025819&systemid=Tokyo_Setagaya&format=json&callback=no"
 ```
 
 - `isbn`: 10桁または13桁。カンマ区切りで複数指定できる。
@@ -39,7 +40,7 @@ curl -s "https://api.calil.jp/check?appkey=${CALIL_APPKEY}&isbn=9784478025819&sy
 蔵書照会は非同期。初回レスポンスが `continue: 1` の場合、返ってきた `session` を付けて2秒以上あけて再取得する。
 
 ```bash
-curl -s "https://api.calil.jp/check?appkey=${CALIL_APPKEY}&session=SESSION_ID&format=json"
+curl -s "https://api.calil.jp/check?appkey=${CALIL_APPKEY}&session=SESSION_ID&format=json&callback=no"
 ```
 
 `continue: 0` になるまで繰り返す(数回で終わることが多い)。`session` 指定の再取得では `isbn` や `systemid` は付けない。

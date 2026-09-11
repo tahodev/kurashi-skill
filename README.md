@@ -71,6 +71,8 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | --- | --- | --- |
 | 1 | 2026-09-09 | 宣言 & リポジトリ公開 (初期スキル5個) |
 | 2 | 2026-09-10 | jma-weather v2 アップグレード |
+| 3-7 | 2026-09-11 | 初期スキルの強化、CI(health-check)整備、ROADMAP策定、ライブデモGIF追加 |
+| 8-13 | 2026-09-11 | 新スキル6個追加 (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
 
 Day 7〜30 の候補は [ROADMAP.md](ROADMAP.md) を参照。
 
@@ -124,6 +126,8 @@ This repository is growing as a 30-day build-in-public challenge: one skill a da
 | --- | --- | --- |
 | 1 | 2026-09-09 | Declaration & repository launch (initial 5 skills) |
 | 2 | 2026-09-10 | jma-weather v2 upgrade |
+| 3-7 | 2026-09-11 | Initial-skill hardening, health-check CI, ROADMAP, live demo GIF |
+| 8-13 | 2026-09-11 | 6 new skills (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
 
 Candidates for Days 7-30: see [ROADMAP.md](ROADMAP.md).
 

@@ -51,6 +51,7 @@ curl -s https://www.jma.go.jp/bosai/warning/data/warning/130000.json
 
 - `headlineText`: 見出し文
 - `areaTypes[].areas[].warnings`: 地域ごとの警報・注意報。`code` と `status` (発表/継続/解除) を持つ。
+- 新しい発表がない期間は、過去の発表がそのまま残ることがある(2026-09-12に `reportDatetime` が数か月前の応答を実測)。`reportDatetime` が古い場合は「最新の発表ではなく過去の発表が残っている可能性」を添えて伝え、発表時刻を必ず併記する。
 
 ## 津波情報
 

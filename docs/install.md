@@ -27,11 +27,17 @@ npx --yes skills add tahodev/kurashi-skill --skill calil-books -g
 
 ```
 kurashi-skill/
-  jma-weather/SKILL.md
-  bosai-alert/SKILL.md
-  japan-holidays/SKILL.md
-  furusato-nozei/SKILL.md
-  calil-books/SKILL.md
+  jma-weather/SKILL.md      # 天気予報
+  bosai-alert/SKILL.md      # 地震・警報・津波
+  japan-holidays/SKILL.md   # 祝日・連休
+  furusato-nozei/SKILL.md   # ふるさと納税の上限目安
+  calil-books/SKILL.md      # 図書館蔵書
+  wareki/SKILL.md           # 西暦⇄和暦
+  rokuyo/SKILL.md           # 六曜
+  zipcode-lookup/SKILL.md   # 郵便番号⇄住所
+  yubin-fee/SKILL.md        # 郵便料金
+  amagumo/SKILL.md          # 雨雲レーダー
+  bosai-typhoon/SKILL.md    # 台風の有無
   docs/
     install.md
     features/<skill>.md   # スキルごとの概要ガイド(正本は各 SKILL.md)
@@ -44,7 +50,7 @@ Node.js v22 / npm 10.9、空のHOME・空のnpmキャッシュで上記コマン
 
 ### `--all -g` (全スキル)
 
-- 5スキルすべてが `~/.agents/skills/<skill名>/SKILL.md` にインストールされる。
+- 当時収録の5スキルすべてが `~/.agents/skills/<skill名>/SKILL.md` にインストールされることを確認した(現在は11スキル。同じコマンドで全スキルが入る)。
 - Claude Code など各エージェントのディレクトリ (例: `~/.claude/skills/<skill名>/`) にも配置される。
 - `Eve` と `PromptScript` の2ターゲットは「global skill installation非対応」でスキップされる。これはインストーラ側の仕様で、スキル自体の問題ではない。
 

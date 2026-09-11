@@ -40,4 +40,19 @@ for url in "${urls[@]}"; do
     *)     echo "FAIL  $code $url"; fail=1 ;;
   esac
 done
+
+# Informational (never fails CI): the KEN_ALL zip behind the templated URL in
+# zipcode-lookup/SKILL.md is skipped above, and Japan Post serves 404 for it
+# from datacenter IPs (documented 2026-09-11/12). Surface the current state so
+# a real outage is distinguishable from the known IP restriction.
+page=$(curl -s -L --max-time 20 -A 'kurashi-skill-url-check' \
+  'https://www.post.japanpost.jp/zipcode/dl/utf-zip.html' || true)
+href=$(grep -oE 'utf/zip/utf_ken_all\.zip' <<<"$page" | head -1)
+if [ -z "$href" ]; then
+  echo "INFO  KEN_ALL zip link not found on download page (page structure changed?)"
+else
+  zcode=$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 \
+    -A 'kurashi-skill-url-check' "https://www.post.japanpost.jp/zipcode/dl/${href}")
+  echo "INFO  KEN_ALL zip (${href}): HTTP ${zcode} (404 from datacenter IPs is the known restriction)"
+fi
 exit "$fail"

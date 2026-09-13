@@ -9,7 +9,7 @@
 - **税率・祝日CSVなど外部データの「時点」が変わったとき**: 該当スキル内の基準日注記とあわせて `Changed` に記録する。
 - CHANGELOG を更新したら、リリース時に git tag と GitHub Release を同じバージョンで切る(現状は手動)。
 
-## [Unreleased]
+## [0.2.0] - 2026-09-12
 
 ### Added
 - 新スキル6個を追加(Day 8-13): `wareki`(和暦⇄西暦変換)、`rokuyo`(六曜計算、国立天文台暦要項ベースの旧暦テーブル内蔵)、`zipcode-lookup`(日本郵便KEN_ALLによる郵便番号検索)、`yubin-fee`(郵便料金表、2024-10-01改定を2026-09-11に確認)、`amagumo`(雨雲レーダータイル)、`bosai-typhoon`(台風情報の有無確認、非発生時404を平時として扱う)
@@ -60,5 +60,5 @@
 - `furusato-nozei` - 給与収入や課税所得からふるさと納税の寄附上限額の目安を計算(API不要)
 - `calil-books` - カーリル図書館APIで図書館の蔵書と貸出状況を検索(無料APIキー)
 
-[Unreleased]: https://github.com/tahodev/kurashi-skill/compare/v0.1.0...HEAD
+[0.2.0]: https://github.com/tahodev/kurashi-skill/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/tahodev/kurashi-skill/releases/tag/v0.1.0

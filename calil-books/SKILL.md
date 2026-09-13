@@ -26,6 +26,46 @@ curl -s "https://api.calil.jp/library?appkey=${CALIL_APPKEY}&pref=東京都&form
 - `pref`: 都道府県名。`city` で市区町村に絞れる。`geocode=経度,緯度` でも検索できる。
 - レスポンスの `systemid` が蔵書照会で使う図書館システムのID。`libkey` は館の略名、`formal` は正式名称。
 
+
+## デフォルトの対象図書館システム(東京)
+
+ユーザーが東京在住で、対象の図書館を指定しない場合は、東京都立図書館と23区の区立図書館を既定の照会先にする。systemidはカーリルのAPIで実測確認済み(2026-09-14)。
+
+| systemid | 図書館システム |
+| --- | --- |
+| Tokyo_Pref | 東京都立図書館 |
+| Tokyo_Chiyoda | 千代田区立図書館 |
+| Tokyo_Chuo | 中央区立図書館 |
+| Tokyo_Minato | 港区立図書館 |
+| Tokyo_Shinjuku | 新宿区立図書館 |
+| Tokyo_Bunkyo | 文京区立図書館 |
+| Tokyo_Taito | 台東区立図書館 |
+| Tokyo_Sumida | 墨田区立図書館 |
+| Tokyo_Koto | 江東区立図書館 |
+| Tokyo_Shinagawa | 品川区立図書館 |
+| Tokyo_Meguro | 目黒区立図書館 |
+| Tokyo_Ota | 大田区立図書館 |
+| Tokyo_Setagaya | 世田谷区立図書館 |
+| Tokyo_Shibuya | 渋谷区立図書館 |
+| Tokyo_Nakano | 中野区立図書館 |
+| Tokyo_Suginami | 杉並区立図書館 |
+| Tokyo_Toshima | 豊島区立図書館 |
+| Tokyo_Kita | 北区立図書館 |
+| Tokyo_Arakawa | 荒川区立図書館 |
+| Tokyo_Itabashi | 板橋区立図書館 |
+| Tokyo_Nerima | 練馬区立図書館 |
+| Tokyo_Adachi | 足立区立図書館 |
+| Tokyo_Katsushika | 葛飾区立図書館 |
+| Tokyo_Edogawa | 江戸川区立図書館 |
+
+`systemid` はカンマ区切りで複数指定できるので、都立+23区をまとめて1回で照会できる。
+
+```bash
+curl -s "https://api.calil.jp/check?appkey=${CALIL_APPKEY}&isbn=9784478025819&systemid=Tokyo_Pref,Tokyo_Setagaya,Tokyo_Shibuya&format=json&callback=no"
+```
+
+別地域のユーザーには、この表を当てはめず、図書館検索(`pref` / `city` / `geocode`)でその地域のsystemidを調べてから照会する。
+
 ## 蔵書・貸出状況を調べる
 
 ```bash

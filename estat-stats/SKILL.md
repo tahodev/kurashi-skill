@@ -27,25 +27,28 @@ curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=${ESTAT_A
 - `limit`: 件数。`startPosition` でページング
 - 応答の `GET_STATS_LIST.DATALIST_INF.TABLE_INF` が統計表の配列。`@id` が後続のAPIで使う統計表ID(statsDataId)。`STATISTICS_NAME`(調査名)、`TITLE.$`(表題)、`GOV_ORG.$`(所管)を見て絞る
 - appIdなし・無効だと `RESULT.STATUS=100`「認証に失敗しました」のJSONが返る(HTTP 200のまま。2026-09-13実測)。**HTTPステータスではなく応答JSONの `STATUS` を見る**
+- 2026-09-13に無料appIdで getStatsList/getMetaInfo/getStatsData の3連を実測(いずれも `STATUS=0`)。appIdの即時発行を確認
 
 ## 2. 表の構造を調べる (getMetaInfo)
 
+例として `0000150002`(人口推計、総務省。2026-09-13に実キーで実測)を使う。
+
 ```bash
-curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=${ESTAT_APP_ID}&statsDataId=0003009245"
+curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=${ESTAT_APP_ID}&statsDataId=0000150002"
 ```
 
-- 応答の `METADATA_INF.CLASS_INF.CLASS_OBJ` に、表の軸(表章事項・分類事項・時間軸・地域)と各コード値が入る
+- 応答の `METADATA_INF.CLASS_INF.CLASS_OBJ` に、表の軸(表章事項・分類事項・時間軸・地域)と各コード値が入る。この表の実測では `cat01`(年齢5歳階級、46コード)、`cat02`(男女別、3コード)、`cat03`(年、5コード)、`area`(全国)、`time`(時間軸) が返った
 - データ取得で使う絞り込みコード(`cdArea`、`cdCat01` など)はここで得る。`@id` がパラメータ名の suffix、`CLASS` がコードと名称の一覧
 
 ## 3. データを取得する (getStatsData)
 
 ```bash
-curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=${ESTAT_APP_ID}&statsDataId=0003009245&limit=100"
+curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=${ESTAT_APP_ID}&statsDataId=0000150002&cdCat01=000&cdCat02=000&limit=5"
 ```
 
+- `cdCat01=000&cdCat02=000` は getMetaInfo で得たコード(年齢総数・男女総数)による絞り込み。`cd<軸ID>=<コード>` の形式で付ける(2026-09-13実測)
 - 応答の `STATISTICAL_DATA.DATA_INF.VALUE` が値の配列。`@time`(時間軸コード)、`@area`(地域コード)、`$`(値)を持つ。コードの意味は getMetaInfo の結果と突き合わせる
-- 大きい表は `limit` + `startPosition` で分割取得する(次の開始位置は `RESULT_INF` の値から計算する)
-- 地域や分類で絞るときは `cdArea=13000`(東京都)のように、getMetaInfoで得たコードを `cd<軸ID>=<コード>` 形式で付ける
+- 大きい表は `limit` + `startPosition` で分割取得する(次の開始位置は `RESULT_INF` の `TOTAL_NUMBER`/`FROM_NUMBER`/`TO_NUMBER` から計算する)
 
 ## エラー・失敗時の対応
 

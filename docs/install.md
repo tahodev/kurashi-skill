@@ -50,7 +50,7 @@ Node.js v22 / npm 10.9、空のHOME・空のnpmキャッシュで上記コマン
 
 ### `--all -g` (全スキル)
 
-- 当時収録の5スキルすべてが `~/.agents/skills/<skill名>/SKILL.md` にインストールされることを確認した(現在は11スキル。同じコマンドで全スキルが入る)。
+- 当時収録の5スキルすべてが `~/.agents/skills/<skill名>/SKILL.md` にインストールされることを確認した(現在は17スキル。同じコマンドで全スキルが入る)。
 - Claude Code など各エージェントのディレクトリ (例: `~/.claude/skills/<skill名>/`) にも配置される。
 - `Eve` と `PromptScript` の2ターゲットは「global skill installation非対応」でスキップされる。これはインストーラ側の仕様で、スキル自体の問題ではない。
 

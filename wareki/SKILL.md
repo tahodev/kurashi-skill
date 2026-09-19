@@ -5,6 +5,9 @@ license: MIT
 metadata:
   category: calendar
   locale: ja-JP
+  data_as_of: 2026-09-11
+  valid_through: 2027-09-11
+  source_version: "Japanese era boundaries verified 2026-09-11"
 ---
 
 # wareki

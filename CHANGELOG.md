@@ -12,6 +12,7 @@
 ## [Unreleased]
 
 ### Added
+- 静的データの鮮度ポリシー(`data_as_of` / `valid_through` / `source_version`)、30日前の期限ゲート、六曜・郵便料金の核心行fixtureを追加
 - 新スキル `volcano`: 気象庁の火山情報(噴火速報・噴火警報/噴火警戒レベル・解説情報)を公開JSONから取得(2026-09-19実測)
 - 新スキル `shelter-lookup`: 国土地理院の指定緊急避難場所・指定避難所データ(全国CSV/GeoJSON)を検索(2026-09-19実測)
 

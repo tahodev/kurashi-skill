@@ -44,7 +44,7 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 台風の発生を確認する | `bosai-typhoon` | 気象庁の台風情報JSONで発生中の台風の有無を確認 | 不要 | [bosai-typhoon ガイド](docs/features/bosai-typhoon.md) |
 | 緊急地震速報の発表状況を見る | `eew-monitor` | 緊急地震速報(EEW)の最新電文と直近の地震・津波情報を公開中継APIから取得 | 不要 | [eew-monitor ガイド](docs/features/eew-monitor.md) |
 | 政府統計を検索・取得する | `estat-stats` | e-Stat API v3で統計表の検索・メタ情報・データ取得 | APIキー(無料)が必要 | [estat-stats ガイド](docs/features/estat-stats.md) |
-| ごみ収集日を調べる | `garbage-day` | 5374形式の公開CSVで地区ごとの収集曜日を照会 | 不要 | [garbage-day ガイド](docs/features/garbage-day.md) |
+| ごみ収集日を調べる | `garbage-day` | 5374形式の公開CSVと自治体公式オープンデータで収集曜日と品目別分別を照会 | 不要 | [garbage-day ガイド](docs/features/garbage-day.md) |
 | 公用文の表記を校閲する | `koyobun-check` | 文化審議会建議「公用文作成の考え方」に基づく表記チェック(API不要) | 不要 | [koyobun-check ガイド](docs/features/koyobun-check.md) |
 | 火山情報を調べる | `volcano` | 気象庁の公開JSONから噴火速報・噴火警報・火山解説情報を取得 | 不要 | [volcano ガイド](docs/features/volcano.md) |
 | 指定避難所を検索する | `shelter-lookup` | 国土地理院の公式CSVから住所・施設名・災害種別で避難所を検索 | 不要 | [shelter-lookup ガイド](docs/features/shelter-lookup.md) |
@@ -105,7 +105,7 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Check for active typhoons | `bosai-typhoon` | JMA typhoon JSON feed; a 404 means none active (normal) | Not required | [bosai-typhoon guide](docs/features/bosai-typhoon.md) |
 | Check live earthquake early warnings | `eew-monitor` | Latest EEW telegram and recent quake/tsunami bulletins via public relay APIs | Not required | [eew-monitor guide](docs/features/eew-monitor.md) |
 | Search and fetch government statistics | `estat-stats` | Table search, metadata and data retrieval via the official e-Stat API v3 | Free API key required | [estat-stats guide](docs/features/estat-stats.md) |
-| Look up garbage collection days | `garbage-day` | Per-district collection weekdays from 5374-format open CSVs | Not required | [garbage-day guide](docs/features/garbage-day.md) |
+| Look up garbage collection days | `garbage-day` | Per-district collection weekdays and item-level sorting rules from 5374-format open CSVs and official municipal open data | Not required | [garbage-day guide](docs/features/garbage-day.md) |
 | Proofread administrative Japanese | `koyobun-check` | Style checks based on the 2022 koyobun recommendation (no API) | Not required | [koyobun-check guide](docs/features/koyobun-check.md) |
 | Check volcano bulletins | `volcano` | Eruption notices, warnings and explanatory bulletins from JMA public JSON | Not required | [volcano guide](docs/features/volcano.md) |
 | Search designated shelters | `shelter-lookup` | Search official GSI shelter CSV data by address, facility and disaster type | Not required | [shelter-lookup guide](docs/features/shelter-lookup.md) |

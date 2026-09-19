@@ -39,7 +39,7 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 和暦と西暦を変換する | `wareki` | 元号の境界表で西暦⇄和暦を相互変換(API不要) | 不要 | [wareki ガイド](docs/features/wareki.md) |
 | 六曜を調べる | `rokuyo` | 国立天文台の暦要項から作った旧暦テーブルで大安・仏滅などを計算 | 不要 | [rokuyo ガイド](docs/features/rokuyo.md) |
 | 郵便番号・住所を検索する | `zipcode-lookup` | 日本郵便の公式データ(KEN_ALL)で郵便番号⇄住所をローカル検索 | 不要 | [zipcode-lookup ガイド](docs/features/zipcode-lookup.md) |
-| 郵便料金を調べる | `yubin-fee` | 定形・定形外・はがき・レターパックなどの料金を重量とサイズから計算 | 不要 | [yubin-fee ガイド](docs/features/yubin-fee.md) |
+| 郵便料金を調べる | `yubin-fee` | 定形・定形外・はがき・レターパックなどの料金を重量とサイズから計算。速達・書留・特定記録の加算とゆうパック運賃(東京発)にも対応 | 不要 | [yubin-fee ガイド](docs/features/yubin-fee.md) |
 | 今の雨雲を調べる | `amagumo` | 気象庁の雨雲レーダータイルから現在の雨の強さと短時間の見通しを取得 | 不要 | [amagumo ガイド](docs/features/amagumo.md) |
 | 台風の発生を確認する | `bosai-typhoon` | 気象庁の台風情報JSONで発生中の台風の有無を確認 | 不要 | [bosai-typhoon ガイド](docs/features/bosai-typhoon.md) |
 | 緊急地震速報の発表状況を見る | `eew-monitor` | 緊急地震速報(EEW)の最新電文と直近の地震・津波情報を公開中継APIから取得 | 不要 | [eew-monitor ガイド](docs/features/eew-monitor.md) |
@@ -100,7 +100,7 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Convert between Gregorian and Japanese era dates | `wareki` | Day-exact era boundary table for wareki conversion (no API) | Not required | [wareki guide](docs/features/wareki.md) |
 | Check the rokuyo fortune day | `rokuyo` | Taian/butsumetsu and the other four from a lunar table built on the official almanac | Not required | [rokuyo guide](docs/features/rokuyo.md) |
 | Look up postal codes and addresses | `zipcode-lookup` | Two-way search over Japan Post's official KEN_ALL dataset | Not required | [zipcode-lookup guide](docs/features/zipcode-lookup.md) |
-| Check domestic postage fees | `yubin-fee` | Letter, postcard and Letter Pack fees from weight and size (2024-10-01 revision) | Not required | [yubin-fee guide](docs/features/yubin-fee.md) |
+| Check domestic postage fees | `yubin-fee` | Letter, postcard and Letter Pack fees from weight and size (2024-10-01 revision), plus express/registered/tokutei-kiroku surcharges and Yu-Pack fares (from Tokyo) | Not required | [yubin-fee guide](docs/features/yubin-fee.md) |
 | Check current rain radar | `amagumo` | JMA rain-cloud tiles for current intensity and a 30-60 minute outlook | Not required | [amagumo guide](docs/features/amagumo.md) |
 | Check for active typhoons | `bosai-typhoon` | JMA typhoon JSON feed; a 404 means none active (normal) | Not required | [bosai-typhoon guide](docs/features/bosai-typhoon.md) |
 | Check live earthquake early warnings | `eew-monitor` | Latest EEW telegram and recent quake/tsunami bulletins via public relay APIs | Not required | [eew-monitor guide](docs/features/eew-monitor.md) |

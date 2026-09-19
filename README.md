@@ -41,6 +41,7 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 郵便番号・住所を検索する | `zipcode-lookup` | 日本郵便の公式データ(KEN_ALL)で郵便番号⇄住所をローカル検索 | 不要 | [zipcode-lookup ガイド](docs/features/zipcode-lookup.md) |
 | 郵便料金を調べる | `yubin-fee` | 定形・定形外・はがき・レターパックなどの料金を重量とサイズから計算 | 不要 | [yubin-fee ガイド](docs/features/yubin-fee.md) |
 | 今の雨雲を調べる | `amagumo` | 気象庁の雨雲レーダータイルから現在の雨の強さと短時間の見通しを取得 | 不要 | [amagumo ガイド](docs/features/amagumo.md) |
+| 今の気温・雨・風を調べる | `amedas-weather` | 気象庁アメダスの最新観測値(気温・降水量・風など)を全国の観測所から取得 | 不要 | [amedas-weather ガイド](docs/features/amedas-weather.md) |
 | 台風の発生を確認する | `bosai-typhoon` | 気象庁の台風情報JSONで発生中の台風の有無を確認 | 不要 | [bosai-typhoon ガイド](docs/features/bosai-typhoon.md) |
 | 緊急地震速報の発表状況を見る | `eew-monitor` | 緊急地震速報(EEW)の最新電文と直近の地震・津波情報を公開中継APIから取得 | 不要 | [eew-monitor ガイド](docs/features/eew-monitor.md) |
 | 政府統計を検索・取得する | `estat-stats` | e-Stat API v3で統計表の検索・メタ情報・データ取得 | APIキー(無料)が必要 | [estat-stats ガイド](docs/features/estat-stats.md) |
@@ -105,6 +106,7 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Look up postal codes and addresses | `zipcode-lookup` | Two-way search over Japan Post's official KEN_ALL dataset | Not required | [zipcode-lookup guide](docs/features/zipcode-lookup.md) |
 | Check domestic postage fees | `yubin-fee` | Letter, postcard and Letter Pack fees from weight and size (2024-10-01 revision) | Not required | [yubin-fee guide](docs/features/yubin-fee.md) |
 | Check current rain radar | `amagumo` | JMA rain-cloud tiles for current intensity and a 30-60 minute outlook | Not required | [amagumo guide](docs/features/amagumo.md) |
+| Check current conditions | `amedas-weather` | Latest AMeDAS observations (temperature, precipitation, wind) from JMA stations nationwide | Not required | [amedas-weather guide](docs/features/amedas-weather.md) |
 | Check for active typhoons | `bosai-typhoon` | JMA typhoon JSON feed; a 404 means none active (normal) | Not required | [bosai-typhoon guide](docs/features/bosai-typhoon.md) |
 | Check live earthquake early warnings | `eew-monitor` | Latest EEW telegram and recent quake/tsunami bulletins via public relay APIs | Not required | [eew-monitor guide](docs/features/eew-monitor.md) |
 | Search and fetch government statistics | `estat-stats` | Table search, metadata and data retrieval via the official e-Stat API v3 | Free API key required | [estat-stats guide](docs/features/estat-stats.md) |

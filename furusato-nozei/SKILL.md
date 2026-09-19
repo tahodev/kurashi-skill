@@ -5,6 +5,9 @@ license: MIT
 metadata:
   category: tax
   locale: ja-JP
+  data_as_of: 2026-09-11
+  valid_through: 2027-03-31
+  source_version: "NTA rates effective 2025-04-01"
 ---
 
 # furusato-nozei

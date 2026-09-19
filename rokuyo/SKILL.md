@@ -5,6 +5,9 @@ license: MIT
 metadata:
   category: calendar
   locale: ja-JP
+  data_as_of: 2026-09-11
+  valid_through: 2027-12-27
+  source_version: "NAOJ almanac 2024-2027"
 ---
 
 # rokuyo
@@ -30,7 +33,7 @@ metadata:
 
 ## 旧暦月テーブル(朔=旧暦の各月の初日)
 
-国立天文台暦計算室の暦要項「朔弦望」「二十四節気および雑節」(https://eco.mtk.nao.ac.jp/koyomi/yoko/2026/rekiyou263.html ほか各年)から計算。閏月は「中気を含まない月」という公式ルールで判定。2026-09-11に外部カレンダー2件と照合して検証済み(閏月含む)。
+国立天文台暦計算室の暦要項「朔弦望」「二十四節気および雑節」(2026年: https://eco.mtk.nao.ac.jp/koyomi/yoko/2026/rekiyou263.html ／ 2027年: https://eco.mtk.nao.ac.jp/koyomi/yoko/2027/rekiyou273.html ほか各年)から計算。閏月は「中気を含まない月」という公式ルールで判定。2026-09-11に外部カレンダー2件と照合して検証済み(閏月含む)。
 
 | 朔の日(新暦) | 旧暦 | 朔の日(新暦) | 旧暦 |
 | --- | --- | --- | --- |

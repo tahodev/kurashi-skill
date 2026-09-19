@@ -5,6 +5,9 @@ license: MIT
 metadata:
   category: postal
   locale: ja-JP
+  data_as_of: 2026-09-11
+  valid_through: 2027-09-11
+  source_version: "Japan Post domestic rates 2024-10-01"
 ---
 
 # yubin-fee

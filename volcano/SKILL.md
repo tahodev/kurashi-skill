@@ -42,7 +42,7 @@ curl -s https://www.jma.go.jp/bosai/volcano/data/warning.json
 
 - `eventId`: 火山コード。`volcano_list.json` の `code` と一致させると火山名(`name_jp` / `name_en`)が引ける。
 - `volcanoInfos[].items[].name`: 「レベル２（火口周辺規制）」「レベル３（入山規制）」のような警戒レベル文字列、または「火口周辺危険」等のキーワード。
-- `condition`: 「継続」など。
+- `volcanoInfos[].items[].condition`: 「継続」「切替」など(2026-09-19にwarning.jsonの実データで存在を確認)。
 
 2026-09-19実測の例: 阿蘇山(503)がレベル２、十勝岳(108)がレベル３で発表中だった。
 

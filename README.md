@@ -57,6 +57,11 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 - 予約・購入・投稿など状態を変更する操作は扱いません。照会と計算だけです。
 - 気象・防災情報は気象庁の発表データをそのまま取得します。最終的な判断には必ず公式発表を確認してください。
 
+## 共通ガイド
+
+- [共通レスポンス契約](docs/response-contract.md) - 対象地域、データ時刻、照会時刻、公式性、不確実性を同じ枠で表示
+- [複合生活シナリオ](docs/scenarios.md) - 「今日の外出」「災害への備え」を複数スキルで安全に照会
+
 ## インストール
 
 ```bash
@@ -117,6 +122,11 @@ Scope notes:
 - Services with heavy anti-scraping (Mercari, SUUMO, transfer guides, Tabelog, ...) are out of scope.
 - Nothing here changes state: no reservations, purchases, or posts. Lookups and calculations only.
 - Weather and disaster data are JMA announcements as-is. Always confirm against official JMA bulletins before making decisions.
+
+### Common guides
+
+- [Common response contract](docs/response-contract.md) - consistent target, data time, query time, official status, and uncertainty fields
+- [Combined life scenarios](docs/scenarios.md) - safe multi-skill flows for going out today and disaster preparation
 
 ### Install
 

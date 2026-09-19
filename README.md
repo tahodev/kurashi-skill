@@ -79,6 +79,9 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | 2 | 2026-09-10 | jma-weather v2 アップグレード |
 | 3-7 | 2026-09-11 | 初期スキルの強化、CI(health-check)整備、ROADMAP策定、ライブデモGIF追加 |
 | 8-13 | 2026-09-11 | 新スキル6個追加 (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
+| 14 | 2026-09-13 | 新スキル4個追加 (eew-monitor / estat-stats / garbage-day / koyobun-check) |
+| 15 | 2026-09-19 | volcano 追加 (気象庁 火山JSON) |
+| 16 | 2026-09-19 | shelter-lookup 追加 (国土地理院 避難所データ) |
 
 Day 7〜30 の候補は [ROADMAP.md](ROADMAP.md) を参照。
 

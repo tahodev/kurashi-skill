@@ -44,6 +44,7 @@ kurashi-skill/
   koyobun-check/SKILL.md     # 公用文チェック
   volcano/SKILL.md           # 火山情報
   shelter-lookup/SKILL.md    # 指定避難所
+  amedas-weather/SKILL.md    # アメダス最新観測
   docs/
     install.md
     features/<skill>.md   # スキルごとの概要ガイド(正本は各 SKILL.md)
@@ -56,7 +57,7 @@ Node.js v22 / npm 10.9、空のHOME・空のnpmキャッシュで上記コマン
 
 ### `--all -g` (全スキル)
 
-- 当時収録の5スキルすべてが `~/.agents/skills/<skill名>/SKILL.md` にインストールされることを確認した(現在は17スキル。同じコマンドで全スキルが入る)。
+- 当時収録の5スキルすべてが `~/.agents/skills/<skill名>/SKILL.md` にインストールされることを確認した(現在は18スキル。同じコマンドで全スキルが入る)。
 - Claude Code など各エージェントのディレクトリ (例: `~/.claude/skills/<skill名>/`) にも配置される。
 - `Eve` と `PromptScript` の2ターゲットは「global skill installation非対応」でスキップされる。これはインストーラ側の仕様で、スキル自体の問題ではない。
 

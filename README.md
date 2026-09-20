@@ -39,15 +39,16 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 和暦と西暦を変換する | `wareki` | 元号の境界表で西暦⇄和暦を相互変換(API不要) | 不要 | [wareki ガイド](docs/features/wareki.md) |
 | 六曜を調べる | `rokuyo` | 国立天文台の暦要項から作った旧暦テーブルで大安・仏滅などを計算 | 不要 | [rokuyo ガイド](docs/features/rokuyo.md) |
 | 郵便番号・住所を検索する | `zipcode-lookup` | 日本郵便の公式データ(KEN_ALL)で郵便番号⇄住所をローカル検索 | 不要 | [zipcode-lookup ガイド](docs/features/zipcode-lookup.md) |
-| 郵便料金を調べる | `yubin-fee` | 定形・定形外・はがき・レターパックなどの料金を重量とサイズから計算 | 不要 | [yubin-fee ガイド](docs/features/yubin-fee.md) |
+| 郵便料金を調べる | `yubin-fee` | 定形・定形外・はがき・レターパックなどの料金を重量とサイズから計算。速達・書留・特定記録の加算とゆうパック運賃(東京発)にも対応 | 不要 | [yubin-fee ガイド](docs/features/yubin-fee.md) |
 | 今の雨雲を調べる | `amagumo` | 気象庁の雨雲レーダータイルから現在の雨の強さと短時間の見通しを取得 | 不要 | [amagumo ガイド](docs/features/amagumo.md) |
 | 台風の発生を確認する | `bosai-typhoon` | 気象庁の台風情報JSONで発生中の台風の有無を確認 | 不要 | [bosai-typhoon ガイド](docs/features/bosai-typhoon.md) |
 | 緊急地震速報の発表状況を見る | `eew-monitor` | 緊急地震速報(EEW)の最新電文と直近の地震・津波情報を公開中継APIから取得 | 不要 | [eew-monitor ガイド](docs/features/eew-monitor.md) |
 | 政府統計を検索・取得する | `estat-stats` | e-Stat API v3で統計表の検索・メタ情報・データ取得 | APIキー(無料)が必要 | [estat-stats ガイド](docs/features/estat-stats.md) |
-| ごみ収集日を調べる | `garbage-day` | 5374形式の公開CSVで地区ごとの収集曜日を照会 | 不要 | [garbage-day ガイド](docs/features/garbage-day.md) |
+| ごみ収集日を調べる | `garbage-day` | 5374形式の公開CSVと自治体公式オープンデータで収集曜日と品目別分別を照会 | 不要 | [garbage-day ガイド](docs/features/garbage-day.md) |
 | 公用文の表記を校閲する | `koyobun-check` | 文化審議会建議「公用文作成の考え方」に基づく表記チェック(API不要) | 不要 | [koyobun-check ガイド](docs/features/koyobun-check.md) |
 | 火山情報を調べる | `volcano` | 気象庁の公開JSONから噴火速報・噴火警報・火山解説情報を取得 | 不要 | [volcano ガイド](docs/features/volcano.md) |
 | 指定避難所を検索する | `shelter-lookup` | 国土地理院の公式CSVから災害別に最寄り3か所を直線距離順で検索 | 不要 | [shelter-lookup ガイド](docs/features/shelter-lookup.md) |
+| アメダスの現在値を調べる | `amedas-weather` | 気象庁のアメダス観測JSONから全国約1,300観測所の気温・湿度・風・降水量の最新値を取得 | 不要 | [amedas-weather ガイド](docs/features/amedas-weather.md) |
 
 各スキルの**正本は `<スキル名>/SKILL.md`** です。`docs/features/` のガイドは概要版なので、詳細な手順・パラメータ・エラー対応は必ず SKILL.md を参照してください。
 
@@ -56,6 +57,11 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 - スクレイピング対策が強いサービス(メルカリ、SUUMO、乗換案内、食べログなど)は対象外です。
 - 予約・購入・投稿など状態を変更する操作は扱いません。照会と計算だけです。
 - 気象・防災情報は気象庁の発表データをそのまま取得します。最終的な判断には必ず公式発表を確認してください。
+
+## 共通ガイド
+
+- [共通レスポンス契約](docs/response-contract.md) - 対象地域、データ時刻、照会時刻、公式性、不確実性を同じ枠で表示
+- [複合生活シナリオ](docs/scenarios.md) - 「今日の外出」「災害への備え」を複数スキルで安全に照会
 
 ## インストール
 
@@ -77,10 +83,14 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | --- | --- | --- |
 | 1 | 2026-09-09 | 宣言 & リポジトリ公開 (初期スキル5個) |
 | 2 | 2026-09-10 | jma-weather v2 アップグレード |
+現在の収録数: **17スキル** (2026-09-19)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
 | 3-7 | 2026-09-11 | 初期スキルの強化、CI(health-check)整備、ROADMAP策定、ライブデモGIF追加 |
 | 8-13 | 2026-09-11 | 新スキル6個追加 (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
+| 14 | 2026-09-13 | 新スキル4個追加 (eew-monitor / estat-stats / garbage-day / koyobun-check) |
+| 15 | 2026-09-19 | volcano 追加 (気象庁 火山JSON) |
+| 16 | 2026-09-19 | shelter-lookup 追加 (国土地理院 避難所データ) |
 
-Day 7〜30 の候補は [ROADMAP.md](ROADMAP.md) を参照。
+今後の候補は [ROADMAP.md](ROADMAP.md) を参照。
 
 ## English
 
@@ -100,15 +110,16 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Convert between Gregorian and Japanese era dates | `wareki` | Day-exact era boundary table for wareki conversion (no API) | Not required | [wareki guide](docs/features/wareki.md) |
 | Check the rokuyo fortune day | `rokuyo` | Taian/butsumetsu and the other four from a lunar table built on the official almanac | Not required | [rokuyo guide](docs/features/rokuyo.md) |
 | Look up postal codes and addresses | `zipcode-lookup` | Two-way search over Japan Post's official KEN_ALL dataset | Not required | [zipcode-lookup guide](docs/features/zipcode-lookup.md) |
-| Check domestic postage fees | `yubin-fee` | Letter, postcard and Letter Pack fees from weight and size (2024-10-01 revision) | Not required | [yubin-fee guide](docs/features/yubin-fee.md) |
+| Check domestic postage fees | `yubin-fee` | Letter, postcard and Letter Pack fees from weight and size (2024-10-01 revision), plus express/registered/tokutei-kiroku surcharges and Yu-Pack fares (from Tokyo) | Not required | [yubin-fee guide](docs/features/yubin-fee.md) |
 | Check current rain radar | `amagumo` | JMA rain-cloud tiles for current intensity and a 30-60 minute outlook | Not required | [amagumo guide](docs/features/amagumo.md) |
 | Check for active typhoons | `bosai-typhoon` | JMA typhoon JSON feed; a 404 means none active (normal) | Not required | [bosai-typhoon guide](docs/features/bosai-typhoon.md) |
 | Check live earthquake early warnings | `eew-monitor` | Latest EEW telegram and recent quake/tsunami bulletins via public relay APIs | Not required | [eew-monitor guide](docs/features/eew-monitor.md) |
 | Search and fetch government statistics | `estat-stats` | Table search, metadata and data retrieval via the official e-Stat API v3 | Free API key required | [estat-stats guide](docs/features/estat-stats.md) |
-| Look up garbage collection days | `garbage-day` | Per-district collection weekdays from 5374-format open CSVs | Not required | [garbage-day guide](docs/features/garbage-day.md) |
+| Look up garbage collection days | `garbage-day` | Per-district collection weekdays and item-level sorting rules from 5374-format open CSVs and official municipal open data | Not required | [garbage-day guide](docs/features/garbage-day.md) |
 | Proofread administrative Japanese | `koyobun-check` | Style checks based on the 2022 koyobun recommendation (no API) | Not required | [koyobun-check guide](docs/features/koyobun-check.md) |
 | Check volcano bulletins | `volcano` | Eruption notices, warnings and explanatory bulletins from JMA public JSON | Not required | [volcano guide](docs/features/volcano.md) |
 | Search designated shelters | `shelter-lookup` | Find the nearest three official GSI evacuation sites by hazard and straight-line distance | Not required | [shelter-lookup guide](docs/features/shelter-lookup.md) |
+| Check current AMeDAS observations | `amedas-weather` | Latest temperature, humidity, wind and precipitation from about 1,300 JMA observation stations | Not required | [amedas-weather guide](docs/features/amedas-weather.md) |
 
 The canonical source for each skill is its `<skill>/SKILL.md`. The guides under `docs/features/` are summaries only - always refer to SKILL.md for full procedures, parameters, and error handling.
 
@@ -117,6 +128,11 @@ Scope notes:
 - Services with heavy anti-scraping (Mercari, SUUMO, transfer guides, Tabelog, ...) are out of scope.
 - Nothing here changes state: no reservations, purchases, or posts. Lookups and calculations only.
 - Weather and disaster data are JMA announcements as-is. Always confirm against official JMA bulletins before making decisions.
+
+### Common guides
+
+- [Common response contract](docs/response-contract.md) - consistent target, data time, query time, official status, and uncertainty fields
+- [Combined life scenarios](docs/scenarios.md) - safe multi-skill flows for going out today and disaster preparation
 
 ### Install
 
@@ -138,10 +154,9 @@ This repository is growing as a 30-day build-in-public challenge: one skill a da
 | --- | --- | --- |
 | 1 | 2026-09-09 | Declaration & repository launch (initial 5 skills) |
 | 2 | 2026-09-10 | jma-weather v2 upgrade |
-| 3-7 | 2026-09-11 | Initial-skill hardening, health-check CI, ROADMAP, live demo GIF |
-| 8-13 | 2026-09-11 | 6 new skills (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
+Current collection: **17 skills** (2026-09-19). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
 
-Candidates for Days 7-30: see [ROADMAP.md](ROADMAP.md).
+See [ROADMAP.md](ROADMAP.md) for future candidates.
 
 ## ライセンス / License
 

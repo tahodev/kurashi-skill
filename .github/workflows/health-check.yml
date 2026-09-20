@@ -29,6 +29,8 @@ jobs:
         run: python3 scripts/check-docs-drift.py
       - name: Validate documented code blocks
         run: python3 scripts/check-code-blocks.py
+      - name: Run fixed-fixture regression and core skill smoke tests
+        run: python3 tests/test-core-skills.py
       - name: Check documented URLs and API responses
         run: python3 scripts/check-urls.py
       - name: Open or update a GitHub issue on scheduled/manual failure

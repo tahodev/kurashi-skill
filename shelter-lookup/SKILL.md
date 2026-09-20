@@ -74,6 +74,17 @@ grep '千代田区' mergeFromCity_2.csv | head -5
 awk -F, '$10==1' mergeFromCity_2.csv | head -5
 ```
 
+**注意: 改行を含む引用符付きレコードがある**(mergeFromCity_2.csv で2026-09-19実測147件)。`grep` や `awk` の行単位処理ではそのレコードの列がずれる。厳密な抽出には Python の `csv` モジュールを使う。
+
+```bash
+python3 - <<'EOF'
+import csv
+for row in csv.reader(open('mergeFromCity_2.csv', encoding='utf-8-sig')):
+    if row[9] == '1':  # 津波列(10列目)
+        print(row[2], row[3])
+EOF
+```
+
 CSVには引用符を含むフィールドがありうるため、確実な検索・距離計算には `lookup.py` の `csv` モジュール処理を使う。
 
 ### データの新しさを確認する
@@ -84,7 +95,7 @@ CSVには引用符を含むフィールドがありうるため、確実な検�
 curl -s https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/publicHistoryCSV/publicHistoryListData.csv | head -5
 ```
 
-`市町村コード,市町村名,初回公開日,データ更新日` の形式。2026-09-19実測では 2026-09-10 更新の自治体があった。**回答には「この市町村のデータは○年○月更新」と更新日を添える。**
+`市町村コード,市町村名,初回公開日,データ更新日` の4項目のCSV(行末に空列が2つ付く6列形式)。2026-09-19実測では 2026-09-11 更新の自治体(東京都板橋区など)があった。**回答には「この市町村のデータは○年○月更新」と更新日を添える。**
 
 ## エラー・失敗時の対応
 

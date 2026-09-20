@@ -83,13 +83,14 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | --- | --- | --- |
 | 1 | 2026-09-09 | 宣言 & リポジトリ公開 (初期スキル5個) |
 | 2 | 2026-09-10 | jma-weather v2 アップグレード |
+現在の収録数: **17スキル** (2026-09-19)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
 | 3-7 | 2026-09-11 | 初期スキルの強化、CI(health-check)整備、ROADMAP策定、ライブデモGIF追加 |
 | 8-13 | 2026-09-11 | 新スキル6個追加 (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
 | 14 | 2026-09-13 | 新スキル4個追加 (eew-monitor / estat-stats / garbage-day / koyobun-check) |
 | 15 | 2026-09-19 | volcano 追加 (気象庁 火山JSON) |
 | 16 | 2026-09-19 | shelter-lookup 追加 (国土地理院 避難所データ) |
 
-Day 7〜30 の候補は [ROADMAP.md](ROADMAP.md) を参照。
+今後の候補は [ROADMAP.md](ROADMAP.md) を参照。
 
 ## English
 
@@ -153,10 +154,9 @@ This repository is growing as a 30-day build-in-public challenge: one skill a da
 | --- | --- | --- |
 | 1 | 2026-09-09 | Declaration & repository launch (initial 5 skills) |
 | 2 | 2026-09-10 | jma-weather v2 upgrade |
-| 3-7 | 2026-09-11 | Initial-skill hardening, health-check CI, ROADMAP, live demo GIF |
-| 8-13 | 2026-09-11 | 6 new skills (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
+Current collection: **17 skills** (2026-09-19). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
 
-Candidates for Days 7-30: see [ROADMAP.md](ROADMAP.md).
+See [ROADMAP.md](ROADMAP.md) for future candidates.
 
 ## ライセンス / License
 

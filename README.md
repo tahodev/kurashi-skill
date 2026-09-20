@@ -48,6 +48,7 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 公用文の表記を校閲する | `koyobun-check` | 文化審議会建議「公用文作成の考え方」に基づく表記チェック(API不要) | 不要 | [koyobun-check ガイド](docs/features/koyobun-check.md) |
 | 火山情報を調べる | `volcano` | 気象庁の公開JSONから噴火速報・噴火警報・火山解説情報を取得 | 不要 | [volcano ガイド](docs/features/volcano.md) |
 | 指定避難所を検索する | `shelter-lookup` | 国土地理院の公式CSVから住所・施設名・災害種別で避難所を検索 | 不要 | [shelter-lookup ガイド](docs/features/shelter-lookup.md) |
+| アメダスの現在値を調べる | `amedas-weather` | 気象庁のアメダス観測JSONから全国約1,300観測所の気温・湿度・風・降水量の最新値を取得 | 不要 | [amedas-weather ガイド](docs/features/amedas-weather.md) |
 
 各スキルの**正本は `<スキル名>/SKILL.md`** です。`docs/features/` のガイドは概要版なので、詳細な手順・パラメータ・エラー対応は必ず SKILL.md を参照してください。
 
@@ -112,6 +113,7 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Proofread administrative Japanese | `koyobun-check` | Style checks based on the 2022 koyobun recommendation (no API) | Not required | [koyobun-check guide](docs/features/koyobun-check.md) |
 | Check volcano bulletins | `volcano` | Eruption notices, warnings and explanatory bulletins from JMA public JSON | Not required | [volcano guide](docs/features/volcano.md) |
 | Search designated shelters | `shelter-lookup` | Search official GSI shelter CSV data by address, facility and disaster type | Not required | [shelter-lookup guide](docs/features/shelter-lookup.md) |
+| Check current AMeDAS observations | `amedas-weather` | Latest temperature, humidity, wind and precipitation from about 1,300 JMA observation stations | Not required | [amedas-weather guide](docs/features/amedas-weather.md) |
 
 The canonical source for each skill is its `<skill>/SKILL.md`. The guides under `docs/features/` are summaries only - always refer to SKILL.md for full procedures, parameters, and error handling.
 

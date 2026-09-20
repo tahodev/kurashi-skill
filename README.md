@@ -75,6 +75,15 @@ npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
 
 Node.js 18 以上と `npx` が必要です。詳しくは [インストールガイド](docs/install.md) を参照してください。
 
+## どれから始める?
+
+目的別のおすすめセットと代表質問は [スターターガイド](docs/getting-started.md) にまとめています。
+
+- 生活基本パック — 天気・雨雲・祝日・ごみ収集日・郵便番号・郵便料金
+- 防災パック — 地震速報・警報・台風・火山・避難所
+- 行政・文書パック — ふるさと納税・和暦・六曜・公用文校閲
+- データ調査パック — e-Stat統計・図書館蔵書 (このパックのみ無料キーあり)
+
 ## 30日間の公開開発 (build in public) チャレンジ実施中
 
 このリポジトリは、30日間の公開開発チャレンジとして育っています。1日1スキル、コミットがそのままQiitaの記事になる方式です。なお、制作パートナーのAIエージェント(Astra)のクオータが30日間持つかどうかが、実は最大のリスク要因だったりします。
@@ -145,6 +154,15 @@ npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
 ```
 
 Node.js 18+ and `npx` are required. See the [install guide](docs/install.md) for details.
+
+### Where to start?
+
+Recommended packs by purpose and ten ready-to-ask sample questions are in the [starter guide](docs/getting-started.md) (Japanese; English summary included).
+
+- Daily-life basics - weather, rain radar, holidays, garbage days, postal codes, postage
+- Disaster readiness - earthquake bulletins, warnings, typhoons, volcanoes, shelters
+- Admin & documents - furusato nozei, wareki, rokuyo, administrative proofreading
+- Data research - e-Stat statistics and library holdings (the only pack with free API keys)
 
 ### Building in public: a 30-day challenge
 

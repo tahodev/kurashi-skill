@@ -38,6 +38,12 @@ kurashi-skill/
   yubin-fee/SKILL.md        # 郵便料金
   amagumo/SKILL.md          # 雨雲レーダー
   bosai-typhoon/SKILL.md    # 台風の有無
+  eew-monitor/SKILL.md       # 緊急地震速報
+  estat-stats/SKILL.md       # 政府統計
+  garbage-day/SKILL.md       # ごみ収集日
+  koyobun-check/SKILL.md     # 公用文チェック
+  volcano/SKILL.md           # 火山情報
+  shelter-lookup/SKILL.md    # 指定避難所
   docs/
     install.md
     features/<skill>.md   # スキルごとの概要ガイド(正本は各 SKILL.md)

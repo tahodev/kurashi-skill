@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "datasets": {
+    "rokuyo": {
+      "skill": "rokuyo/SKILL.md",
+      "source_urls": [
+        "https://eco.mtk.nao.ac.jp/koyomi/yoko/2026/rekiyou263.html",
+        "https://eco.mtk.nao.ac.jp/koyomi/yoko/2027/rekiyou273.html"
+      ],
+      "required_rows": [
+        "| 2026-09-11 | 8月 |",
+        "| 2027-08-02 | 7月 |"
+      ],
+      "required_text": [
+        "テーブル収録範囲は2024-12-01から2027-12-27まで",
+        "計算を保証するのは2027-12-27まで"
+      ]
+    },
+    "yubin-fee": {
+      "skill": "yubin-fee/SKILL.md",
+      "source_urls": [
+        "https://www.post.japanpost.jp/send/domestic/charge/list/one_two.html",
+        "https://www.post.japanpost.jp/service/send/domestic/mail/postcard/"
+      ],
+      "required_rows": [
+        "| 50g以内 | 110円 |",
+        "| 50g以内 | 140円 | 260円 |",
+        "| 1kg以内 | 750円 | 920円 |",
+        "| 通常はがき | 85円 | 全国一律(2026-09-11に公式ページで確認) |",
+        "| レターパックライト | 430円 | 厚さ3cm・4kgまで |",
+        "| レターパックプラス | 600円 | 4kgまで(厚さ制限なし) |",
+        "| スマートレター | 210円 | 25×17cm・厚さ2cm・1kgまで |"
+      ],
+      "required_text": [
+        "基準日: 郵便料金は2024-10-01の改定料金"
+      ]
+    }
+  }
+}

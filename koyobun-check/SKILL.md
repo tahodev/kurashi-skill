@@ -5,6 +5,9 @@ license: MIT
 metadata:
   category: writing
   locale: ja-JP
+  data_as_of: 2026-09-13
+  valid_through: 2027-09-13
+  source_version: "Bunka Shingikai recommendation 2022-01-07"
 ---
 
 # koyobun-check

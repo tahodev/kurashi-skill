@@ -68,7 +68,7 @@ Day 1 の Qiita 記事で公表した案(以下「A案」)と、検証済み候�
 | `reinfolib-prices` | 不動産取引価格・地価公示の照会(国土交通省 不動産情報ライブラリ API) | **キー発行に審査があり即時性が低い**。キーは事前に申請しておき、発行され次第いずれかの Day と差し替えて投入する。住まいテーマとして強力な次期候補 |
 | ~~`estat-stats`~~ (採用済み) | 政府統計の統計表検索(e-Stat API、無料appId) | **2026-09-13に採用**。calil-books方式のキー前提スキルとして実装。下の「追加採用」参照 |
 | `dataportal-search` | data.go.jp のデータセット横断検索(CKAN互換API) | メタ的なスキル。estat-stats と同じく性格がデータ基盤寄り |
-| `amedas-weather` | アメダス最新観測値の照会(気象庁 防災情報 JSON) | Day 2 の jma-weather とテーマが近い(観測 vs 予報の違いはある)。Week 2 の拡張候補。2026-09-11 `latest_time.txt` 実測200 |
+| ~~`amedas-weather`~~ (採用済み) | アメダス最新観測値の照会(気象庁 防災情報 JSON) | **2026-09-20に採用・実装済み**。Day 17 の `river-level` が収録基準を満たさなかったため代替採用 |
 | `hazard-map` | 洪水・土砂災害などのハザード情報の照会(国土数値情報/ハザードマップポータル) | **タイル配信の利用規約確認が先**。規約上問題なければ採用可 |
 
 上記以外のアイデアは issue テンプレート「スキル追加の提案」から。採用・不採用の判断はこのファイルに記録する。
@@ -80,7 +80,8 @@ Day 1 の Qiita 記事で公表した案(以下「A案」)と、検証済み候�
 Adopted schedule for Days 7-30 of the 30-day build-in-public challenge, decided 2026-09-11 by merging the plan announced in the Day 1 Qiita article with the verified candidate list. Every skill follows the repo's inclusion rules: no login or paid key (free instant API keys are OK), official APIs or public datasets only, read-only lookups and calculations. A skill ships only after its commands are tested for real, and every adoption is recorded here and in the changelog.
 
 - **Week 2** (Day 8-13): `wareki`, `rokuyo`, `zipcode-lookup`, `yubin-fee`, `amagumo`, `bosai-typhoon` (Day 7: reflection)
-- **Week 3** (Day 15-20): `volcano`, `shelter-lookup`, `river-level`, `air-quality`, `heatstroke`, `address-normalize` (Day 14: reflection). Disaster-heavy by design: September is typhoon season in Japan
-- **Week 4** (Day 22-28): `odpt-transit`, `ndl-books`, `aozora`, `kokkai`, `egov-laws`, `withholding-tax`, `garbage-day` (Day 21: reflection, Day 29: v1.0.0 release, Day 30: wrap-up)
+- **Week 3** (Day 15-20): `volcano` (shipped 2026-09-19), `shelter-lookup` (shipped 2026-09-19), `amedas-weather` (shipped 2026-09-20), `air-quality`, `heatstroke`, `address-normalize` (Day 14: reflection). Disaster-heavy by design: September is typhoon season in Japan
+- **Week 4** (Day 22-28): `odpt-transit`, `ndl-books`, `aozora`, `kokkai`, `egov-laws`, `withholding-tax`; `garbage-day` shipped early on 2026-09-13, so Day 28 is open for a reflection or replacement (Day 21: reflection, Day 29: v1.0.0 release, Day 30: wrap-up)
 - **Rejected**: `station-finder` (superseded by `odpt-transit`), `nenkin` (calculation pattern duplicates `furusato-nozei`)
-- **Backlog**: `reinfolib-prices` (waiting on API key review; apply in advance and swap in once issued), `estat-stats`, `dataportal-search`, `amedas-weather`, `hazard-map` (tile terms of use must be checked first)
+- **Adopted early / from backlog**: `estat-stats` and `garbage-day` (2026-09-13), `amedas-weather` (2026-09-20)
+- **Backlog**: `reinfolib-prices` (waiting on API key review; apply in advance and swap in once issued), `dataportal-search`, `hazard-map` (tile terms of use must be checked first)

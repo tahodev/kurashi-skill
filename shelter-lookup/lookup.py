@@ -88,6 +88,10 @@ def nearest_sites(
                 site_lon = float(row["経度"])
             except (KeyError, TypeError, ValueError):
                 continue
+            if not (math.isfinite(site_lat) and math.isfinite(site_lon)) or not (
+                -90 <= site_lat <= 90 and -180 <= site_lon <= 180
+            ):
+                continue
             distance = haversine_km(latitude, longitude, site_lat, site_lon)
             matches.append((distance, row))
     return sorted(matches, key=lambda item: (item[0], item[1].get("施設・場所名", "")))[:limit]
@@ -98,7 +102,7 @@ def coordinate(value: str, minimum: float, maximum: float, label: str) -> float:
         number = float(value)
     except ValueError as exc:
         raise argparse.ArgumentTypeError(f"{label}は数値で指定してください") from exc
-    if not minimum <= number <= maximum:
+    if not math.isfinite(number) or not minimum <= number <= maximum:
         raise argparse.ArgumentTypeError(f"{label}は{minimum}〜{maximum}で指定してください")
     return number
 

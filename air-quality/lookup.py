@@ -35,6 +35,22 @@ def latest_hour(refresh=False):
         open(path, "wb").write(raw)
     return f"{y}/{m}/{day} {hh}:00", path
 
+
+def select_hits(hdr, data, item, keyword=None, pref=None, station=None):
+    """行リストから条件で絞り、(値, 行) を値降順で返す。未測定("","-")は末尾。"""
+    col = hdr.index(item)
+    name_i, addr_i, city_i = hdr.index("測定局名称"), hdr.index("住所"), hdr.index("市区町村名")
+    pref_i, code_i = hdr.index("都道府県コード"), hdr.index("測定局コード")
+    hit = []
+    for r in data:
+        if station and r[code_i] != station: continue
+        if pref and r[pref_i] != pref.zfill(2): continue
+        if keyword and keyword not in (r[name_i] + r[addr_i] + r[city_i]): continue
+        v = r[col].strip()
+        hit.append((float(v) if v not in ("", "-") else None, r))
+    hit.sort(key=lambda x: (x[0] is None, -(x[0] or 0)))
+    return hit
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--keyword", help="測定局名・住所・市区町村名の部分一致")
@@ -55,14 +71,7 @@ def main():
     name_i, addr_i, type_i, city_i = hdr.index("測定局名称"), hdr.index("住所"), hdr.index("局種別"), hdr.index("市区町村名")
     pref_i, code_i = hdr.index("都道府県コード"), hdr.index("測定局コード")
 
-    hit = []
-    for r in data:
-        if a.station and r[code_i] != a.station: continue
-        if a.pref and r[pref_i] != a.pref.zfill(2): continue
-        if a.keyword and a.keyword not in (r[name_i] + r[addr_i] + r[city_i]): continue
-        v = r[col].strip()
-        hit.append((float(v) if v not in ("", "-") else None, r))
-    hit.sort(key=lambda x: (x[0] is None, -(x[0] or 0)))
+    hit = select_hits(hdr, data, a.item, keyword=a.keyword, pref=a.pref, station=a.station)
 
     print(f"{when} JST 時点の速報値 ({a.item}) - {min(a.top, len(hit))}件/{len(hit)}件")
     for v, r in hit[: a.top]:

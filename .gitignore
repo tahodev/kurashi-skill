@@ -42,3 +42,4 @@ pnpm-lock.yaml
 # Logs / caches
 *.log
 .cache/
+__pycache__/

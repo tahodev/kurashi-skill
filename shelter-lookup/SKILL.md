@@ -52,7 +52,7 @@ python3 shelter-lookup/lookup.py \
   --cache-dir /tmp/kurashi-shelter-cache
 ```
 
-`--hazard` は `flood`(洪水)、`landslide`(崖崩れ・土石流・地滑り)、`storm-surge`(高潮)、`earthquake`(地震)、`tsunami`(津波)、`fire`(大規模な火事)、`inland-flood`(内水氾濫)、`volcano`(火山現象)に対応する。日本語名も指定できる。取得済みCSVは `~/.cache/kurashi-skill/shelter-lookup/` に保存し、再取得は `--refresh` を使う。
+`--hazard` は `flood`(洪水)、`landslide`(崖崩れ・土石流・地滑り)、`storm-surge`(高潮)、`earthquake`(地震)、`tsunami`(津波)、`fire`(大規模な火事)、`inland-flood`(内水氾濫)、`volcano`(火山現象)に対応する。日本語名も指定できる。取得済みCSVは `~/.cache/kurashi-skill/shelter-lookup/` に保存し、再取得は `--refresh` を使う。キャッシュが7日より古い場合は、市町村の更新を取りこぼす可能性があるため stderr に警告を出す。
 
 出力例:
 

@@ -12,6 +12,7 @@
 ## [Unreleased]
 
 ### Added
+- 新スキル `address-normalize`: デジタル庁ABRの公開マスタで住所文字列を分解・正規化(lg_code/町字IDの特定、丁目・漢数字の表記ゆれ吸収)。`lookup.py` とテスト5件つき(2026-09-26実測)
 - テスト基盤: 直近追加の7スキル(volcano, shelter-lookup, amedas-weather, air-quality, garbage-day, eew-monitor, estat-stats)の固定フィクスチャによるスモークテストを tests/test-core-skills.py に追加。air-quality/lookup.py に select_hits を切り出し単体テストを追加(新規ヘルパー=テスト同梱の規則化)
 - scripts/check-measured-date.py: SKILL.md の実測日が90日を超えるとCI失敗(スケジュール実行時はissue自動起票で再実測リマインド)
 - scripts/check-urls.py: AEROS/WBGT/ABRの新規エンドポイント用の応答契約を追加

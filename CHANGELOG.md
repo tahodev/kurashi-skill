@@ -12,6 +12,7 @@
 ## [Unreleased]
 
 ### Added
+- 新スキル `air-quality`: 環境省AEROS(そらまめくん)の大気汚染測定値(速報値)を公開CSV/公式JSON APIから取得。全国最新1時間値(noudoAll)、測定局ごとのtoday/7day、PM2.5注意喚起。検索用 `lookup.py` つき(2026-09-26実測)
 - 静的データの鮮度ポリシー(`data_as_of` / `valid_through` / `source_version`)、30日前の期限ゲート、六曜・郵便料金の核心行fixtureを追加
 - ドキュメント: 目的別のおすすめ導入セット(パック)と代表質問10をまとめたスターターガイド `docs/getting-started.md` を追加
 - 共通レスポンス契約と、「今日の外出」「災害への備え」の複合生活シナリオガイドを追加。

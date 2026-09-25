@@ -17,6 +17,8 @@ metadata:
 **基準日: 郵便料金は2024-10-01の改定料金、オプション加算料金とゆうパック運賃は2026-09-19に公式ページで現行であることを確認。**
 根拠URL: 手紙(第一種) https://www.post.japanpost.jp/send/domestic/charge/list/one_two.html ／ はがき https://www.post.japanpost.jp/service/send/domestic/mail/postcard/ ／ オプション加算料金一覧 https://www.post.japanpost.jp/send/domestic/charge/list/option.html ／ ゆうパック https://www.post.japanpost.jp/send/domestic/charge/list/parcel.html
 
+**実測日: 2026-09-19。本文のコマンド・構造は実測で確認したものを収録(個所ごとの日付は各所の記載を参照)。**
+
 ## 料金表
 
 ### 定形郵便物(長辺14〜23.5cm × 短辺9〜12cm、厚さ1cm以内、50g以内)
@@ -131,6 +133,8 @@ metadata:
 
 ## エラー・失敗時の対応
 
+
+共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
 - このスキルはネットワークを使わない。
 - **区分が判定できない(サイズ不明など)**: 推測で料金を出さず、足りない条件(重量・厚さ・3辺合計・差出地)を聞き返す。条件が違えば料金は倍近く変わる。
 - **ゆうパックで東京以外からの差出**: 内蔵表は東京発のみ。公式の料金計算ページを案内し、東京発の額をそのまま答えない。

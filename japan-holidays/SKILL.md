@@ -54,6 +54,8 @@ curl -s https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv | iconv -f SHIFT
 
 ## エラー・失敗時の対応
 
+
+共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
 - **タイムアウトを付ける**: `curl -sm 30` のように必ず制限時間を付ける。
 - **`iconv` がない環境**: 代わりに Python を使う(ほぼどの環境にもある):
 

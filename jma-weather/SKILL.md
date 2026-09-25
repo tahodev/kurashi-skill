@@ -78,6 +78,8 @@ curl -s https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json
 
 ## エラー・失敗時の対応
 
+
+共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
 - **タイムアウトを付ける**: `curl` には必ず `-m 30` 程度を付ける(例: `curl -sm 30 <URL>`)。応答がないまま待ち続けない。
 - **HTTP 404**: エリアコードの間違いがほぼ原因。`https://www.jma.go.jp/bosai/common/const/area.json` を取り直し、`offices` 層のコードを使っているか確認する(`class10s` などの細かいコードでは 404 になる)。
 - **HTTP 5xx / タイムアウト**: 気象庁サイト側の障害か負荷。数秒おいて1〜2回だけ再試行し、直らなければ「気象庁のサイトで障害が起きている可能性がある。公式サイト https://www.jma.go.jp/jma/index.html を直接確認してください」とユーザーに伝える。推測で予報をでっち上げない。

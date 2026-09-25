@@ -11,6 +11,8 @@ metadata:
 
 e-Stat(政府統計の総合窓口)のAPI(バージョン3.0)で、統計表の検索からデータ取得までを行うスキル。総務省など各府省の公式統計3,000表以上をカバーする。
 
+**実測日: 2026-09-13。本文のコマンド・構造は実測で確認したものを収録(個所ごとの日付は各所の記載を参照)。**
+
 ## appIdの準備(最初の1回だけ)
 
 1. e-Statのユーザ登録ページ( https://www.e-stat.go.jp/mypage/user/preregister )で登録し、マイページからappIdを発行する(無料・即時)。
@@ -52,6 +54,8 @@ curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=${ESTAT_A
 
 ## エラー・失敗時の対応
 
+
+共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
 - **タイムアウトを付ける**: `curl -sm 30` のように必ず制限時間を付ける。
 - **`STATUS=100` (認証エラー)**: appIdが未設定・無効。`ESTAT_APP_ID` が設定されているか確認し、「e-StatのappIdが無効な可能性があります。マイページで確認してください」と伝える。HTTPは200でもエラーなので、応答JSONの `RESULT.STATUS` を必ず見る(`0` が成功)。
 - **`STATUS=1` / エラーメッセージ付き**: パラメータの誤り(存在しないstatsDataId、不正なコード値など)。`ERROR_MSG` をそのままユーザーに見せ、getMetaInfoでコードを取り直す。

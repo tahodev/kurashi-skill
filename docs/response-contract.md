@@ -68,6 +68,20 @@
 - キャッシュや前回値を使う場合は、データ時刻と「最新取得ではない」ことを不確実性に書く。
 - 異なる地域粒度のデータを組み合わせる場合、それぞれの対象範囲を保つ。
 
+
+## 取得時の落とし穴チェックリスト
+
+各スキルの「エラー・失敗時の対応」に書く前に、共通で見るべき罠。新しいスキルを実測するときはこの順で確認する。
+
+1. **存在しないURLでも200が返るSPA**: シェルHTMLが返って404にならない。受け取った本文の先頭(ヘッダ行・JSONの型)が期待の形式かを必ず確認する(例: air-quality)。
+2. **URLを推測しない**: 似た名前のファイル(marinevolcano.json、amedastation.json など)は404になりがち。URLはサイトの案内か実測で確かめる(例: volcano、amedas-weather)。
+3. **未解除・旧版のデータが残り続ける**: 解除されなかった警報が配信JSONに残る(volcano の2007年エントリ)、検索で旧版データセットが上位に来る(shelter-lookup のP20)。必ず発表日時・版を確認して引用する。
+4. **空の配列・ヘッダのみのCSVはエラーではない**: 「現在発表なし」の正常値。失敗と読み替えない(bosai-alert、amagumo、air-quality の alert.csv)。
+5. **CSVの方言**: フィールド内の改行を含む引用符つきレコード(shelter-lookup)、ヘッダや値の前後空白(heatstroke の地点マスタ)、`欠測;` や `-` の欠測記号。行数とパース結果がずれたらまず方言を疑う。
+6. **観測所・地点ごとに測れる項目が違う**: 同じAPIでも地点タイプで返る要素が変わる(amedas-weather、air-quality)。欠損は「その地点では測っていない」と伝え、推測で埋めない。
+7. **ID系がJISコードとは限らない**: 都道府県らしきパラメータが独自のブロック番号体系のことがある(heatstroke の pref_cds)。既知の地点で往復テストしてから使う。
+8. **HTTPステータスを見て終わらない**: 200でも本文がエラーJSON(`status: "error"`、e-Stat の `STATUS=100`)のことがある。本文のステータスフィールドを必ず見る。
+
 ## English labels
 
 For English responses, use the same order: `Target`, `Data issued/updated`, `Queried at`, `Source and official status`, `Uncertainty`. Never omit an unknown field; state `unknown` and why.

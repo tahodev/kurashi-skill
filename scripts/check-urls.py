@@ -34,18 +34,26 @@ CONTRACTS = [
     (re.compile(r'^https://www8\.cao\.go\.jp/chosei/shukujitsu/.+\.csv'), Contract((200,), ('text/csv', 'application/octet-stream', 'text/plain'), 'Cabinet Office CSV')),
     (re.compile(r'^https://www\.post\.japanpost\.jp/.+\.zip'), Contract((200,), ('application/zip', 'application/octet-stream'), 'Japan Post ZIP')),
     (re.compile(r'^https://raw\.githubusercontent\.com/.+\.csv'), Contract((200,), ('text/plain', 'text/csv'), 'GitHub raw CSV')),
+    (re.compile(r'^https://soramame\.env\.go\.jp/data/sokutei/.+\.csv'), Contract((200,), ('text/csv', 'application/octet-stream', 'text/plain'), 'AEROS CSV')),
+    (re.compile(r'^https://soramame\.env\.go\.jp/'), Contract((200,), ('application/json', 'text/csv', 'text/plain', 'application/octet-stream'), 'AEROS API')),
+    (re.compile(r'^https://www\.wbgt\.env\.go\.jp/api/v1/'), Contract((200,), ('application/json',), 'WBGT API v1')),
+    (re.compile(r'^https://www\.wbgt\.env\.go\.jp/man15NH/'), Contract((200,), ('text/csv', 'application/pdf', 'application/octet-stream', 'text/plain'), 'WBGT master/manual')),
+    (re.compile(r'^https://dataset\.address-br\.digital\.go\.jp/api/'), Contract((200,), ('application/json',), 'ABR Hub API')),
+    (re.compile(r'^https://data\.address-br\.digital\.go\.jp/.+\.zip'), Contract((200,), ('application/zip', 'application/octet-stream'), 'ABR ZIP')),
 ]
 DEFAULT_CONTRACT = Contract(tuple(range(200, 400)), ('text/html', 'text/plain', 'text/csv', 'application/pdf', 'application/json', 'application/octet-stream', 'image/'), 'documentation page')
 
 # A WARN is temporary debt, never an open-ended host allowlist. Budgets are per reason.
 WARN_RULES = {
-    'ci-geo-network': WarnRule('GitHub-hosted runners may be blocked by Japanese public sites', date(2026, 12, 31), 12),
+    'ci-geo-network': WarnRule('GitHub-hosted runners may be blocked by Japanese public sites', date(2026, 12, 31), 15),
     'quiet-time-empty-feed': WarnRule('feed legitimately returns 404 when no event is active', date(2026, 10, 31), 1),
 }
 WARN_HOSTS = {
     'www.jma.go.jp', 'www8.cao.go.jp', 'www.soumu.go.jp', 'www.nta.go.jp',
     'www.bunka.go.jp', 'hinanmap.gsi.go.jp', 'www.kyoshin.bosai.go.jp',
     'eco.mtk.nao.ac.jp', 'www.post.japanpost.jp', 'www.e-stat.go.jp', 'api.e-stat.go.jp',
+    'data.address-br.digital.go.jp', 'dataset.address-br.digital.go.jp',
+    'soramame.env.go.jp', 'www.wbgt.env.go.jp',
 }
 QUIET_TIME_URLS = {'https://www.jma.go.jp/bosai/typhoon/data/list.json'}
 EXCLUDE_URLS = {'https://www.jma.go.jp/bosai/quake/data/20260908234330_20260908234052_VXSE5k_1.json'}

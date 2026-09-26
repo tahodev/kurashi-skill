@@ -185,6 +185,15 @@ Current collection: **21 skills** (2026-09-27). To prevent duplicated records fr
 | --- | --- | --- |
 | 1 | 2026-09-09 | Declaration & repository launch (initial 5 skills) |
 | 2 | 2026-09-10 | jma-weather v2 upgrade |
+| 3-7 | 2026-09-11 | Strengthened the initial skills, set up CI (health-check), planned the roadmap, and added a live demo GIF |
+| 8-13 | 2026-09-11 | Added six skills (wareki / rokuyo / zipcode-lookup / yubin-fee / amagumo / bosai-typhoon) |
+| 14 | 2026-09-13 | Added four skills (eew-monitor / estat-stats / garbage-day / koyobun-check) |
+| 15 | 2026-09-19 | Added volcano (JMA volcano JSON) |
+| 16 | 2026-09-19 | Added shelter-lookup (GSI evacuation-site data) |
+| 17 | 2026-09-20 | Added amedas-weather (JMA AMeDAS observation JSON) |
+| 18 | 2026-09-26 | Added air-quality (Ministry of the Environment AEROS / Soramame) |
+| 19 | 2026-09-26 | Added heatstroke (Ministry of the Environment heat-index API v1) |
+| 20 | 2026-09-26 | Added address-normalize (Digital Agency ABR masters) |
 
 See [ROADMAP.md](ROADMAP.md) for future candidates.
 

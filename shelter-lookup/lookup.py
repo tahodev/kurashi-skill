@@ -10,12 +10,14 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 SITES_URL = "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv"
 HISTORY_URL = "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/publicHistoryCSV/publicHistoryListData.csv"
 EARTH_RADIUS_KM = 6371.0088
+CACHE_STALE_DAYS = 7
 
 HAZARDS = {
     "flood": "洪水",
@@ -70,6 +72,20 @@ def load_update_dates(path: Path) -> dict[str, str]:
             if len(row) >= 4 and row[1] and row[3]:
                 dates[row[1].strip()] = row[3].strip()
     return dates
+
+
+def stale_caches(paths: list[Path], stale_days: int, now: float | None = None) -> list[tuple[Path, int]]:
+    """Return cached files older than stale_days, each with its age in whole days."""
+    moment = time.time() if now is None else now
+    stale: list[tuple[Path, int]] = []
+    for path in paths:
+        try:
+            age = int((moment - path.stat().st_mtime) // 86400)
+        except OSError:
+            continue
+        if age > stale_days:
+            stale.append((path, age))
+    return stale
 
 
 def nearest_sites(
@@ -145,6 +161,12 @@ def main() -> int:
     except (OSError, RuntimeError) as exc:
         print(str(exc), file=sys.stderr)
         return 1
+
+    for cached, age in stale_caches([sites_path, history_path], CACHE_STALE_DAYS):
+        print(
+            f"警告: キャッシュ {cached.name} は{age}日前のものです。避難所データは市町村によって更新されます。--refresh で再取得してください。",
+            file=sys.stderr,
+        )
 
     print(f"{HAZARDS[hazard_key]}に指定された最寄りの指定緊急避難場所 (上位{args.limit}件)")
     print("距離は入力座標からのHaversine法による直線距離です。道路距離・徒歩距離ではありません。")

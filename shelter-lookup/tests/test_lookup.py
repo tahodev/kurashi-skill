@@ -1,5 +1,6 @@
 import csv
 import importlib.util
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -31,6 +32,20 @@ class ShelterLookupTests(unittest.TestCase):
                 writer.writerows(rows)
             results = lookup.nearest_sites(path, 35, 139, "洪水", 1)
         self.assertEqual(results[0][1]["施設・場所名"], "near")
+
+
+    def test_stale_caches_flags_only_old_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            fresh = Path(directory) / "fresh.csv"
+            old = Path(directory) / "old.csv"
+            missing = Path(directory) / "missing.csv"
+            fresh.write_text("x", encoding="utf-8")
+            old.write_text("x", encoding="utf-8")
+            old_epoch = 1_700_000_000
+            os.utime(old, (old_epoch, old_epoch))
+            os.utime(fresh, (old_epoch + 9 * 86400, old_epoch + 9 * 86400))
+            stale = lookup.stale_caches([fresh, old, missing], 7, now=old_epoch + 10 * 86400)
+        self.assertEqual([(p.name, age) for p, age in stale], [("old.csv", 10)])
 
 
 if __name__ == "__main__":

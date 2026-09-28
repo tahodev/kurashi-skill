@@ -41,7 +41,7 @@ CONTRACTS = [
     (re.compile(r'^https://dataset\.address-br\.digital\.go\.jp/api/'), Contract((200,), ('application/json',), 'ABR Hub API')),
     (re.compile(r'^https://data\.address-br\.digital\.go\.jp/.+\.zip'), Contract((200,), ('application/zip', 'application/octet-stream'), 'ABR ZIP')),
 ]
-DEFAULT_CONTRACT = Contract(tuple(range(200, 400)), ('text/html', 'text/plain', 'text/csv', 'application/pdf', 'application/json', 'application/octet-stream', 'image/'), 'documentation page')
+DEFAULT_CONTRACT = Contract(tuple(range(200, 400)), ('text/html', 'text/plain', 'text/csv', 'text/xml', 'application/xml', 'application/rss', 'application/pdf', 'application/json', 'application/octet-stream', 'image/'), 'documentation page')
 
 # A WARN is temporary debt, never an open-ended host allowlist. Budgets are per reason.
 WARN_RULES = {

@@ -33,6 +33,7 @@ CONTRACTS = [
     (re.compile(r'^https://api\.e-stat\.go\.jp/'), Contract((200, 400, 401, 403), ('application/json', 'application/xml', 'text/xml'), 'e-Stat API')),
     (re.compile(r'^https://www8\.cao\.go\.jp/chosei/shukujitsu/.+\.csv'), Contract((200,), ('text/csv', 'application/octet-stream', 'text/plain'), 'Cabinet Office CSV')),
     (re.compile(r'^https://www\.post\.japanpost\.jp/.+\.zip'), Contract((200,), ('application/zip', 'application/octet-stream'), 'Japan Post ZIP')),
+    (re.compile(r'^https://www\.aozora\.gr\.jp/index_pages/.+\.zip'), Contract((200,), ('application/zip',), 'Aozora ZIP')),
     (re.compile(r'^https://raw\.githubusercontent\.com/.+\.csv'), Contract((200,), ('text/plain', 'text/csv'), 'GitHub raw CSV')),
     (re.compile(r'^https://soramame\.env\.go\.jp/data/sokutei/.+\.csv'), Contract((200,), ('text/csv', 'application/octet-stream', 'text/plain'), 'AEROS CSV')),
     (re.compile(r'^https://soramame\.env\.go\.jp/'), Contract((200,), ('application/json', 'text/csv', 'text/plain', 'application/octet-stream'), 'AEROS API')),

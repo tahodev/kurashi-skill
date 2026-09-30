@@ -81,7 +81,7 @@ Adopted schedule for Days 7-30 of the 30-day build-in-public challenge, decided 
 
 - **Week 2** (Day 8-13): `wareki`, `rokuyo`, `zipcode-lookup`, `yubin-fee`, `amagumo`, `bosai-typhoon` (Day 7: reflection)
 - **Week 3** (Day 15-20): `volcano` (shipped 2026-09-19), `shelter-lookup` (shipped 2026-09-19), `amedas-weather` (shipped 2026-09-20), `air-quality`, `heatstroke`, `address-normalize` (Day 14: reflection). Disaster-heavy by design: September is typhoon season in Japan
-- **Week 4** (Day 22-28): `odpt-transit`, `ndl-books`, `aozora`, `kokkai`, `egov-laws`, `withholding-tax`; `garbage-day` shipped early on 2026-09-13, so Day 28 is open for a reflection or replacement (Day 21: reflection, Day 29: v1.0.0 release, Day 30: wrap-up)
+- **Week 4** (Day 22-28): `odpt-transit`(保留), `ndl-books`(shipped Day 23), `aozora`(shipped Day 24), `kokkai`(shipped Day 25), `egov-laws`, `withholding-tax`; `garbage-day` shipped early on 2026-09-13, so Day 28 is open for a reflection or replacement (Day 21: reflection, Day 29: v1.0.0 release, Day 30: wrap-up)
 - **Rejected**: `station-finder` (superseded by `odpt-transit`), `nenkin` (calculation pattern duplicates `furusato-nozei`)
 - **Adopted early / from backlog**: `estat-stats` and `garbage-day` (2026-09-13), `amedas-weather` (2026-09-20)
 - **Backlog**: `reinfolib-prices` (waiting on API key review; apply in advance and swap in once issued), `dataportal-search`, `hazard-map` (tile terms of use must be checked first)

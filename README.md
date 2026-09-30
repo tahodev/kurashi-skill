@@ -54,6 +54,7 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 住所を分解・正規化する | `address-normalize` | デジタル庁アドレス・ベース・レジストリ(ABR)の公式マスタで住所を都道府県・市区町村・町字・番地に分解 | 不要 | [address-normalize ガイド](docs/features/address-normalize.md) |
 | 本の書誌を検索する | `ndl-books` | 国立国会図書館サーチAPIでISBN・タイトル・著者名から書誌を検索 | 不要 | [ndl-books ガイド](docs/features/ndl-books.md) |
 | 青空文庫の本文を読む | `aozora` | 全作品カタログCSVで作品検索、本文をプレーンテキスト取得(ルビ除去) | 不要 | [aozora ガイド](docs/features/aozora.md) |
+| 国会で何が言われたか調べる | `kokkai` | 国会会議録検索APIで議事録を発言単位・会議単位で検索 | 不要 | [kokkai ガイド](docs/features/kokkai.md) |
 
 各スキルの**正本は `<スキル名>/SKILL.md`** です。`docs/features/` のガイドは概要版なので、詳細な手順・パラメータ・エラー対応は必ず SKILL.md を参照してください。
 
@@ -93,7 +94,7 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 
 このリポジトリは、30日間の公開開発チャレンジとして育っています。1日1スキル、コミットがそのままQiitaの記事になる方式です。なお、制作パートナーのAIエージェント(Astra)のクオータが30日間持つかどうかが、実は最大のリスク要因だったりします。
 
-現在の収録数: **23スキル** (2026-09-30)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
+現在の収録数: **24スキル** (2026-10-01)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
 
 | Day | 日付 | できごと |
 | --- | --- | --- |
@@ -110,6 +111,7 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | 20 | 2026-09-26 | address-normalize 追加 (デジタル庁 ABRマスタ) |
 | 21 | 2026-09-29 | ndl-books 追加 (国立国会図書館サーチAPI) |
 | 22 | 2026-09-30 | aozora 追加 (青空文庫 カタログCSV) |
+| 23 | 2026-10-01 | kokkai 追加 (国会会議録検索API) |
 
 今後の候補は [ROADMAP.md](ROADMAP.md) を参照。
 
@@ -146,6 +148,7 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Parse and normalize Japanese addresses | `address-normalize` | Split an address into prefecture, city, town and lot number using the Digital Agency's Address Base Registry masters | Not required | [address-normalize guide](docs/features/address-normalize.md) |
 | Search book bibliographic records | `ndl-books` | Bibliographic search by ISBN, title or author via the National Diet Library Search API | Not required | [ndl-books guide](docs/features/ndl-books.md) |
 | Read Aozora Bunko texts | `aozora` | Search the full-catalog CSV and extract plain text (ruby stripped) | Not required | [aozora guide](docs/features/aozora.md) |
+| Search Diet proceedings | `kokkai` | Search the National Diet record API by speech, meeting or speaker | Not required | [kokkai guide](docs/features/kokkai.md) |
 
 The canonical source for each skill is its `<skill>/SKILL.md`. The guides under `docs/features/` are summaries only - always refer to SKILL.md for full procedures, parameters, and error handling.
 
@@ -185,7 +188,7 @@ Recommended packs by purpose and ten ready-to-ask sample questions are in the [s
 
 This repository is growing as a 30-day build-in-public challenge: one skill a day, with each commit doubling as a Qiita article. Frankly, the biggest risk factor is whether the quota of Astra - the AI agent co-authoring this series - survives all 30 days.
 
-Current collection: **23 skills** (2026-09-30). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
+Current collection: **24 skills** (2026-10-01). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
 
 | Day | Date | What happened |
 | --- | --- | --- |

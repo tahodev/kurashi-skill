@@ -56,6 +56,7 @@ Claude Code、Codex、OpenCode など、`npx skills add` に対応したコー�
 | 青空文庫の本文を読む | `aozora` | 全作品カタログCSVで作品検索、本文をプレーンテキスト取得(ルビ除去) | 不要 | [aozora ガイド](docs/features/aozora.md) |
 | 国会で何が言われたか調べる | `kokkai` | 国会会議録検索APIで議事録を発言単位・会議単位で検索 | 不要 | [kokkai ガイド](docs/features/kokkai.md) |
 | 法律の条文を条番号で引く | `egov-laws` | e-Gov法令API v2で法令検索・条文取得・時点指定・改正履歴・全文検索 | 不要 | [egov-laws ガイド](docs/features/egov-laws.md) |
+| 給与の源泉所得税(月額表)を計算する | `withholding-tax` | 国税庁の特例計算式で月給と扶養人数から源泉徴収税額の目安を算出。令和8年分/令和9年分(API不要) | 不要 | [withholding-tax ガイド](docs/features/withholding-tax.md) |
 
 各スキルの**正本は `<スキル名>/SKILL.md`** です。`docs/features/` のガイドは概要版なので、詳細な手順・パラメータ・エラー対応は必ず SKILL.md を参照してください。
 
@@ -95,7 +96,7 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 
 このリポジトリは、30日間の公開開発チャレンジとして育っています。1日1スキル、コミットがそのままQiitaの記事になる方式です。なお、制作パートナーのAIエージェント(Astra)のクオータが30日間持つかどうかが、実は最大のリスク要因だったりします。
 
-現在の収録数: **25スキル** (2026-10-02)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
+現在の収録数: **26スキル** (2026-10-03)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
 
 | Day | 日付 | できごと |
 | --- | --- | --- |
@@ -114,6 +115,7 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | 22 | 2026-09-30 | aozora 追加 (青空文庫 カタログCSV) |
 | 23 | 2026-10-01 | kokkai 追加 (国会会議録検索API) |
 | 24 | 2026-10-02 | egov-laws 追加 (e-Gov法令API v2) |
+| 25 | 2026-10-03 | withholding-tax 追加 (源泉徴収税額の目安計算) |
 
 今後の候補は [ROADMAP.md](ROADMAP.md) を参照。
 
@@ -152,6 +154,7 @@ Works with any coding agent that supports `npx skills add` (Claude Code, Codex, 
 | Read Aozora Bunko texts | `aozora` | Search the full-catalog CSV and extract plain text (ruby stripped) | Not required | [aozora guide](docs/features/aozora.md) |
 | Search Diet proceedings | `kokkai` | Search the National Diet record API by speech, meeting or speaker | Not required | [kokkai guide](docs/features/kokkai.md) |
 | Look up statute articles | `egov-laws` | Search laws, fetch articles by number, point-in-time text and revision history via the e-Gov Law API v2 | Not required | [egov-laws guide](docs/features/egov-laws.md) |
+| Estimate monthly income-tax withholding | `withholding-tax` | Compute withholding from monthly pay and dependents with the NTA formula, Reiwa 8 and Reiwa 9 tables (no API needed) | Not required | [withholding-tax guide](docs/features/withholding-tax.md) |
 
 The canonical source for each skill is its `<skill>/SKILL.md`. The guides under `docs/features/` are summaries only - always refer to SKILL.md for full procedures, parameters, and error handling.
 
@@ -191,7 +194,7 @@ Recommended packs by purpose and ten ready-to-ask sample questions are in the [s
 
 This repository is growing as a 30-day build-in-public challenge: one skill a day, with each commit doubling as a Qiita article. Frankly, the biggest risk factor is whether the quota of Astra - the AI agent co-authoring this series - survives all 30 days.
 
-Current collection: **25 skills** (2026-10-02). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
+Current collection: **26 skills** (2026-10-03). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
 
 | Day | Date | What happened |
 | --- | --- | --- |

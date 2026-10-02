@@ -32,6 +32,8 @@ CONTRACTS = [
     (re.compile(r'^https://api\.calil\.jp/'), Contract((200, 400, 401, 403, 404), ('application/json', 'text/javascript', 'text/plain'), 'Calil API')),
     (re.compile(r'^https://api\.e-stat\.go\.jp/'), Contract((200, 400, 401, 403), ('application/json', 'application/xml', 'text/xml'), 'e-Stat API')),
     (re.compile(r'^https://kokkai\.ndl\.go\.jp/api/'), Contract((200, 400), ('application/json', 'application/xml', 'text/xml', 'text/html'), 'Kokkai API')),
+    (re.compile(r'^https://laws\.e-gov\.go\.jp/api/2/swagger-ui/'), Contract((200,), ('text/html',), 'e-Gov Law API v2 Swagger UI')),
+    (re.compile(r'^https://(laws|elaws)\.e-gov\.go\.jp/api/'), Contract((200, 301, 400), ('application/json', 'application/xml', 'text/xml', 'text/html'), 'e-Gov Law API')),
     (re.compile(r'^https://www8\.cao\.go\.jp/chosei/shukujitsu/.+\.csv'), Contract((200,), ('text/csv', 'application/octet-stream', 'text/plain'), 'Cabinet Office CSV')),
     (re.compile(r'^https://www\.post\.japanpost\.jp/.+\.zip'), Contract((200,), ('application/zip', 'application/octet-stream'), 'Japan Post ZIP')),
     (re.compile(r'^https://www\.aozora\.gr\.jp/index_pages/.+\.zip'), Contract((200,), ('application/zip',), 'Aozora ZIP')),

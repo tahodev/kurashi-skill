@@ -43,3 +43,6 @@ pnpm-lock.yaml
 *.log
 .cache/
 __pycache__/
+
+# local scratch dumps
+/*.json

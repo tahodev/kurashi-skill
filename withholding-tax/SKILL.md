@@ -5,7 +5,7 @@ license: MIT
 metadata:
   category: tax
   locale: ja-JP
-  data_as_of: 2026-10-03
+  data_as_of: 2026-10-02
   valid_through: 2027-12-31
   source_version: "NTA 令和8年分 and 令和9年分 源泉徴収税額表 (電算機計算の特例、財務省告示)"
 ---

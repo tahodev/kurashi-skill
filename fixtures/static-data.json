@@ -34,6 +34,21 @@
       "required_text": [
         "基準日: 郵便料金は2024-10-01の改定料金"
       ]
+    },
+    "withholding-tax": {
+      "skill": "withholding-tax/SKILL.md",
+      "source_urls": [
+        "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/denshi_01.pdf",
+        "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2027/data/denshi_01.pdf"
+      ],
+      "required_rows": [
+        "| 令和8年分 | 175,000円 | 2 | 210円 | 250円 |",
+        "| 令和9年分 | 177,000円 | 2 | 110円 | 150円 |"
+      ],
+      "required_text": [
+        "B×20.420%−36,374",
+        "給与所得控除の下限が54,167円→57,500円"
+      ]
     }
   }
 }

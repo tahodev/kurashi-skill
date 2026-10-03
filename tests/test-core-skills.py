@@ -104,6 +104,113 @@ def check_shelter():
     assert len(tsunami) == 1 and tsunami[0]['施設・場所名'] == '千代田区役所'
     assert rows[0]['住所'] == '千代田区九段南1-2-1'
 
+import math, re
+root = Path(__file__).parent.parent
+
+def md_rows(skill, header_start):
+    """Rows of the first Markdown table in SKILL.md whose header line starts with header_start."""
+    lines = (root / skill / 'SKILL.md').read_text().split('\n')
+    out, on = [], False
+    for ln in lines:
+        if ln.startswith(header_start):
+            on = True
+            continue
+        if on:
+            if not ln.startswith('|'):
+                break
+            if set(ln.replace('|', '').strip()) <= set('- '):
+                continue
+            out.append([c.strip() for c in ln.strip('|').split('|')])
+    return out
+
+@smoke('wareki')
+def check_wareki():
+    # SKILL.md の元号表を読み、境界日の変換を検証する(表そのものが正)
+    eras = [(r[0], tuple(map(int, r[1].split('-')))) for r in md_rows('wareki', '| 元号')]
+    eras.sort(key=lambda e: e[1])
+    def to_wareki(y, m, d):
+        name = [e for e in eras if e[1] <= (y, m, d)][-1]
+        n = y - name[1][0] + 1
+        return name[0], '元' if n == 1 else n
+    assert to_wareki(1989, 1, 7) == ('昭和', 64)
+    assert to_wareki(1989, 1, 8) == ('平成', '元')
+    assert to_wareki(2019, 4, 30) == ('平成', 31)
+    assert to_wareki(2019, 5, 1) == ('令和', '元')
+    assert to_wareki(2026, 9, 11) == ('令和', 8)
+    assert to_wareki(1912, 7, 30) == ('大正', '元')
+
+@smoke('rokuyo')
+def check_rokuyo():
+    # SKILL.md の旧暦月テーブルを読み、(月+日)%6 の規則を検証する
+    import datetime as dt
+    rows = []
+    pairs = [(r[i], r[i + 1]) for r in md_rows('rokuyo', '| 朔の日(新暦)') for i in (0, 2) if len(r) > i + 1]
+    for a, b in pairs:
+        if re.match(r'\d{4}-\d{2}-\d{2}$', a):
+            rows.append((dt.date.fromisoformat(a), int(re.search(r'(\d+)月', b).group(1))))
+    rows.sort()
+    names = ['大安', '赤口', '先勝', '友引', '先負', '仏滅']
+    def rokuyo(d):
+        start, month = [r for r in rows if r[0] <= d][-1]
+        return names[(month + (d - start).days + 1) % 6]
+    assert rokuyo(dt.date(2026, 9, 11)) == '友引'   # SKILL.md の検証例(外部カレンダー照合済み)
+    assert rokuyo(dt.date(2026, 9, 12)) == '先負'
+    # 旧暦1日(朔)は月ごとに六曜が決まる: 1月・7月=先勝、2月・8月=友引、3月・9月=先負、4月・10月=仏滅、5月・11月=大安、6月・12月=赤口
+    firsts = {1: '先勝', 2: '友引', 3: '先負', 4: '仏滅', 5: '大安', 6: '赤口'}
+    for start, month in rows:
+        if True:
+            assert rokuyo(start) == firsts[(month - 1) % 6 + 1], (start, month)
+
+@smoke('yubin-fee')
+def check_yubin():
+    rows = md_rows('yubin-fee', '| 重量')
+    assert rows[0] == ['50g以内', '110円']
+    extra = {r[0]: r[1:] for r in md_rows('yubin-fee', '| 重量 | 規格内')}
+    # 定形外は重さが増えるほど料金が上がる。規格外は規格内より常に高い
+    yen = lambda t: int(t.replace('円', '').replace(',', ''))
+    ins = [yen(v[0]) for k, v in extra.items() if '対象外' not in v[0]]
+    outs = [yen(v[1]) for v in extra.values()]
+    assert ins == sorted(ins) and outs == sorted(outs)
+    assert all(yen(v[1]) > yen(v[0]) for v in extra.values() if '対象外' not in v[0])
+
+@smoke('amagumo')
+def check_amagumo():
+    times = json.loads((fixtures / 'amagumo-targettimes-N1.json').read_text())
+    # 各要素は basetime/validtime(YYYYMMDDHHMMSS, UTC)/elements。新しい順で返る
+    for t in times:
+        assert re.fullmatch(r'\d{14}', t['basetime']) and re.fullmatch(r'\d{14}', t['validtime'])
+        assert 'hrpns' in t['elements']
+    assert times[0]['validtime'] > times[1]['validtime']
+    # SKILL.md のタイル座標式: 東京(35.68, 139.77) z=8 → 227,100
+    lat, lon, z = 35.68, 139.77, 8
+    n = 2 ** z
+    x = int(n * ((lon + 180) / 360))
+    y = int(n * (1 - math.log(math.tan(math.radians(lat)) + 1 / math.cos(math.radians(lat))) / math.pi) / 2)
+    assert (x, y) == (227, 100)
+
+@smoke('bosai-typhoon')
+def check_typhoon():
+    # SKILL.md の判断規則: 404=台風なし(正常) / 200+配列=発生中 / それ以外=取得失敗(「なし」と言わない)
+    def classify(status, body=None):
+        if status == 404:
+            return 'none'
+        if status == 200 and isinstance(body, list):
+            return 'active'
+        return 'failed'
+    assert classify(404) == 'none'
+    assert classify(200, []) == 'active' and classify(200, [{}]) == 'active'
+    assert classify(500) == 'failed' and classify(200, None) == 'failed' and classify(0) == 'failed'
+
+@smoke('zipcode-lookup')
+def check_zipcode():
+    # 形式フィクスチャ(合成行): SKILL.md が説明する15列・全項目クォート・「以下に掲載がない場合」行・1郵便番号に複数行
+    rows = list(csv.reader(io.StringIO((fixtures / 'zipcode-ken-all-format.csv').read_text())))
+    assert all(len(r) == 15 for r in rows)
+    assert all(re.fullmatch(r'\d{7}', r[2]) for r in rows)
+    same = [r for r in rows if r[2] == '9999991']
+    assert len(same) == 2, 'one postal code can map to several rows'
+    assert [r for r in rows if r[8] == '以下に掲載がない場合']
+
 failed = 0
 for name, check in checks:
     try:

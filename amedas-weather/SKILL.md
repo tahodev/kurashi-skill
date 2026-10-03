@@ -28,7 +28,8 @@ curl -sm 30 https://www.jma.go.jp/bosai/amedas/data/latest_time.txt
 時刻を `YYYYMMDDHHMMSS` に変換してmapファイルを取る。
 
 ```bash
-curl -sm 30 -o amap.json https://www.jma.go.jp/bosai/amedas/data/map/20260920132000.json
+# {amedas_time} は latest_time.txt を YYYYMMDDHHMMSS に直した値(例: 2026-09-20T13:20:00+09:00 → 20260920132000)
+curl -sm 30 -o amap.json https://www.jma.go.jp/bosai/amedas/data/map/{amedas_time}.json
 ```
 
 2026-09-20実測: 200、約251KB、1,286観測所分。キーは観測所コード、値は各要素の `[値, フラグ]` の組。

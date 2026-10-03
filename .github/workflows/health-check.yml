@@ -35,6 +35,14 @@ jobs:
         run: python3 scripts/check-measured-date.py
       - name: Run fixed-fixture regression and core skill smoke tests
         run: python3 tests/test-core-skills.py
+      - name: Run per-skill unit tests (*/tests)
+        run: |
+          status=0
+          for d in */tests; do
+            echo "== $d"
+            python3 -m unittest discover -s "$d" || status=1
+          done
+          exit $status
       - name: Check documented URLs and API responses
         run: python3 scripts/check-urls.py
       - name: Open or update a GitHub issue on scheduled/manual failure

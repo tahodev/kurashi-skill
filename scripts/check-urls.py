@@ -69,6 +69,36 @@ PLACEHOLDERS = {
     'z': '5', 'x': '28', 'y': '12',
 }
 
+def resolve_amedas_time():
+    """Resolve the live AMeDAS snapshot time so the map URL is checked against current data, not a dated 404."""
+    try:
+        out = subprocess.run(['curl', '-sS', '--max-time', '15', 'https://www.jma.go.jp/bosai/amedas/data/latest_time.txt'], capture_output=True, text=True, timeout=20).stdout.strip()
+        m = re.match(r'(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})', out)
+        return ''.join(m.groups()) if m else None
+    except Exception:
+        return None
+
+# Live probes: real data endpoints that no SKILL.md URL line exercises (a 400/HTML shell must not pass).
+PROBES = [
+    ('https://laws.e-gov.go.jp/api/2/laws?limit=1', 'total_count', 'e-Gov Law API v2 laws list'),
+    ('https://laws.e-gov.go.jp/api/2/law_data/129AC0000000089?law_full_text_format=json&elm=Article%5B709%5D', 'law_info', 'e-Gov Law API v2 law_data (Civil Code, elm=Article[N])'),
+    ('https://laws.e-gov.go.jp/api/2/keyword?keyword=%E6%AF%8D%E5%AD%90&limit=1', 'items', 'e-Gov Law API v2 keyword search'),
+]
+
+def probe(item):
+    url, key, label = item
+    try:
+        proc = subprocess.run(['curl', '-sS', '-L', '--connect-timeout', '8', '--max-time', str(TIMEOUT), '-A', 'kurashi-skill-health-check/2.0', '-o', '-', '-w', '\n%{http_code}\n%{content_type}', url], capture_output=True, timeout=TIMEOUT + 5)
+        output = proc.stdout.decode('utf-8', 'replace')
+        body, _, tail = output.rpartition('\n')
+        body, _, code = body.rpartition('\n')
+    except subprocess.TimeoutExpired:
+        return 'FAIL', f'probe timeout {url} [{label}]'
+    code, tail = code.strip(), tail.strip().lower()
+    if code == '200' and 'json' in tail and f'"{key}"' in body:
+        return 'OK', f'probe 200 {tail} has "{key}" {url} [{label}]'
+    return 'FAIL', f'probe {code} {tail} missing "{key}" {url} [{label}]'
+
 def source_files():
     return [root / 'README.md', *root.glob('*/SKILL.md'), *root.glob('docs/**/*.md')]
 
@@ -156,6 +186,9 @@ def check(pair):
     return 'OK', f'{owner}: {code} {content_type} {original} [{expected.label}]', None
 
 def main():
+    amedas_time = resolve_amedas_time()
+    if amedas_time:
+        PLACEHOLDERS['amedas_time'] = amedas_time
     items = collect_urls()
     warn_counts = {key: 0 for key in WARN_RULES}
     failed = False
@@ -167,6 +200,9 @@ def main():
             failed |= status == 'FAIL'
             if reason:
                 warn_counts[reason] += 1
+    for status, message in map(probe, PROBES):
+        print(f'{status:5} {message}')
+        failed |= status == 'FAIL'
     for reason, rule in WARN_RULES.items():
         count = warn_counts[reason]
         if TODAY > rule.expires:

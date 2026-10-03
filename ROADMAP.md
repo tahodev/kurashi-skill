@@ -37,7 +37,7 @@ Day 1 の Qiita 記事で公表した案(以下「A案」)と、検証済み候�
 | 25 | `kokkai` | 国会会議録の検索 | 国会会議録検索システム API | 不要 | 2026-09-11実測で応答確認(パラメータ必須、認証不要) |
 | ~~26~~ shipped Day 26 (2026-10-02) | `egov-laws` | 法令条文の検索・照会 | e-Gov 法令API v2 | 不要 | shipped。当初の注記「v1は廃止済み」は誤りで、2026-10-02時点でv1もXMLを返す(公式の終了告知なし)。v2を使う理由は時点指定・改正履歴・全文検索 |
 | ~~27~~ shipped Day 27 (2026-10-03) | `withholding-tax` | 源泉徴収税額の目安計算 | 国税庁 公表の税額表・電算機計算の特例 | 不要 | shipped。税額表そのものではなく国税庁公表の特例計算式で実装(税額表と一致しないことがある注記つき)。令和8年分・令和9年分 |
-| 28 | ~~`garbage-day`~~ (採用済み) | ごみ収集日の照会 | 5374形式の公開CSV | 不要 | **2026-09-13に前倒し採用**。下の「追加採用」参照。Day 28 の記事枠は振り返りか差し替え候補から選ぶ |
+| ~~28~~ shipped Day 28 (2026-10-04) | `gsi-geocode` | 住所→緯度経度・標高・逆ジオコーダ | 国土地理院 住所検索API・標高API・逆ジオコーダ | 不要 | shipped。バックログ外の差し替え候補として2026-10-04の実測で採用(garbage-dayは2026-09-13に前倒し済み)。曖昧一致の並び・`-----`・muniCdの桁ずれを罠として記録 |
 | 29 | (v1.0.0) | 全スキルの最終点検と v1.0.0 リリース | - | - | git tag と GitHub Release を同バージョンで作成 |
 | 30 | (総括) | 30日間の総括記事 | - | - | スキル追加なし |
 
@@ -81,7 +81,7 @@ Adopted schedule for Days 7-30 of the 30-day build-in-public challenge, decided 
 
 - **Week 2** (Day 8-13): `wareki`, `rokuyo`, `zipcode-lookup`, `yubin-fee`, `amagumo`, `bosai-typhoon` (Day 7: reflection)
 - **Week 3** (Day 15-20): `volcano` (shipped 2026-09-19), `shelter-lookup` (shipped 2026-09-19), `amedas-weather` (shipped 2026-09-20), `air-quality`, `heatstroke`, `address-normalize` (Day 14: reflection). Disaster-heavy by design: September is typhoon season in Japan
-- **Week 4** (Day 22-28): `odpt-transit`(保留), `ndl-books`(shipped Day 23), `aozora`(shipped Day 24), `kokkai`(shipped Day 25), `egov-laws`(shipped Day 26), `withholding-tax`(shipped Day 27); `garbage-day` shipped early on 2026-09-13, so Day 28 is open for a reflection or replacement (Day 21: reflection, Day 29: v1.0.0 release, Day 30: wrap-up)
+- **Week 4** (Day 22-28): `odpt-transit`(保留), `ndl-books`(shipped Day 23), `aozora`(shipped Day 24), `kokkai`(shipped Day 25), `egov-laws`(shipped Day 26), `withholding-tax`(shipped Day 27), `gsi-geocode`(shipped Day 28); `garbage-day` shipped early on 2026-09-13, so Day 28 is open for a reflection or replacement (Day 21: reflection, Day 29: v1.0.0 release, Day 30: wrap-up)
 - **Rejected**: `station-finder` (superseded by `odpt-transit`), `nenkin` (calculation pattern duplicates `furusato-nozei`)
 - **Adopted early / from backlog**: `estat-stats` and `garbage-day` (2026-09-13), `amedas-weather` (2026-09-20)
 - **Backlog**: `reinfolib-prices` (waiting on API key review; apply in advance and swap in once issued), `dataportal-search`, `hazard-map` (tile terms of use must be checked first)

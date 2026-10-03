@@ -21,6 +21,7 @@
 - 新スキル `kokkai`: 国会会議録検索API(発言単位/会議単位/会議一覧の3エンドポイント)で議事録検索。`lookup.py` とテスト7件つき(2026-10-01実測)
 - 新スキル `egov-laws`: e-Gov法令API v2で法令検索・条文取得(条番号指定)・時点指定・改正履歴・全文検索。`elm=Article[N]` が第N条ではなくN番目の要素を返す罠を回避し、Num属性で探す。`lookup.py` とテスト12件つき(2026-10-02実測)
 - 新スキル `withholding-tax`: 月額表甲欄の源泉徴収税額を国税庁の電算機計算の特例の式で計算(令和8年分・令和9年分)。公式の計算例4件を再現するテスト10件つき、基準日2026-10-03
+- 新スキル `gsi-geocode`: 国土地理院の住所検索・標高・逆ジオコーダAPIで、住所→緯度経度、緯度経度→標高、緯度経度→住所を引く。曖昧一致が関連度順でない点(「東京タワー」の本物は50件中最後)、標高の「データなし」が文字列 `-----`、北海道の市区町村コードの先頭0のずれを実測で記録。`lookup.py` とテスト10件つき(2026-10-04実測)
 - テスト基盤: 直近追加の7スキル(volcano, shelter-lookup, amedas-weather, air-quality, garbage-day, eew-monitor, estat-stats)の固定フィクスチャによるスモークテストを tests/test-core-skills.py に追加。air-quality/lookup.py に select_hits を切り出し単体テストを追加(新規ヘルパー=テスト同梱の規則化)
 - scripts/check-measured-date.py: SKILL.md の実測日が90日を超えるとCI失敗(スケジュール実行時はissue自動起票で再実測リマインド)
 - scripts/check-urls.py: AEROS/WBGT/ABRの新規エンドポイント用の応答契約を追加

@@ -97,7 +97,7 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 
 このリポジトリは、30日間の公開開発チャレンジとして育っています。1日1スキル、コミットがそのままQiitaの記事になる方式です。なお、制作パートナーのAIエージェント(Astra)のクオータが30日間持つかどうかが、実は最大のリスク要因だったりします。
 
-現在の収録数: **27スキル** (2026-10-04)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
+現在の収録数: **27スキル** (2026-10-05, v1.0.0)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
 
 | Day | 日付 | できごと |
 | --- | --- | --- |
@@ -118,6 +118,7 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 | 24 | 2026-10-02 | egov-laws 追加 (e-Gov法令API v2) |
 | 25 | 2026-10-03 | withholding-tax 追加 (源泉徴収税額の目安計算) |
 | 26 | 2026-10-04 | gsi-geocode 追加 (国土地理院 住所検索・標高・逆ジオコーダ) |
+| 27 | 2026-10-05 | v1.0.0 リリース (27スキルの最終点検。URL 114件OK・FAIL 0件) |
 
 今後の候補は [ROADMAP.md](ROADMAP.md) を参照。
 
@@ -197,7 +198,7 @@ Recommended packs by purpose and ten ready-to-ask sample questions are in the [s
 
 This repository is growing as a 30-day build-in-public challenge: one skill a day, with each commit doubling as a Qiita article. Frankly, the biggest risk factor is whether the quota of Astra - the AI agent co-authoring this series - survives all 30 days.
 
-Current collection: **27 skills** (2026-10-04). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
+Current collection: **27 skills** (2026-10-05, v1.0.0). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
 
 | Day | Date | What happened |
 | --- | --- | --- |

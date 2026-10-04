@@ -11,6 +11,10 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-05
+
+30日間の公開開発チャレンジの最終点検リリース。27スキル。2026-10-05の点検結果: lint・docs-drift・static-data・code-blocks・measured-date・コアfixtureテスト(18)・スキル別単体テスト(10スキル・計67件)がすべて成功。check-urls は 124件中 OK 114 / SKIP 8(実行時変数・過去の例) / FAIL 0、免除(WARN)は7件(ci-geo-network 6・quiet-time-empty-feed 1、期限つき)。単体またはfixtureのテストを持たないのは `koyobun-check`(ネットワークを使わない知識スキル)のみ。
+
 ### Added
 - CI: スキルごとの単体テスト(`*/tests`)を health-check で実行(これまで CI は走らせていなかった)
 - テスト: wareki / rokuyo / yubin-fee / amagumo / bosai-typhoon / zipcode-lookup の固定フィクスチャテスト(SKILL.md の表・式・判断規則を読んで検証。zipcode は形式のみの合成フィクスチャ)

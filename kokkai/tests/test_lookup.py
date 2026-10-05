@@ -52,7 +52,7 @@ class UrlBuildTest(unittest.TestCase):
         self.assertIn("recordPacking=json", url)
 
     def test_any_space_join_is_and(self):
-        # 実測: any=北海道 青森 はAND(両方含む発言24件)
+        # 実測: any=北海道 青森 はAND(両方含む発言3,867件、2026-10-05再実測)
         url = lookup.build_url("speech", self._args(any=["北海道", "青森"]))
         self.assertIn("any=%E5%8C%97%E6%B5%B7%E9%81%93+%E9%9D%92%E6%A3%AE", url)
 

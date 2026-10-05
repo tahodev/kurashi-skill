@@ -43,7 +43,7 @@ python3 kokkai/lookup.py --any 防災 --from-date 2026-01-01 --until-date 2026-0
 ## 実測で確認した罠
 
 1. **3エンドポイントの最大件数が違う。** speech/listは100、meetingは10。`maximumRecords=101` を渡すと **HTTP 400** で `{"message":"(19011)検索条件の入力に誤りがあります。","details":["...maximumRecordsには1～100の値を指定してください。"]}` が返る(2026-10-01実測)。エラーは日本語で具体的。
-2. **`any` はスペース区切りでAND、`nameOfMeeting` はスペース区切りでOR。** 逆なので注意(実測: any=北海道 青森 → 両方を含む発言24件、nameOfMeeting=文部 文教 → どちらかを含む会議)。
+2. **`any` はスペース区切りでAND、`nameOfMeeting` はスペース区切りでOR。** 逆なので注意(実測: any=北海道 青森 → 両方を含む発言3,867件(2026-10-05再実測。「北海道」単独115,795件・「青森」単独18,908件より少ないのでAND)、nameOfMeeting=文部 文教 → どちらかを含む会議)。
 3. **`any` の検索対象は発言本文だけ。** 会議名・発言者は別パラメータ(`nameOfMeeting` / `speaker`)。
 4. **既定はXML。** `recordPacking=json` を忘れるとXMLが返る。
 5. **speechIDに日付と回次が埋まっている。** `121704080X00920250411_169` = 第121回・2025-04-11。発言を一意に参照するIDとして使える。

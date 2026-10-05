@@ -11,6 +11,9 @@
 
 ## [Unreleased]
 
+### Changed
+- kokkai: SKILL.md の例「any=北海道 青森」の件数を24件から3,867件に訂正(2026-10-05再実測。24件は再現できなかった)。「北海道」単独115,795件・「青森」単独18,908件より少なく、AND動作は変わらない
+
 ## [1.0.0] - 2026-10-05
 
 30日間の公開開発チャレンジの最終点検リリース。27スキル。2026-10-05の点検結果: lint・docs-drift・static-data・code-blocks・measured-date・コアfixtureテスト(18)・スキル別単体テスト(10スキル・計67件)がすべて成功。check-urls はファイル別の出現ベースで OK 112 / WARN(免除) 7 / SKIP 8(実行時変数・過去の例) / FAIL 0。免除7件(ci-geo-network 6・quiet-time-empty-feed 1、期限つき)。単体またはfixtureのテストを持たないのは `koyobun-check`(ネットワークを使わない知識スキル)のみ。

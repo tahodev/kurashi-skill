@@ -12,6 +12,7 @@
 ## [Unreleased]
 
 ### Changed
+- egov-laws: 一覧の `current_revision_status` 件数を2026-10-06の再実測に更新(CurrentEnforced 8,915→8,916、PreviousEnforced 87→86。Repeal 559・UnEnforced 11は不変)
 - kokkai: SKILL.md の例「any=北海道 青森」の件数を24件から3,867件に訂正(2026-10-05再実測。24件は再現できなかった)。「北海道」単独115,795件・「青森」単独18,908件より少なく、AND動作は変わらない
 
 ## [1.0.0] - 2026-10-05

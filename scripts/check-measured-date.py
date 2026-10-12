@@ -5,7 +5,7 @@
 スケジュール実行時は health-check.yml の issue 自動起票で再実測のリマインドになる。
 実測日ヘッダがないスキル(静的データスキル等)は data_as_of ポリシー側の対象なので警告のみ。
 """
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 import os
 from pathlib import Path
 import re, sys
@@ -14,7 +14,9 @@ STALE_AFTER_DAYS = 90
 HEADER_RE = re.compile(r'実測日[:：]\s*(\d{4}-\d{2}-\d{2})')
 
 root = Path(__file__).resolve().parents[1]
-today = date.fromisoformat(os.environ.get('MEASURED_DATE_TODAY', date.today().isoformat()))
+# 実測日は日本時間(JST)基準。UTCの date.today() と比べると JST 0-9 時台に未来日誤検知する。
+jst_today = datetime.now(timezone(timedelta(hours=9))).date()
+today = date.fromisoformat(os.environ.get('MEASURED_DATE_TODAY', jst_today.isoformat()))
 stale, missing = [], []
 for path in sorted(root.glob('*/SKILL.md')):
     m = HEADER_RE.search(path.read_text(encoding='utf-8'))

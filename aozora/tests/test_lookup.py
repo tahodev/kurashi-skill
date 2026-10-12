@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """aozora lookup.py のパース回帰テスト(ネットワーク不要、fixture使用)。"""
 import os, sys, unittest
@@ -30,7 +31,7 @@ class CsvTest(unittest.TestCase):
 
 class CardTest(unittest.TestCase):
     def test_card_links(self):
-        html = open(os.path.join(FIX, "card789.html"), encoding="utf-8").read()
+        html = Path(FIX, "card789.html").read_text(encoding="utf-8")
         links = lookup.parse_card_links(html)
         # 2026-09-30実測: 本文URLの通し番号(14547)は作品ID(789)から推測不可。カードを読んで拾う
         self.assertEqual(links["text_html"], "files/789_14547.html")
@@ -39,7 +40,7 @@ class CardTest(unittest.TestCase):
 
 class TextTest(unittest.TestCase):
     def test_shift_jis_and_ruby(self):
-        raw = open(os.path.join(FIX, "text789_sample.html"), "rb").read()
+        raw = Path(FIX, "text789_sample.html").read_bytes()
         text = lookup.extract_text(raw)
         # ルビは基底文字のみ残り、読み(わがはい)と<rp>の括弧は消える
         self.assertIn("吾輩は猫である。名前はまだ無い。", text)

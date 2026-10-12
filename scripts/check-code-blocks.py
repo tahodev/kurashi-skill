@@ -6,7 +6,7 @@ files=[root/'README.md',*root.glob('*/SKILL.md'),*root.glob('docs/**/*.md')]
 failed=False; checked=0; executed=0
 # Syntax-check every supported fence. Execute only self-contained, offline snippets;
 # network examples (including documented `python3 <skill>/lookup.py` calls, which run
-# against live endpoints) are exercised by check-urls.py instead.
+# against live endpoints) are not executed here; check-urls.py checks endpoint contracts, not every full helper command.
 unsafe=re.compile(r'\b(curl|wget|npx|npm|gh|git|rm|mv|cp|jq|grep|sed|awk|cat|ls|find|unzip)\b|https?://|/tmp/|\{[A-Z][A-Z0-9_]*\}|\$\{?[A-Z_][A-Z0-9_]*\}?|\b(open|read_text|read_bytes|Image\.open)\s*\(|[a-z0-9-]+/lookup\.py|scripts/')
 for path in files:
     text=path.read_text(encoding='utf-8')

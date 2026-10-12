@@ -2,6 +2,8 @@
 
 ## 前提条件
 
+- Python 3.10 以上: `lookup.py` がある10スキルとPython計算例で使用(実行時は標準ライブラリのみ)
+- `curl`、必要な例に応じて `jq`・`iconv`・`unzip`。雨雲画像をPythonで読む場合は Pillow が必要
 - Node.js 18 以上 (`npx` が使えること)
 - `npx skills add` に対応したコーディングエージェント (Claude Code、Codex、OpenCode など)
 
@@ -23,7 +25,11 @@ npx --yes skills add tahodev/kurashi-skill --skill calil-books -g
 
 ## スキルの構成
 
-各スキルはリポジトリ直下のディレクトリにある `SKILL.md` 1ファイルだけで動きます。追加のランタイムやプロキシサーバーは不要です。照会はすべて `curl` など一般的なHTTPクライアントで完結します。
+各スキルはリポジトリ直下のディレクトリにあります。`SKILL.md` が正本で、10スキルには同じディレクトリの `lookup.py` と固定fixture付き `tests/` があります。ヘルパーはPython標準ライブラリで動きます。プロキシサーバーは不要ですが、Node.jsはインストール用、Pythonやcurlは実行用です。
+
+インストール後、選んだスキルのディレクトリに `SKILL.md` と(存在する場合) `lookup.py` が揃っていることを確認してください。`tests/fixtures/` は検証用です。ヘルパーだけを別の場所にコピーせず、スキルのディレクトリを保って使います。
+
+例: リポジトリルートから `python3 withholding-tax/lookup.py --help`。利用ツールは各SKILL.mdに従ってください。
 
 ```
 kurashi-skill/
@@ -58,7 +64,6 @@ kurashi-skill/
     install.md
     features/<skill>.md   # スキルごとの概要ガイド(正本は各 SKILL.md)
 ```
-
 
 ## クリーン環境での検証結果 (2026-09-09 実測)
 

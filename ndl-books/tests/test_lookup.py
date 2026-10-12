@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """ndl-books lookup.py の XML パース回帰テスト(ネットワーク不要、fixture使用)。"""
 import os, sys, unittest
@@ -10,7 +11,7 @@ FIX = os.path.join(os.path.dirname(__file__), "fixtures", "opensearch_title_yuki
 class ParseTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.total, cls.items = lookup.parse_items(open(FIX, "rb").read())
+        cls.total, cls.items = lookup.parse_items(Path(FIX).read_bytes())
 
     def test_total_and_count(self):
         # 2026-09-29実測: title=雪国&cnt=3 -> totalResults 7719, 3件

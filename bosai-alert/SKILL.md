@@ -71,8 +71,8 @@ curl -s https://www.jma.go.jp/bosai/tsunami/data/list.json
 
 ## エラー・失敗時の対応
 
-
 共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
+
 - **タイムアウトを付ける**: `curl -sm 30` のように必ず制限時間を付ける。
 - **空配列 `[]` はエラーではない**: 津波情報の list.json などで `[]` が返るのは「現在発表中の情報がない」という正常な結果。「津波情報は現在発表されていません」と伝える。HTTPエラーやタイムアウト(取得自体の失敗)と混同しない。
 - **HTTP 404**: `offices` コードの間違いが原因になりやすい。`https://www.jma.go.jp/bosai/common/const/area.json` でコードを確認する。

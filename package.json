@@ -1,0 +1,10 @@
+{
+  "name": "kurashi-skill-checks",
+  "private": true,
+  "scripts": {
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.18.1"
+  }
+}

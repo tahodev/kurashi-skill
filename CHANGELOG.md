@@ -11,7 +11,25 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- yubin-fee: 2026-10-01改定の東京発ゆうパック全49料金と重量加算620円を公式表で再確認(2026-10-13)、SKILL.md・ガイド・fixture・期待値を同期。
+- static-data: 既知の改定日 `effective_until` を年次再検証期限より優先。改定前/当日/以後を回帰テスト。
+- URL検査: 最新radar/AMeDAS/AEROS時刻と公式郵便ZIPリンクを解決。WBGT必須引数とAEROS局指定、JSON/CSV/GeoJSON契約を確認。400/404/timeoutを一律ネットワークWARNにしない。
+- 台風の正常404を期限なし契約に移し、実測日または静的metadataを必須化。
+- aozora/kokkai/ndl-booksテストのunclosed file警告を解消。追跡済みPython bytecodeを削除。
+
 ### Changed
+
+- README/ROADMAP: 完了したQiita30日連載と現在の保守・候補を分離、JA/EN開発ログを一致。過去の計画をdocs/archiveに保存。
+- Pages: 既存の和デザインをmain/siteに移し、27カードをREADMEから生成。GitHub Actionsで配信するworkflowを追加(公開設定のSource切替が必要)。
+- docs/install: Python3.10+、helper、ツール前提を明記。10helperを隔離したclean installで確認。
+
+### Added
+
+- Markdown/YAML/相対リンク/anchor検証、Pages drift、checker回帰テスト、ゆうパック49料金のlive比較。
+- SECURITY、CODEOWNERS(@tahodev)、PRテンプレート、検証範囲とローカル再現ガイド。
+
 - egov-laws: 一覧の `current_revision_status` 件数を2026-10-06の再実測に更新(CurrentEnforced 8,915→8,916、PreviousEnforced 87→86。Repeal 559・UnEnforced 11は不変)
 - kokkai: SKILL.md の例「any=北海道 青森」の件数を24件から3,867件に訂正(2026-10-05再実測。24件は再現できなかった)。「北海道」単独115,795件・「青森」単独18,908件より少なく、AND動作は変わらない
 
@@ -20,6 +38,7 @@
 30日間の公開開発チャレンジの最終点検リリース。27スキル。2026-10-05の点検結果: lint・docs-drift・static-data・code-blocks・measured-date・コアfixtureテスト(18)・スキル別単体テスト(10スキル・計67件)がすべて成功。check-urls はファイル別の出現ベースで OK 112 / WARN(免除) 7 / SKIP 8(実行時変数・過去の例) / FAIL 0。免除7件(ci-geo-network 6・quiet-time-empty-feed 1、期限つき)。単体またはfixtureのテストを持たないのは `koyobun-check`(ネットワークを使わない知識スキル)のみ。
 
 ### Added
+
 - CI: スキルごとの単体テスト(`*/tests`)を health-check で実行(これまで CI は走らせていなかった)
 - テスト: wareki / rokuyo / yubin-fee / amagumo / bosai-typhoon / zipcode-lookup の固定フィクスチャテスト(SKILL.md の表・式・判断規則を読んで検証。zipcode は形式のみの合成フィクスチャ)
 - scripts/check-urls.py: e-Gov 法令API v2 の実データ3エンドポイント(laws / law_data / keyword)を200+JSONキーで検証するプローブを追加
@@ -45,6 +64,7 @@
 - 新スキル `shelter-lookup`: 国土地理院の指定緊急避難場所・指定避難所データ(全国CSV/GeoJSON)を検索(2026-09-19実測)
 
 ### Changed
+
 - scripts/check-urls.py: amedas-weather のmap URLを固定の日付スナップショット(404)から、latest_time.txt を解決した現在時刻のURLに変更。SKILL.md は `{amedas_time}` で表記
 - 実測日の表記をヘッダ行 `**実測日: YYYY-MM-DD**` に統一(10スキルに追記)
 - `shelter-lookup`: ユーザー座標からHaversine直線距離で並べ、災害種別で絞り込んだ最寄り3か所と自治体データ更新日を表示する `lookup.py` を追加
@@ -54,14 +74,17 @@
 ## [0.3.0] - 2026-09-14
 
 ### Added
+
 - 新スキル4個を追加: `eew-monitor`(緊急地震速報の発表状況と直近の地震・津波情報。wolfxとP2P地震情報の非公式中継APIを利用し、公式確認は `bosai-alert` へ誘導)、`estat-stats`(e-Stat API v3による統計表検索・メタ情報・データ取得。無料appId前提)、`garbage-day`(5374形式の公開CSVによるごみ収集日照会。金沢・美唄・松前・笠間・上砂川・大分を実測)、`koyobun-check`(文化審議会建議「公用文作成の考え方」ベースの公用文校閲チェックリスト。ネットワーク不要)
 
 ### Changed
+
 - README のスキル一覧と ROADMAP を15スキル構成に更新
 
 ## [0.2.0] - 2026-09-12
 
 ### Added
+
 - calil-books: 東京の既定照会先として都立+23区の区立図書館のsystemid一覧を追加(2026-09-14にカーリルAPIで実測確認)
 - 新スキル6個を追加(Day 8-13): `wareki`(和暦⇄西暦変換)、`rokuyo`(六曜計算、国立天文台暦要項ベースの旧暦テーブル内蔵)、`zipcode-lookup`(日本郵便KEN_ALLによる郵便番号検索)、`yubin-fee`(郵便料金表、2024-10-01改定を2026-09-11に確認)、`amagumo`(雨雲レーダータイル)、`bosai-typhoon`(台風情報の有無確認、非発生時404を平時として扱う)
 - 各SKILL.mdに失敗時の対応セクション(HTTPエラー、空配列とエラーの区別、ポーリング上限、文字コード変換の代替手段、タイムアウト、ユーザーへの伝え方)を追加
@@ -74,6 +97,7 @@
 - ROADMAP.md を追加(30日チャレンジ Day 7-30 のスキル候補一覧)
 
 ### Changed
+
 - ROADMAP.md に Day 7-30 の採用スケジュールを記録(Day 1 記事の案と検証済み候補一覧をマージして 2026-09-11 に決定)。不採用(`station-finder` / `nenkin`)とバックログ(`reinfolib-prices` / `estat-stats` / `dataportal-search` / `amedas-weather` / `hazard-map`)の判断理由も明記
 - furusato-nozei: 給与所得控除・基礎控除を令和7年分以降の現行値に更新し、各税率表に基準日(2026年9月時点)と国税庁・総務省の公式URLを明記
 - docs/features の各ガイドを要約に整理し、SKILL.md を正(カノニカル)とする方針を明記
@@ -83,6 +107,7 @@
 - check-urls.sh: KEN_ALL zip の到達性を fail させない INFO 出力として追加(テンプレートURLでスキップされる実データの死活がCIから見えるように)
 
 ### Fixed
+
 - jma-weather: エリアコード表の誤り2件を修正(札幌は `016000` 石狩・空知・後志地方、鹿児島は `460100` 奄美地方除く。`014100` は釧路・根室地方、`460040` は奄美地方だった。live の area.json で確認)。あわせて `offices` コードが地方予報単位である注記と、沿岸部 `areas` の `winds`/`waves` フィールドの説明を追加
 - furusato-nozei: 基礎控除の記述を国税庁 No.1199 の現行値に修正(令和8年分・令和9年分以後は489万円以下104万円など、令和7年分と別の表)。年収600万円の計算例で住民税所得割に所得税用の基礎控除を使っていた誤りを修正し(住民税の基礎控除は43万円据え置き)、上限 ≈77,900円・目安表とほぼ同水準という結論に更新
 - zipcode-lookup: データセンター系IPからはページ経由でもKEN_ALL zipが404になる制限(2026-09-11/12実測)を冒頭の重要注意として明記し、代替手順(ユーザー側でのダウンロード等)を追加
@@ -105,6 +130,7 @@
 初回リリース。ログイン不要で安全に使える照会・計算系スキル5件を収録。
 
 ### Added
+
 - `jma-weather` - 気象庁の公開JSONから天気予報(天気・降水確率・気温)を取得
 - `bosai-alert` - 気象庁の防災情報(地震一覧と詳細、警報・注意報、津波情報)を取得
 - `japan-holidays` - 内閣府の公式CSVから祝日・振替休日・国民の休日の照会と連休計算

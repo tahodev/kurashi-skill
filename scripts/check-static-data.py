@@ -35,6 +35,26 @@ def metadata(path: Path) -> dict[str, str]:
     return result
 
 
+def expiry_errors(meta: dict[str, str], today: dt.date) -> list[str]:
+    """valid_through is a review deadline; effective_until is exclusive validity."""
+    errors = []
+    review = dt.date.fromisoformat(meta["valid_through"])
+    days_left = (review - today).days
+    if days_left < 0:
+        errors.append(f"static data expired {abs(days_left)} day(s) ago on {review}")
+    elif days_left <= FAIL_BEFORE_DAYS:
+        errors.append(f"static data expires in {days_left} day(s) on {review}; refresh now")
+    if meta.get("effective_until"):
+        change = dt.date.fromisoformat(meta["effective_until"])
+        if change <= dt.date.fromisoformat(meta["data_as_of"]):
+            errors.append("effective_until must be after data_as_of")
+        if today >= change:
+            errors.append(f"known change effective {change}: old data must not be used")
+        elif (change - today).days <= FAIL_BEFORE_DAYS:
+            errors.append(f"known change on {change}: refresh before it takes effect")
+    return errors
+
+
 def main() -> int:
     today = dt.date.fromisoformat(os.environ.get("STATIC_DATA_TODAY", dt.date.today().isoformat()))
     errors: list[str] = []
@@ -60,13 +80,13 @@ def main() -> int:
             errors.append(f"{path.relative_to(ROOT)}: data_as_of {data_as_of} is in the future")
         if valid_through < data_as_of:
             errors.append(f"{path.relative_to(ROOT)}: valid_through precedes data_as_of")
-        days_left = (valid_through - today).days
-        if days_left < 0:
-            errors.append(f"{path.relative_to(ROOT)}: static data expired {abs(days_left)} day(s) ago on {valid_through}")
-        elif days_left <= FAIL_BEFORE_DAYS:
-            errors.append(f"{path.relative_to(ROOT)}: static data expires in {days_left} day(s) on {valid_through}; refresh now")
-        else:
-            print(f"OK    {path.relative_to(ROOT)}: valid through {valid_through} ({days_left} days left)")
+        try:
+            expiry = expiry_errors(meta, today)
+            errors.extend(f"{path.relative_to(ROOT)}: {error}" for error in expiry)
+            if not expiry:
+                print(f"OK    {path.relative_to(ROOT)}: review by {valid_through}")
+        except ValueError as exc:
+            errors.append(f"{path.relative_to(ROOT)}: invalid effective_until ({exc})")
         if not meta["source_version"].strip():
             errors.append(f"{path.relative_to(ROOT)}: source_version is empty")
 

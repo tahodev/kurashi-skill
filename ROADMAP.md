@@ -1,87 +1,45 @@
 # ROADMAP
 
-30日間の公開開発チャレンジの Day 7-30 の計画。収録基準は [CONTRIBUTING.md](CONTRIBUTING.md) と同じ: **ログイン不要・課金不要**(無料即時発行のAPIキーは可)、**公式API・公開データのみ**、**照会・計算のみ**。
+更新日: 2026-10-13。30日連載は2026-10-10に完了、27スキルを収録。
+過去の計画・差し替え理由は [30日計画アーカイブ](docs/archive/roadmap-30-days.md) に保存。
+開発ログの区分はREADME、Qiitaの記事番号は連載側で管理する。
 
-採用の条件:
+## 完了 / Shipped
 
-1. 実際にコマンドを実行して動くことを確認してから採用する(実測なしでSKILL.mdを書かない)。
-2. 失敗時の対応セクションを必ず付ける。
-3. 外部データに基準日があるものは、基準日と公式の根拠URLを明記する。
-4. 採用したら下の表を更新し、[CHANGELOG.md](CHANGELOG.md) に記録する。
+- 27スキルの一覧と正本への入口は [README](README.md) を参照。
+- `air-quality`: CSV速報値と公式JSONの月次履歴に対応。
+- `heatstroke`: API v1の予測・実況。旧CSVは使用しない。
+- `address-normalize`: 都道府県・市区町村・町字の分解。番地・号の正規化とジオコーディングは対象外。
+- `kokkai`・`egov-laws`・`withholding-tax`・`gsi-geocode`: 実装・fixtureテスト済み。
+- v1.0.0リリース済み。10月の修正は次のpatch releaseで公開する。
 
-## 採用スケジュール (Day 7-30) — 2026-09-11 決定
+## 現在の優先順位 / Maintenance first
 
-Day 1 の Qiita 記事で公表した案(以下「A案」)と、検証済み候補一覧(「B案」)をマージした結果。A案の週構成(週頭の振り返り、Day 29 の v1.0.0、Day 30 の総括)を骨格に、重複する候補は実測済みの名前・データソースに統一し、B案の検証済み候補を組み込んだ。Week 3 が防災寄りなのは、9月(防災の日・台風シーズン・残暑)に合わせた意図的な構成。
+1. 料金・税表の既知の改定日を期限に結び、古い値で回答しない。
+2. URL到達、レスポンス形式、データ内容、実際の文書手順を分けて検証する。
+3. README・SKILL.md・ガイド・Pagesを同期し、検証していない機能を宣伝しない。
 
-| Day | スキル | 内容 | データソース | 認証 | 検証メモ |
-| --- | --- | --- | --- | --- | --- |
-| 7 | (振り返り) | Week 2 の振り返り記事 | - | - | スキル追加なし |
-| 8 | `wareki` | 西暦⇔和暦(令和・平成など)の変換 | 純計算 | 不要 | 元号の改元日は静的データとして保持 |
-| 9 | `rokuyo` | 六曜(大安・仏滅など)の算出 | 純計算 | 不要 | 旧暦換算が必要。計算の根拠を明記 |
-| 10 | `zipcode-lookup` | 郵便番号⇔住所の照会 | 日本郵便 郵便番号データ(CSV) | 不要 | 公式CSV(utf_ken_all)の存在を2026-09-11確認。**月次更新**(追加・廃止の差分あり)の注記が必要 |
-| 11 | `yubin-fee` | 郵便料金の目安計算 | 日本郵便 公表の料金表 | 不要 | 料金表は静的データとして保持し、基準日と根拠URLを明記 |
-| 12 | `amagumo` | 雨雲の動き(降水ナウキャスト)の照会 | 気象庁 防災情報 JSON | 不要 | jma-weather(予報)とは観測/ナウキャストで棲み分け |
-| 13 | `bosai-typhoon` | 台風の現況・進路予報の照会 | 気象庁 防災情報 JSON (`bosai/typhoon`) | 不要 | **台風非発生時は一覧が404になる**ことを2026-09-11実測。空=平時の扱いを失敗時対応に明記 |
-| 14 | (振り返り) | Week 3 の振り返り記事 | - | - | スキル追加なし |
-| 15 | ~~`volcano`~~ (shipped 2026-09-19) | 火山の噴火警報・活動情報の照会 | 気象庁 防災情報 JSON | 不要 | bosai-alert と同系のJSON。対象火山の一覧を明記 |
-| 16 | ~~`shelter-lookup`~~ (shipped 2026-09-19) | 指定避難所・避難場所の検索 | 国土地理院 避難所・避難場所データ(hinanmap defaultFtpData全国CSV/GeoJSON) | 不要 | 国土数値情報のP20(2012年版)は陳腐化のため不採用。市町村別更新日はpublicHistoryCSVで確認 |
-| 17 | ~~`river-level`~~ (不採用 2026-09-20) | 河川の水位・氾濫注意情報の照会 | 国土交通省 川の防災情報 | 不要 | **不採用**: 公式オープンデータ提供サービスは有償(月額)、無償公開サイトはツールによる定期収集の自粛を求めており収録基準と抵触。代替として `amedas-weather` を採用 |
-| 17' | ~~`amedas-weather`~~ (shipped 2026-09-20) | アメダス最新観測値の照会 | 気象庁 防災情報 JSON (`bosai/amedas`) | 不要 | river-level の代替。latest_time.txt → map JSON → amedastable.json の3点を2026-09-20実測 |
-| 18 | `air-quality` | 大気汚染の常時監視データ(PM2.5など)の照会 | 環境省 そらまめ君 データダウンロード | 不要 | CSVダウンロード型。リアルタイムAPIではない点を明記 |
-| 19 | `heatstroke` | 暑さ指数(WBGT)・熱中症警戒情報の照会 | 環境省 暑さ指数予報等 | 不要 | 9月の残暑に季節的に合致。予報/実況の区別を明記 |
-| 20 | `address-normalize` | 住所文字列の正規化・緯度経度の付与 | デジタル庁 アドレス・ベース・レジストリ (ABR) | 不要 | 配布形態(カタログデータ/ツール)の実測から採用判断 |
-| 21 | (振り返り) | Week 4 の振り返り記事 | - | - | スキル追加なし |
-| 22 | `odpt-transit` (Day 23→24→保留 2026-09-30) | 鉄道・バスの時刻表・運行情報の照会 | 公共交通オープンデータセンター (ODPT) API | 無料キー(要登録) | 登録に氏名・住所・電話番号が必須で承認まで最大2営業日(2026-09-30確認)。ユーザーが登録した場合のみ再開、なければdrop。対象事業者が限定される点を明記。乗換案内のスクレイピングではなく公式APIの経路 |
-| 23 | ~~`ndl-books`~~ (shipped 2026-09-29, 記事Day 23として前倒し) | 国立国会図書館サーチで書誌検索(ISBN・タイトル) | NDL Search API (SRU / OpenSearch) | 不要 | 公式仕様書あり。calil-books と棲み分け(蔵書ではなく書誌) |
-| ~~24~~ shipped Day 24 (2026-09-30) | `aozora` | 青空文庫の作品検索 | 青空文庫 カタログCSV | 不要 | shipped。一覧は不定期更新スナップショットの注記つき |
-| 25 | `kokkai` | 国会会議録の検索 | 国会会議録検索システム API | 不要 | 2026-09-11実測で応答確認(パラメータ必須、認証不要) |
-| ~~26~~ shipped Day 26 (2026-10-02) | `egov-laws` | 法令条文の検索・照会 | e-Gov 法令API v2 | 不要 | shipped。当初の注記「v1は廃止済み」は誤りで、2026-10-02時点でv1もXMLを返す(公式の終了告知なし)。v2を使う理由は時点指定・改正履歴・全文検索 |
-| ~~27~~ shipped Day 27 (2026-10-03) | `withholding-tax` | 源泉徴収税額の目安計算 | 国税庁 公表の税額表・電算機計算の特例 | 不要 | shipped。税額表そのものではなく国税庁公表の特例計算式で実装(税額表と一致しないことがある注記つき)。令和8年分・令和9年分 |
-| ~~28~~ shipped Day 28 (2026-10-04) | `gsi-geocode` | 住所→緯度経度・標高・逆ジオコーダ | 国土地理院 住所検索API・標高API・逆ジオコーダ | 不要 | shipped。バックログ外の差し替え候補として2026-10-04の実測で採用(garbage-dayは2026-09-13に前倒し済み)。曖昧一致の並び・`-----`・muniCdの桁ずれを罠として記録 |
-| ~~29~~ shipped Day 29 (2026-10-05) | (v1.0.0) | 全スキルの最終点検と v1.0.0 リリース | - | - | shipped。点検結果は CHANGELOG [1.0.0] に記録。git tag と GitHub Release を同バージョンで作成 |
-| 30 | (総括) | 30日間の総括記事 | - | - | スキル追加なし |
+## 次期候補 / Uncommitted candidates
 
-## 追加採用 (2026-09-13)
-
-スケジュール外・バックログから4スキルを採用し実装した。
-
-| スキル | 内容 | データソース | 認証 | 由来 |
-| --- | --- | --- | --- | --- |
-| `eew-monitor` | 緊急地震速報(EEW)の発表状況と直近の地震・津波情報 | wolfx (api.wolfx.jp) / P2P地震情報 API v2 (いずれも気象庁電文の非公式中継) | 不要 | 新規。bosai-alert(気象庁公式の確定情報)との棲み分けを明記 |
-| `estat-stats` | 政府統計の統計表検索・データ取得 | e-Stat API v3 | 無料appId(要登録) | バックログから採用 |
-| `garbage-day` | ごみ収集日の照会 | 5374形式の公開CSV(金沢・美唄・松前・笠間・上砂川・大分を2026-09-13実測) | 不要 | Day 28 から前倒し |
-| `koyobun-check` | 公用文の表記校閲 | 文化審議会建議「公用文作成の考え方」(令和4年。知識スキル、APIなし) | 不要 | 新規 |
-
-## 不採用 (2026-09-11 決定)
-
-| 候補名 | 不採用の理由 |
-| --- | --- |
-| `station-finder` | `odpt-transit` が上位互換(駅検索・時刻表・運行情報をまとめてカバー)のため統合 |
-| `nenkin` | `furusato-nozei` と計算スキルとしてのパターンが重複。フリーランスの読者には `withholding-tax` のほうが実用的と判断 |
-
-## バックログ (差し替え候補)
-
-採用スケジュールに空きが出た場合や、採用候補が実測で使えなかった場合の差し替え枠。
-
-| 候補名 | 内容 | 保留の理由 |
+| 候補 | 状態 | 再開・採用条件 |
 | --- | --- | --- |
-| `reinfolib-prices` | 不動産取引価格・地価公示の照会(国土交通省 不動産情報ライブラリ API) | **キー発行に審査があり即時性が低い**。キーは事前に申請しておき、発行され次第いずれかの Day と差し替えて投入する。住まいテーマとして強力な次期候補 |
-| ~~`estat-stats`~~ (採用済み) | 政府統計の統計表検索(e-Stat API、無料appId) | **2026-09-13に採用**。calil-books方式のキー前提スキルとして実装。下の「追加採用」参照 |
-| `dataportal-search` | data.go.jp のデータセット横断検索(CKAN互換API) | メタ的なスキル。estat-stats と同じく性格がデータ基盤寄り |
-| ~~`amedas-weather`~~ (採用済み) | アメダス最新観測値の照会(気象庁 防災情報 JSON) | **2026-09-20に採用・実装済み**。Day 17 の `river-level` が収録基準を満たさなかったため代替採用 |
-| `hazard-map` | 洪水・土砂災害などのハザード情報の照会(国土数値情報/ハザードマップポータル) | **タイル配信の利用規約確認が先**。規約上問題なければ採用可 |
+| `odpt-transit` | 保留 | 利用者が公式の無料キーを登録・取得し、対象事業者と条件を実測できた場合のみ。登録代行やスクレイピングはしない |
+| `reinfolib-prices` | 保留 | 審査付きAPIキー取得後、公式仕様・利用条件・応答を実測 |
+| `dataportal-search` | 未検証 | 現在の公式データポータルとAPIの提供状況を確認してから判断 |
+| `hazard-map` | 未検証 | タイルの利用規約と必要な照会方法を確認してから判断 |
 
-上記以外のアイデアは issue テンプレート「スキル追加の提案」から。採用・不採用の判断はこのファイルに記録する。
+日付や実装を約束する表ではない。未確認の候補はSKILL.mdを出さない。
 
----
+## 不採用・代替 / Rejected or replaced
 
-## Roadmap (English summary)
+- `river-level`: 有償提供または定期収集自粛の条件が収録基準と合わず不採用。`amedas-weather`を代替採用済み。
+- `station-finder`: ODPT候補と重複するため別スキルとしては不採用。ODPT自体は未採用。
+- `nenkin`: 当初の計算テーマからは不採用。将来の判断は新しい提案で行う。
 
-Adopted schedule for Days 7-30 of the 30-day build-in-public challenge, decided 2026-09-11 by merging the plan announced in the Day 1 Qiita article with the verified candidate list. Every skill follows the repo's inclusion rules: no login or paid key (free instant API keys are OK), official APIs or public datasets only, read-only lookups and calculations. A skill ships only after its commands are tested for real, and every adoption is recorded here and in the changelog.
+## English summary
 
-- **Week 2** (Day 8-13): `wareki`, `rokuyo`, `zipcode-lookup`, `yubin-fee`, `amagumo`, `bosai-typhoon` (Day 7: reflection)
-- **Week 3** (Day 15-20): `volcano` (shipped 2026-09-19), `shelter-lookup` (shipped 2026-09-19), `amedas-weather` (shipped 2026-09-20), `air-quality`, `heatstroke`, `address-normalize` (Day 14: reflection). Disaster-heavy by design: September is typhoon season in Japan
-- **Week 4** (Day 22-28): `odpt-transit`(保留), `ndl-books`(shipped Day 23), `aozora`(shipped Day 24), `kokkai`(shipped Day 25), `egov-laws`(shipped Day 26), `withholding-tax`(shipped Day 27), `gsi-geocode`(shipped Day 28); `garbage-day` shipped early on 2026-09-13, so Day 28 is open for a reflection or replacement (Day 21: reflection, Day 29: v1.0.0 release, Day 30: wrap-up)
-- **Rejected**: `station-finder` (superseded by `odpt-transit`), `nenkin` (calculation pattern duplicates `furusato-nozei`)
-- **Adopted early / from backlog**: `estat-stats` and `garbage-day` (2026-09-13), `amedas-weather` (2026-09-20)
-- **Backlog**: `reinfolib-prices` (waiting on API key review; apply in advance and swap in once issued), `dataportal-search`, `hazard-map` (tile terms of use must be checked first)
+The 30-post series is complete. All 27 shipped skills are listed in README.
+The original schedule is archived, not a list of pending implementation tasks.
+Maintenance prioritizes known data changes, meaningful API checks and synchronized docs.
+ODPT and real-estate APIs need user-obtained keys and verified terms; portal search and
+hazard tiles remain unverified. No delivery dates are promised.

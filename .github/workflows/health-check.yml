@@ -23,8 +23,29 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Lint skills and Markdown
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install check dependencies
+        run: |
+          npm ci --ignore-scripts
+          python3 -m pip install -r requirements-dev.txt
+      - name: Validate YAML, Markdown and local links
+        run: |
+          npm run lint:markdown
+          python3 scripts/check-yaml-links.py
+      - name: Lint skill metadata
         run: bash scripts/lint-skills.sh
+      - name: Check checker regression tests
+        run: python3 -m unittest discover -s tests/checks
+      - name: Check generated Pages
+        run: |
+          python3 scripts/build-pages.py
+          git diff --exit-code -- site/
       - name: Check README and docs drift
         run: python3 scripts/check-docs-drift.py
       - name: Check static-data freshness and fixtures

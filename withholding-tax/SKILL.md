@@ -38,6 +38,7 @@ python3 withholding-tax/lookup.py --salary 300000 --dependents 0 --year 2027  # 
 **令和9年分で変わるのは2か所だけ(2026-10-03実測):** 給与所得控除の下限が54,167円→57,500円(第1区分の上限も158,333→169,444)、基礎控除の最大が48,334円→51,667円。第2表(31,667円)と第4表の税率は同じ。
 
 根拠(国税庁):
+
 - 令和8年分: https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/denshi_01.pdf
 - 令和9年分: https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2027/data/denshi_01.pdf
 - 税額表(月額表、令和8年分): https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/01-07.pdf

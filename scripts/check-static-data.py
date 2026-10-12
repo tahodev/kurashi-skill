@@ -56,7 +56,9 @@ def expiry_errors(meta: dict[str, str], today: dt.date) -> list[str]:
 
 
 def main() -> int:
-    today = dt.date.fromisoformat(os.environ.get("STATIC_DATA_TODAY", dt.date.today().isoformat()))
+    # データの実測日は日本時間(JST)基準。UTCの date.today() と比べると JST 0-9 時台に誤検知する。
+    jst_now = dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).date()
+    today = dt.date.fromisoformat(os.environ.get("STATIC_DATA_TODAY", jst_now.isoformat()))
     errors: list[str] = []
     checked = 0
 

@@ -6,6 +6,7 @@
 実測日ヘッダがないスキル(静的データスキル等)は data_as_of ポリシー側の対象なので警告のみ。
 """
 from datetime import date
+import os
 from pathlib import Path
 import re, sys
 
@@ -13,22 +14,32 @@ STALE_AFTER_DAYS = 90
 HEADER_RE = re.compile(r'実測日[:：]\s*(\d{4}-\d{2}-\d{2})')
 
 root = Path(__file__).resolve().parents[1]
-today = date.today()
+today = date.fromisoformat(os.environ.get('MEASURED_DATE_TODAY', date.today().isoformat()))
 stale, missing = [], []
 for path in sorted(root.glob('*/SKILL.md')):
     m = HEADER_RE.search(path.read_text(encoding='utf-8'))
     if not m:
-        missing.append(path.parent.name)
+        from importlib.util import spec_from_file_location, module_from_spec
+        spec = spec_from_file_location('static_check', root / 'scripts/check-static-data.py')
+        module = module_from_spec(spec)
+        spec.loader.exec_module(module)
+        meta = module.metadata(path)
+        if not all(meta.get(key) for key in module.KEYS):
+            missing.append(path.parent.name)
         continue
     d = date.fromisoformat(m.group(1))
     age = (today - d).days
+    if age < 0:
+        print(f"FAIL {path.parent.name}: future measured date {d}")
+        sys.exit(1)
     status = 'OK  ' if age <= STALE_AFTER_DAYS else 'STALE'
     print(f'{status} {path.parent.name}: 実測日 {d} ({age}日前)')
     if age > STALE_AFTER_DAYS:
         stale.append((path.parent.name, d, age))
 
 if missing:
-    print('INFO  実測日ヘッダなし(data_as_ofポリシー側で管理): ' + ', '.join(missing))
+    print('FAIL  実測日も静的データ期限もない: ' + ', '.join(missing))
+    sys.exit(1)
 if stale:
     print(f'{len(stale)}件のスキルが実測から{STALE_AFTER_DAYS}日超過。再実測してSKILL.mdの実測日を更新してください: '
           + ', '.join(f'{n}({d})' for n, d, _ in stale))

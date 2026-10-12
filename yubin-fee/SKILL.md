@@ -5,16 +5,16 @@ license: MIT
 metadata:
   category: postal
   locale: ja-JP
-  data_as_of: 2026-09-11
-  valid_through: 2027-09-11
-  source_version: "Japan Post domestic rates 2024-10-01"
+  data_as_of: 2026-10-13
+  valid_through: 2027-10-13
+  source_version: "Japan Post postage 2024-10-01; Yu-Pack 2026-10-01"
 ---
 
 # yubin-fee
 
 日本郵便の基本的な郵便料金とオプション加算料金、ゆうパック運賃を重量・サイズ・差出地から調べるスキル。料金表を内蔵するので計算だけで答えられる。
 
-**基準日: 郵便料金は2024-10-01の改定料金、オプション加算料金とゆうパック運賃は2026-09-19に公式ページで現行であることを確認。**
+**基準日: 郵便料金は2024-10-01の改定料金、オプション加算料金は2026-09-19確認、ゆうパック運賃は2026-10-01改定を2026-10-13に公式ページで確認。**
 根拠URL: 手紙(第一種) https://www.post.japanpost.jp/send/domestic/charge/list/one_two.html ／ はがき https://www.post.japanpost.jp/service/send/domestic/mail/postcard/ ／ オプション加算料金一覧 https://www.post.japanpost.jp/send/domestic/charge/list/option.html ／ ゆうパック https://www.post.japanpost.jp/send/domestic/charge/list/parcel.html
 
 **実測日: 2026-09-19。本文のコマンド・構造は実測で確認したものを収録(個所ごとの日付は各所の記載を参照)。**
@@ -101,24 +101,24 @@ metadata:
 
 ## ゆうパック
 
-**2026-09-19に公式ページ( https://www.post.japanpost.jp/send/domestic/charge/list/parcel.html と基本運賃表(東京) https://www.post.japanpost.jp/service/domestic/charge/list/yu-pack/13.html )で確認。**
+**2026-10-13に公式ページ( https://www.post.japanpost.jp/send/domestic/charge/list/parcel.html と基本運賃表(東京) https://www.post.japanpost.jp/service/domestic/charge/list/yu-pack/13.html )で確認。**
 
 ### サイズと重さ
 
 - サイズは縦+横+高さの合計で決まる: 60 / 80 / 100 / 120 / 140 / 160 / 170サイズ(170cm以内)。
-- 重さは25kg以内。25kg超30kg以内は重量ゆうパック(基本運賃+560円)。
+- 重さは25kg以内。25kg超30kg以内は重量ゆうパック(基本運賃+620円、公式: https://www.post.japanpost.jp/service/send/domestic/delivery/yu-pack/weight/index.html )。
 
 ### 基本運賃(東京から差し出す場合)
 
 | お届け先 | 60 | 80 | 100 | 120 | 140 | 160 | 170 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 東京 | 820円 | 1,130円 | 1,450円 | 1,770円 | 2,120円 | 2,450円 | 3,000円 |
-| 北海道 | 1,410円 | 1,710円 | 2,020円 | 2,340円 | 2,680円 | 3,010円 | 4,140円 |
-| 東北・関東・信越・北陸・東海 | 880円 | 1,200円 | 1,500円 | 1,830円 | 2,170円 | 2,500円 | 3,070円 |
-| 近畿 | 990円 | 1,310円 | 1,620円 | 1,940円 | 2,300円 | 2,610円 | 3,750円 |
-| 中国・四国 | 1,150円 | 1,440円 | 1,780円 | 2,080円 | 2,440円 | 2,750円 | 3,890円 |
-| 九州 | 1,410円 | 1,710円 | 2,020円 | 2,340円 | 2,680円 | 3,010円 | 4,140円 |
-| 沖縄 | 1,450円 | 1,810円 | 2,160円 | 2,490円 | 2,860円 | 3,180円 | 4,350円 |
+| 東京 | 840円 | 1,150円 | 1,480円 | 1,810円 | 2,160円 | 2,500円 | 3,060円 |
+| 北海道 | 1,550円 | 1,880円 | 2,220円 | 2,570円 | 3,220円 | 3,610円 | 4,970円 |
+| 東北・関東・信越・北陸・東海 | 970円 | 1,320円 | 1,650円 | 2,010円 | 2,600円 | 3,000円 | 3,680円 |
+| 近畿 | 1,090円 | 1,440円 | 1,780円 | 2,130円 | 2,760円 | 3,130円 | 4,500円 |
+| 中国・四国 | 1,270円 | 1,580円 | 1,960円 | 2,290円 | 2,930円 | 3,300円 | 4,670円 |
+| 九州 | 1,550円 | 1,880円 | 2,220円 | 2,570円 | 3,220円 | 3,610円 | 4,970円 |
+| 沖縄 | 1,600円 | 1,990円 | 2,480円 | 2,860円 | 3,430円 | 3,820円 | 5,870円 |
 
 地域の内訳: 東北=青森/岩手/宮城/秋田/山形/福島、関東=茨城/神奈川/栃木/千葉/群馬/山梨/埼玉、信越=新潟/長野、北陸=富山/石川/福井、東海=静岡/岐阜/愛知/三重、近畿=滋賀/京都/兵庫/大阪/奈良/和歌山、中国=鳥取/島根/岡山/広島/山口、四国=香川/愛媛/徳島/高知、九州=福岡/佐賀/長崎/熊本/大分/宮崎/鹿児島。
 
@@ -133,8 +133,8 @@ metadata:
 
 ## エラー・失敗時の対応
 
-
 共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
+
 - このスキルはネットワークを使わない。
 - **区分が判定できない(サイズ不明など)**: 推測で料金を出さず、足りない条件(重量・厚さ・3辺合計・差出地)を聞き返す。条件が違えば料金は倍近く変わる。
 - **ゆうパックで東京以外からの差出**: 内蔵表は東京発のみ。公式の料金計算ページを案内し、東京発の額をそのまま答えない。
@@ -142,10 +142,10 @@ metadata:
 
 ## 注意
 
-- 料金は改定される。直近では2024-10-01に手紙・はがきが改定(定形郵便は50g以内110円の一律に統一)、2025-11-01にゆうメール運賃が改定されている。**2026-10-01にはゆうパック・ゆうパケット・クリックポストの運賃改定が予定されている**(日本郵便のお知らせ: https://www.post.japanpost.jp/newsrelease/pressrelease/26283434137.html )。ゆうパックの表はその日に変わる前提で扱い、2026-10-01以降は必ず公式ページの再確認を促す。
-- 表の料金を答えるときは「2026-09-19時点の料金」と基準日を必ず添える。改定の可能性がある話題(来年の予定など)では、公式ページの確認を促す。
+- 料金は改定される。直近では2024-10-01に手紙・はがきが改定(定形郵便は50g以内110円の一律に統一)、2025-11-01にゆうメール運賃が改定されている。**2026-10-01のゆうパック改定を反映済み**(日本郵便のお知らせ: https://www.post.japanpost.jp/newsrelease/pressrelease/26283434137.html )。今後の改定日が判明したら `effective_until` に旧表の効力終了日を記録し、適用日以降は旧表を使わない。
+- 表の料金を答えるときは「郵便料金は2024-10-01改定、ゆうパックは2026-10-01改定・2026-10-13確認」と基準日を必ず添える。改定の可能性がある話題(来年の予定など)では、公式ページの確認を促す。
 - 切手の組み合わせ(何円切手を何枚)を聞かれたら、不足のない組み合わせを計算してよい。オプション加算分も同じ方針で合計に含めてよい。料金そのものを勝手に安く見せる組み方(過不足のある貼り方)は提案しない。
 
 ## English summary
 
-Looks up Japan Post's domestic postage (letters, postcards, mini-letters, Letter Pack, Smart Letter), option surcharges (express, general/cash/simplified registered mail, delivery-record "tokutei-kiroku"), and Yu-Pack parcel fares from weight, size, and origin using built-in fee tables. No network access needed. Base postage is the 2024-10-01 revision (standard letters are a flat 110 yen up to 50g); option surcharges and the Yu-Pack table were re-verified against Japan Post's official pages on 2026-09-19 - always state that basis date when answering. Combination rules are built in: express can stack with registered mail or tokutei-kiroku, but registered mail and tokutei-kiroku cannot be combined. The built-in Yu-Pack table covers parcels sent from Tokyo only (60-170 size, by destination region); for other origins, point users to the official fare calculator instead of guessing. Yu-Pack fares are scheduled to change on 2026-10-01. Out of scope: Yu-Mail fares, international mail, and other options - point users to the official fee page. If weight, size, or origin is unknown, ask instead of guessing - the fee can nearly double across categories.
+Looks up Japan Post's domestic postage (letters, postcards, mini-letters, Letter Pack, Smart Letter), option surcharges (express, general/cash/simplified registered mail, delivery-record "tokutei-kiroku"), and Yu-Pack parcel fares from weight, size, and origin using built-in fee tables. No network access needed. Base postage is the 2024-10-01 revision (standard letters are a flat 110 yen up to 50g); option surcharges were checked on 2026-09-19; all 49 Tokyo-origin Yu-Pack fares were checked on 2026-10-13 against the 2026-10-01 revision - always state that basis date when answering. Combination rules are built in: express can stack with registered mail or tokutei-kiroku, but registered mail and tokutei-kiroku cannot be combined. The built-in Yu-Pack table covers parcels sent from Tokyo only (60-170 size, by destination region); for other origins, point users to the official fare calculator instead of guessing. The 2026-10-01 Yu-Pack revision is included, with a 620 yen heavy-parcel surcharge. Known future changes must set effective_until (exclusive) in metadata. Out of scope: Yu-Mail fares, international mail, and other options - point users to the official fee page. If weight, size, or origin is unknown, ask instead of guessing - the fee can nearly double across categories.

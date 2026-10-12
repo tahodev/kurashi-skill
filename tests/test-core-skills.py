@@ -173,6 +173,12 @@ def check_yubin():
     assert ins == sorted(ins) and outs == sorted(outs)
     assert all(yen(v[1]) > yen(v[0]) for v in extra.values() if '対象外' not in v[0])
 
+    fixture = json.loads((Path(__file__).parents[1] / 'fixtures/yu-pack-2026-10.json').read_text())
+    actual = {row[0]: [yen(v) for v in row[1:]] for row in md_rows('yubin-fee', '| お届け先 | 60')}
+    assert actual == fixture['fares'], (actual, fixture['fares'])
+    assert fixture['heavy_surcharge_yen'] == 620
+    assert '基本運賃+620円' in (Path(__file__).parents[1] / 'yubin-fee/SKILL.md').read_text()
+
 @smoke('amagumo')
 def check_amagumo():
     times = json.loads((fixtures / 'amagumo-targettimes-N1.json').read_text())

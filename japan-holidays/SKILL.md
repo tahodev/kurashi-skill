@@ -9,6 +9,8 @@ metadata:
 
 # japan-holidays
 
+**実測日: 2026-10-13。公開エンドポイントへの到達・形式を確認。**
+
 内閣府が公開する「国民の祝日・休日」の公式CSVを使って、祝日の照会と連休の計算をするスキル。APIキー不要。
 
 ## データの取得
@@ -54,8 +56,8 @@ curl -s https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv | iconv -f SHIFT
 
 ## エラー・失敗時の対応
 
-
 共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
+
 - **タイムアウトを付ける**: `curl -sm 30` のように必ず制限時間を付ける。
 - **`iconv` がない環境**: 代わりに Python を使う(ほぼどの環境にもある):
 

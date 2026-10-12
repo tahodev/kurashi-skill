@@ -11,7 +11,6 @@
   <a href="https://tahodev.github.io/kurashi-skill/"><strong>紹介サイト — tahodev.github.io/kurashi-skill</strong></a>
 </p>
 
-
 [![health-check](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml/badge.svg)](https://github.com/tahodev/kurashi-skill/actions/workflows/health-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -82,7 +81,7 @@ npx --yes skills add tahodev/kurashi-skill --all -g
 npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
 ```
 
-Node.js 18 以上と `npx` が必要です。詳しくは [インストールガイド](docs/install.md) を参照してください。
+Node.js 18 以上と `npx` が必要です。10個の `lookup.py` ヘルパーには Python 3.10 以上が必要です。詳しくは [インストールガイド](docs/install.md) を参照してください。
 
 ## どれから始める?
 
@@ -93,10 +92,11 @@ Node.js 18 以上と `npx` が必要です。詳しくは [インストールガ
 - 行政・文書パック — ふるさと納税・和暦・六曜・公用文校閲
 - データ調査パック — e-Stat統計・図書館蔵書 (このパックのみ無料キーあり)
 
-## 30日間の公開開発 (build in public) チャレンジ実施中
+## 30日間の公開開発 (build in public) 完了
 
-このリポジトリは、30日間の公開開発チャレンジとして育っています。1日1スキル、コミットがそのままQiitaの記事になる方式です。なお、制作パートナーのAIエージェント(Astra)のクオータが30日間持つかどうかが、実は最大のリスク要因だったりします。
+Qiitaの30日連載は2026-10-10に完了しました。[Day 30 総括](https://qiita.com/Ichiropen/items/6b9d369d608a6b3fca09)では27スキルの検証範囲と今後の課題をまとめています。現在は公開APIへの追従・固定データの更新・使い方の改善を続けます。
 
+以下のDayは開発ログの区分です。Qiita連載のDay番号とは異なります。公開記事の順番は連載側を参照してください。
 現在の収録数: **27スキル** (2026-10-05, v1.0.0)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
 
 | Day | 日付 | できごと |
@@ -183,7 +183,7 @@ npx --yes skills add tahodev/kurashi-skill --all -g
 npx --yes skills add tahodev/kurashi-skill --skill jma-weather -g
 ```
 
-Node.js 18+ and `npx` are required. See the [install guide](docs/install.md) for details.
+Node.js 18+ and `npx` are required. The 10 lookup.py helpers need Python 3.10+. See the [install guide](docs/install.md) for details.
 
 ### Where to start?
 
@@ -196,8 +196,9 @@ Recommended packs by purpose and ten ready-to-ask sample questions are in the [s
 
 ### Building in public: a 30-day challenge
 
-This repository is growing as a 30-day build-in-public challenge: one skill a day, with each commit doubling as a Qiita article. Frankly, the biggest risk factor is whether the quota of Astra - the AI agent co-authoring this series - survives all 30 days.
+The 30-post Qiita series finished on 2026-10-10. [Day 30 recap](https://qiita.com/Ichiropen/items/6b9d369d608a6b3fca09) describes the 27 skills and their limits. Maintenance now focuses on API changes, data updates and practical guides.
 
+The Day labels below group development work; they are not the Qiita article numbering.
 Current collection: **27 skills** (2026-10-05, v1.0.0). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.
 
 | Day | Date | What happened |
@@ -213,8 +214,21 @@ Current collection: **27 skills** (2026-10-05, v1.0.0). To prevent duplicated re
 | 18 | 2026-09-26 | Added air-quality (Ministry of the Environment AEROS / Soramame) |
 | 19 | 2026-09-26 | Added heatstroke (Ministry of the Environment heat-index API v1) |
 | 20 | 2026-09-26 | Added address-normalize (Digital Agency ABR masters) |
+| 21 | 2026-09-29 | Added ndl-books (NDL bibliographic search) |
+| 22 | 2026-09-30 | Added aozora (catalog and text lookup) |
+| 23 | 2026-10-01 | Added kokkai (Diet proceedings) |
+| 24 | 2026-10-02 | Added egov-laws (Law API v2) |
+| 25 | 2026-10-03 | Added withholding-tax (monthly withholding estimate) |
+| 26 | 2026-10-04 | Added gsi-geocode (address, elevation, reverse geocoding) |
+| 27 | 2026-10-05 | v1.0.0 final checks and release |
 
 See [ROADMAP.md](ROADMAP.md) for future candidates.
+
+## 検証・支援 / Verification and support
+
+- [検証範囲と再検証](docs/verification.md) / Verification limits and check commands
+- [セキュリティ報告](SECURITY.md) / Security reporting
+- [貢献方法](CONTRIBUTING.md) / Contributing
 
 ## ライセンス / License
 

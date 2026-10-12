@@ -54,3 +54,7 @@ kurashi-skill への貢献に興味を持ってくれてありがとうござい
 ## Contributing (English summary)
 
 We welcome skill proposals, bug reports, and doc improvements. New skills must be (1) usable without a login or paid key, (2) built only on official APIs or public datasets, and (3) read-only (lookups and calculations, no state changes). Every command in a SKILL.md must be tested for real before merging, and each SKILL.md must include a failure-handling section. Record user-visible changes in [CHANGELOG.md](CHANGELOG.md).
+
+## 再検証とPR
+
+検証コマンドは [docs/verification.md](docs/verification.md) を参照。既知の改定日がある場合は `metadata.effective_until`(効力終了日・その日以降無効)を記録し、再検証期限より早ければ優先する。無料キーの例外は維持し、EEWの非公式リレーは正本の注記を維持する。Pagesはmainのsite/から生成し、旧gh-pagesを直接編集しない。

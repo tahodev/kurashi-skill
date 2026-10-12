@@ -82,8 +82,8 @@ print(idx, im.getpalette()[3*idx:3*idx+3])"   # px,pyはタイル内座標
 
 ## エラー・失敗時の対応
 
-
 共通の取得時チェックリストは [共通レスポンス契約](../docs/response-contract.md) の「取得時の落とし穴チェックリスト」を参照。
+
 - **targetTimesが取れない(5xx・タイムアウト・空)**: 1〜2回リトライし、駄目なら「雨雲データを取得できなかった」と明示して気象庁の防災情報ページ(https://www.jma.go.jp/bosai/map.html)を案内する。取れなかったことを「雨は降っていない」とは言わない。
 - **タイルが404**: basetime/validtimeを推測で組み立てていないか確認。手順1のJSONの値をそのまま使う。古い時刻のタイルは消えることがあるので、一覧を取り直す。
 - **Pillowがない環境**: `pip install pillow`、またはImageMagickの `convert tile.png -format '%[pixel:p{px,py}]' info:` で色を読める。

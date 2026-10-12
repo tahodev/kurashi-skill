@@ -70,5 +70,16 @@ for path in [root / "README.md", *root.glob("docs/**/*.md")]:
                 )
                 failed = True
 
+page = (root / 'site/index.html').read_text()
+compare('Pages skill cards', re.findall(r'data-skill="([a-z0-9-]+)"', page))
+if f'data-skill-count="{len(skills)}"' not in page or 'data-series-state="completed"' not in page:
+    print('FAIL  Pages count/completion metadata drift')
+    failed = True
+ja_days = re.findall(r'^\| (\d+) \| \d{4}-', japanese_readme, re.M)
+en_days = re.findall(r'^\| (\d+) \| \d{4}-', english_readme, re.M)
+if ja_days != en_days:
+    print(f'FAIL  JA/EN development log day drift: {ja_days} vs {en_days}')
+    failed = True
+
 print(f"OK    canonical skill count: {len(skills)}")
 sys.exit(1 if failed else 0)

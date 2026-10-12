@@ -1,3 +1,4 @@
+from pathlib import Path
 #!/usr/bin/env python3
 """kokkai lookup.py のパース・URL構築・エラー処理の回帰テスト(ネットワーク不要、fixture使用)。"""
 import json, os, sys, unittest
@@ -10,7 +11,7 @@ FIX = os.path.join(os.path.dirname(__file__), "fixtures")
 class SpeechParseTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.d = json.load(open(os.path.join(FIX, "speech_kenpo.json")))
+        cls.d = json.loads(Path(FIX, "speech_kenpo.json").read_text(encoding="utf-8"))
 
     def test_totals(self):
         # 2026-10-01実測: any=憲法 -> 184,057件
@@ -27,7 +28,7 @@ class SpeechParseTest(unittest.TestCase):
 
 class MeetingParseTest(unittest.TestCase):
     def test_meeting_with_speeches(self):
-        d = json.load(open(os.path.join(FIX, "meeting_higashinihon.json")))
+        d = json.loads(Path(FIX, "meeting_higashinihon.json").read_text(encoding="utf-8"))
         m = d["meetingRecord"][0]
         out = lookup.slim_meeting(m, with_speeches=True)
         self.assertEqual(out["speech_count"], 3)
@@ -63,7 +64,7 @@ class UrlBuildTest(unittest.TestCase):
 class ErrorShapeTest(unittest.TestCase):
     def test_error_fixture(self):
         # 実測: maximumRecords=101 -> HTTP 400 + このJSON
-        d = json.load(open(os.path.join(FIX, "error_maxrecords.json")))
+        d = json.loads(Path(FIX, "error_maxrecords.json").read_text(encoding="utf-8"))
         self.assertIn("maximumRecordsには1～100", d["details"][0])
         self.assertNotIn("speechRecord", d)
 

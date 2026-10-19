@@ -11,7 +11,7 @@
 - `heatstroke`: API v1の予測・実況。旧CSVは使用しない。
 - `address-normalize`: 都道府県・市区町村・町字の分解。番地・号の正規化とジオコーディングは対象外。
 - `kokkai`・`egov-laws`・`withholding-tax`・`gsi-geocode`: 実装・fixtureテスト済み。
-- v1.0.0リリース済み。10月の修正は次のpatch releaseで公開する。
+- v1.0.1リリース済み(2026-10-13)。ゆうパック料金表の再検証・実測日比較のJST基準化など10月の修正を収録。
 
 ## 現在の優先順位 / Maintenance first
 

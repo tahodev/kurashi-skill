@@ -65,7 +65,7 @@ jobs:
           done
           exit $status
       - name: Check documented URLs and API responses
-        run: python3 scripts/check-urls.py
+        run: python3 scripts/check-urls.py | tee /tmp/check-urls.log
       - name: Open or update a GitHub issue on scheduled/manual failure
         if: failure() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         env:
@@ -73,6 +73,12 @@ jobs:
         run: |
           TITLE="health-check failed: lint, docs, code, or URL ($(date -u +%Y-%m-%d))"
           BODY="Health-check failed. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ -f /tmp/check-urls.log ]; then
+            FAILS=$(grep -E '^FAIL' /tmp/check-urls.log | head -30)
+            if [ -n "$FAILS" ]; then
+              BODY="$BODY"$'\n\nFailing checks:\n```\n'"$FAILS"$'\n```'
+            fi
+          fi
           EXISTING=$(gh issue list --state open --search 'health-check failed' --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             gh issue edit "$EXISTING" --title "$TITLE"

@@ -7,7 +7,7 @@ import json
 from urllib.parse import quote, urljoin
 from pathlib import Path
 from urllib.parse import urlsplit
-import re, subprocess, sys
+import re, subprocess, sys, time
 
 root = Path(__file__).resolve().parents[1]
 MAX_WORKERS = 8
@@ -177,7 +177,29 @@ def resolve_live_parameters():
     return errors, dynamic
 
 
+def fetch(url):
+    """GET with one retry on transport-level failure (timeout or no HTTP response)."""
+    body, code, content_type = '', '000', ''
+    for attempt in (1, 2):
+        try:
+            proc = subprocess.run([
+                'curl', '-sS', '-L', '--connect-timeout', '8', '--max-time', str(TIMEOUT),
+                '-A', 'kurashi-skill-health-check/2.0', '-o', '-', '-w', '\n%{http_code}\n%{content_type}', url,
+            ], capture_output=True, timeout=TIMEOUT + 5)
+            output = proc.stdout.decode('utf-8', 'replace')
+            body, _, tail = output.rpartition('\n')
+            body, _, code = body.rpartition('\n')
+            code, content_type = code.strip() or '000', tail.strip().lower()
+        except subprocess.TimeoutExpired:
+            body, code, content_type = '', '000', ''
+        if code != '000':
+            break
+        if attempt == 1:
+            time.sleep(3)
+    return body, code, content_type
+
 def contract_for(url):
+
     for pattern, contract in CONTRACTS:
         if pattern.search(url):
             return contract
@@ -218,17 +240,7 @@ def check(pair):
     if not url:
         return 'SKIP', f'{owner}: {original} (unresolved runtime variable)', None
     expected = contract_for(url)
-    try:
-        proc = subprocess.run([
-            'curl', '-sS', '-L', '--connect-timeout', '8', '--max-time', str(TIMEOUT),
-            '-A', 'kurashi-skill-health-check/2.0', '-o', '-', '-w', '\n%{http_code}\n%{content_type}', url,
-        ], capture_output=True, timeout=TIMEOUT + 5)
-        output = proc.stdout.decode('utf-8', 'replace')
-        body, _, tail = output.rpartition('\n')
-        body, _, code = body.rpartition('\n')
-        code, content_type = code.strip() or '000', tail.strip().lower()
-    except subprocess.TimeoutExpired:
-        body, code, content_type = '', '000', ''
+    body, code, content_type = fetch(url)
     templated = original != url
     numeric = int(code) if code.isdigit() else 0
     if original in QUIET_TIME_URLS and code == '404':

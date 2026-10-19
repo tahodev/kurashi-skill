@@ -94,7 +94,7 @@ Node.js 18 以上と `npx` が必要です。10個の `lookup.py` ヘルパー�
 
 ## 30日間の公開開発 (build in public) 完了
 
-Qiitaの30日連載は2026-10-10に完了しました。[Day 30 総括](https://qiita.com/Ichiropen/items/6b9d369d608a6b3fca09)では27スキルの検証範囲と今後の課題をまとめています。現在は公開APIへの追従・固定データの更新・使い方の改善を続けます。
+Qiitaの30日連載は2026-10-10に完了しました。Day 30 総括では27スキルの検証範囲と今後の課題をまとめています。現在は公開APIへの追従・固定データの更新・使い方の改善を続けます。
 
 以下のDayは開発ログの区分です。Qiita連載のDay番号とは異なります。公開記事の順番は連載側を参照してください。
 現在の収録数: **27スキル** (2026-10-05, v1.0.0)。Day 3以降の追加・変更履歴は、重複によるずれを防ぐため [CHANGELOG.md](CHANGELOG.md) を正本とします。
@@ -196,7 +196,7 @@ Recommended packs by purpose and ten ready-to-ask sample questions are in the [s
 
 ### Building in public: a 30-day challenge
 
-The 30-post Qiita series finished on 2026-10-10. [Day 30 recap](https://qiita.com/Ichiropen/items/6b9d369d608a6b3fca09) describes the 27 skills and their limits. Maintenance now focuses on API changes, data updates and practical guides.
+The 30-post Qiita series finished on 2026-10-10. Day 30 recap describes the 27 skills and their limits. Maintenance now focuses on API changes, data updates and practical guides.
 
 The Day labels below group development work; they are not the Qiita article numbering.
 Current collection: **27 skills** (2026-10-05, v1.0.0). To prevent duplicated records from drifting, [CHANGELOG.md](CHANGELOG.md) is the canonical record for additions and changes from Day 3 onward.

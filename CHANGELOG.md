@@ -9,6 +9,12 @@
 - **税率・祝日CSVなど外部データの「時点」が変わったとき**: 該当スキル内の基準日注記とあわせて `Changed` に記録する。
 - CHANGELOG を更新したら、リリース時に git tag と GitHub Release を同じバージョンで切る(現状は手動)。
 
+## [Unreleased]
+
+### Fixed
+
+- volcano: 2026-10-29に公開JSONを再実測し、古くなった例(十勝岳レベル３)を現在値(阿蘇山・十勝岳・北海道駒ヶ岳がレベル２)に更新。実測日を2026-10-29に更新。`eruption.json` が空配列、`warning.json` が13件(硫黄島2007年発表が残存)、`data/list.json` と `data/marinevolcano.json` が404のままであることを確認。
+
 ## [1.0.1] - 2026-10-13
 
 ### Fixed
